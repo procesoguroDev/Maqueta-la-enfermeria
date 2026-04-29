@@ -7,19 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0d9488;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --secondary: #6366f1;
+            --primary: #545454;
+            --primary-soft: #a8a8a8;
+            --primary-dark: #353535;
+            --secondary: #a07cfc;
             --bg-main: #f8fafc;
-            --sidebar: #0f172a;
+            --sidebar: #2c2c2c;
             --white: #ffffff;
             --border: #e2e8f0;
-            --text-main: #1e293b;
+            --text-main: #303030;
             --text-muted: #64748b;
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #f59e0b;
+            --success: #7a7a7a;
+            --danger: #585858;
+            --warning: #3d3d3d;
             --shadow: 0 10px 25px rgba(15,23,42,.08);
             --radius: 16px;
         }
@@ -30,10 +30,10 @@
         /* Sidebar */
         .sidebar { width: 280px; background: var(--sidebar); color: white; display: flex; flex-direction: column; padding: 24px 18px; overflow-y: auto; }
         .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; }
-        .brand-logo { width: 42px; height: 42px; background: linear-gradient(135deg,#14b8a6,#2563eb); border-radius: 12px; display: grid; place-items: center; font-weight: 900; font-size: 18px; }
+        .brand-logo { width: 42px; height: 42px; background: linear-gradient(135deg,#545454,#a07cfc); border-radius: 12px; display: grid; place-items: center; font-weight: 900; font-size: 18px; }
         
         .nav-group { margin-bottom: 25px; }
-        .nav-label { font-size: 11px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; font-weight: 700; margin: 0 0 10px 12px; }
+        .nav-label { font-size: 11px; text-transform: uppercase; color: #a07cfc; letter-spacing: 1.2px; font-weight: 700; margin: 0 0 10px 12px; }
         .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; cursor: pointer; color: #94a3b8; text-decoration: none; transition: 0.2s; font-size: 14px; margin-bottom: 4px; }
         .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .nav-item.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(13,148,136,0.3); }
@@ -329,7 +329,7 @@
             </div>
         </section>
 
-        <section id="laboratorio" class="section">
+        <!--section id="laboratorio" class="section">
             <div class="card">
                 <h3>Órdenes de Laboratorio Pendientes</h3>
                 <table>
@@ -339,7 +339,155 @@
                     </tbody>
                 </table>
             </div>
-        </section>
+        </section> -->
+
+<section id="laboratorio" class="section">
+    <div class="card">
+        <div class="card-header">
+            <h3>Órdenes de Laboratorio Pendientes</h3>
+            <button class="btn btn-primary" onclick="abrirModalEstudio()">Nuevo estudio</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Estudio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaLaboratorio">
+                <tr>
+                    <td>L-901</td>
+                    <td>Pedro Infante</td>
+                    <td>Biometría Hemática</td>
+                    <td><span class="badge bg-yellow">En proceso</span></td>
+                    <td><button class="btn btn-secondary">Subir PDF</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div id="modalNuevoEstudio" class="modal">
+    <div class="modal-content">
+        <h3>Nuevo estudio</h3>
+
+        <label for="paciente">Paciente</label>
+        <select id="paciente">
+            <option value="">Selecciona un paciente</option>
+            <option value="Pedro Infante">Pedro Infante</option>
+            <option value="María Félix">María Félix</option>
+            <option value="Jorge Negrete">Jorge Negrete</option>
+        </select>
+
+        <label for="estudio">Estudio</label>
+        <select id="estudio">
+            <option value="">Selecciona un estudio</option>
+            <option value="Biometría Hemática">Biometría Hemática</option>
+            <option value="Química Sanguínea">Química Sanguínea</option>
+            <option value="Examen General de Orina">Examen General de Orina</option>
+            <option value="Perfil Lipídico">Perfil Lipídico</option>
+        </select>
+
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="cerrarModalEstudio()">Cancelar</button>
+            <button class="btn btn-primary" onclick="guardarNuevoEstudio()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        width: min(420px, calc(100% - 32px));
+        background: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content label {
+        display: block;
+        margin-top: 14px;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+
+    .modal-content select {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 22px;
+    }
+</style>
+
+<script>
+    let contadorLaboratorio = 902;
+
+    function abrirModalEstudio() {
+        document.getElementById('modalNuevoEstudio').style.display = 'flex';
+    }
+
+    function cerrarModalEstudio() {
+        document.getElementById('modalNuevoEstudio').style.display = 'none';
+        document.getElementById('paciente').value = '';
+        document.getElementById('estudio').value = '';
+    }
+
+    function guardarNuevoEstudio() {
+        const paciente = document.getElementById('paciente').value;
+        const estudio = document.getElementById('estudio').value;
+
+        if (!paciente || !estudio) {
+            alert('Selecciona un paciente y un estudio.');
+            return;
+        }
+
+        const tabla = document.getElementById('tablaLaboratorio');
+        const fila = document.createElement('tr');
+
+        fila.innerHTML = `
+            <td>L-${contadorLaboratorio}</td>
+            <td>${paciente}</td>
+            <td>${estudio}</td>
+            <td><span class="badge bg-yellow">En proceso</span></td>
+            <td><button class="btn btn-secondary">Subir PDF</button></td>
+        `;
+
+        tabla.appendChild(fila);
+        contadorLaboratorio++;
+
+        cerrarModalEstudio();
+    }
+</script>
+
+
+         <!--Fin sección laboratorio -->
 
         <section id="paramedicos" class="section">
             <div class="card" style="background:var(--sidebar); color:white;">
@@ -353,6 +501,7 @@
                 <button class="btn btn-primary" style="background:var(--danger)">Cerrar Servicio</button>
             </div>
         </section>
+
 
         <section id="compras" class="section">
             <div class="grid grid-2">
