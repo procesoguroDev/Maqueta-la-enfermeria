@@ -1,0 +1,46 @@
+function showModule(id) {
+    // Ocultar todas las secciones
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    // Mostrar la deseada
+    document.getElementById(id).classList.add('active');
+    
+    // Actualizar Sidebar
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    const activeItem = Array.from(document.querySelectorAll('.nav-item')).find(i => i.textContent.toLowerCase().includes(id.replace('rrhh','recursos').replace('recepcion','admisión')));
+    if(activeItem) activeItem.classList.add('active');
+    
+    // Actualizar Título
+    const titles = {
+        dashboard: 'Dashboard General',
+        recepcion: 'Admisión y Recepción de Pacientes',
+        triage: 'Triage y Signos Vitales',
+        consulta: 'Consulta Médica',
+        laboratorio: 'Gestión de Laboratorio',
+        paramedicos: 'Servicios Paramédicos (FRAP)',
+        compras: 'Gestión de Compras',
+        rrhh: 'Recursos Humanos',
+        sistema: 'Configuración del Sistema'
+    };
+    document.getElementById('module-title').innerText = titles[id];
+}
+
+
+function watcherGlassgow(){
+    const ocular = parseInt(document.getElementById('glasgow_ocular').value) || 0
+    const verbal = parseInt(document.getElementById('glasgow_verbal').value) || 0
+    const motor  = parseInt(document.getElementById('glasgow_motor').value) || 0
+    const total = ocular + verbal + motor
+
+    let result = ''
+
+    if (total >= 13){ 
+        result =  'Leve'
+    }
+    else if (total >= 9){ 
+        result =  'Moderado'
+    } else {
+        result = 'severo'
+    }
+    document.getElementById('glassgowTotal').textContent = `${total}/15`
+    document.getElementById('glasgow_result').textContent = result
+}
