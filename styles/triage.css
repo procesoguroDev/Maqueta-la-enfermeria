@@ -1,0 +1,76 @@
+input.error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
+
+.error-message{
+    color: red;
+    font-size: 12px;
+    margin-top:4px;
+    display: none;
+}
+.error-message.active {
+    display: block;
+}
+
+.priority-level-one{
+    display:flex;
+    align-items:center;
+    gap:10px; 
+    padding:10px; 
+    border:2px solid #ef4444; 
+    border-radius:10px; 
+    cursor:pointer;
+}
+
+.priority-level-two{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    border:1px solid #f59e0b;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+
+.priority-level-three{
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    padding:10px; 
+    border:1px solid #22c55e; 
+    border-radius:10px; 
+    cursor:pointer;
+}
+
+
+  #toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+
+  .toast {
+    background: #333;
+    color: #fff;
+    padding: 12px 18px;
+    margin-top: 10px;
+    border-radius: 8px;
+    min-width: 200px;
+    font-family: Arial, sans-serif;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.4s ease;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .toast.success { background: #28a745; }
+  .toast.error { background: #dc3545; }
+  .toast.warning { background: #ffc107; color: #000; }
+
