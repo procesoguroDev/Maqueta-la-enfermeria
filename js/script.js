@@ -24,23 +24,3 @@ function showModule(id) {
     document.getElementById('module-title').innerText = titles[id];
 }
 
-
-function watcherGlassgow(){
-    const ocular = parseInt(document.getElementById('glasgow_ocular').value) || 0
-    const verbal = parseInt(document.getElementById('glasgow_verbal').value) || 0
-    const motor  = parseInt(document.getElementById('glasgow_motor').value) || 0
-    const total = ocular + verbal + motor
-
-    let result = ''
-
-    if (total >= 13){ 
-        result =  'Leve'
-    }
-    else if (total >= 9){ 
-        result =  'Moderado'
-    } else {
-        result = 'severo'
-    }
-    document.getElementById('glassgowTotal').textContent = `${total}/15`
-    document.getElementById('glasgow_result').textContent = result
-}

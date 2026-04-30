@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>ERP Clínica La Enfermería - Sistema Integral</title>
         <script src="./js/script.js"></script>
+        <script src="./js/triage.js"></script>
+        <link rel="stylesheet" href="./styles/triage.css">
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
         <style>
             :root {
@@ -85,7 +87,7 @@
         </style>
     </head>
     <body>
-
+    <div id="toast-container"></div>
     <aside class="sidebar">
         <div class="brand">
             <div class="brand-logo">LE</div>
@@ -191,53 +193,65 @@
                         </div>
                     </div>
                 </section>
-
             <section id="triage" class="section">
-            <div class="grid grid-2">
+             <div class="grid grid-2">
                 <div class="card">
-                    <h3>Valoración de Signos Vitales <!-- (Triage_Vital_Signs) --></h3>
+                    <h3>Valoración de Signos Vitales</h3>
                     <div class="grid grid-3">
                         <div class="form-group">
                             <label>Tensión Sistólica (mmHg)</label>
-                            <input type="number" id="sistolica" placeholder="120">
+                            <input type="number" id="sistolica" placeholder="120" required>
+                            <small class="error-message"></small>
                         </div>
                         <div class="form-group">
                             <label>Tensión Diastólica (mmHg)</label>
-                            <input type="number" id="diastolica" placeholder="80">
+                            <input type="number" id="diastolica" placeholder="80" required >
+                            <small class="error-message"></small>
                         </div>
                         <div class="form-group">
                             <label>Frec. Cardíaca (LPM)</label>
-                            <input type="number" placeholder="75">
+                            <input type="number" id="lpm" placeholder="75" required >
+                            <small class="error-message"></small>
                         </div>
                         <div class="form-group">
                             <label>Frec. Respiratoria (RPM)</label>
-                            <input type="number" placeholder="18">
+                            <input type="number" id="respiratory" required placeholder="18">
+                            <small class="error-message"></small>
                         </div>
                         <div class="form-group">
                             <label>Temperatura (°C)</label>
-                            <input type="number" step="0.1" placeholder="36.5">
+                            <input type="number" id="temperature" required step="0.1" placeholder="36.5">
+                            <small class="error-message"></small>
                         </div>
                         <div class="form-group">
                             <label>Sat. Oxígeno (SpO2 %)</label>
-                            <input type="number" placeholder="98">
+                            <input type="number" id="oxygen" required placeholder="98">
+                            <small class="error-message"></small>
+
                         </div>
                         <div class="form-group">
                             <label>Peso (kg)</label>
-                            <input type="number" step="0.1" placeholder="70.0">
+                            <input type="number" step="0.1" id="wiegth" required placeholder="70.0">
+                            <small class="error-message"></small>
+
                         </div>
                         <div class="form-group">
                             <label>Talla (cm)</label>
-                            <input type="number" placeholder="170">
+                            <input type="number" id="height" required placeholder="170">
+                            <small class="error-message"></small>
+
                         </div>
                         <div class="form-group">
                             <label>Glucosa (mg/dL)</label>
-                            <input type="number" placeholder="90">
+                            <input type="number" id="glucose" required placeholder="90">
+                            <small class="error-message"></small>
+
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Escala Visual Análoga del Dolor (EVA: 0-10)</label>
-                        <input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.value = this.value">
+                        <input type="range" min="0"  id="scale_visual_scale"  max="10" value="0" oninput="this.nextElementSibling.value = this.value">
                         <output style="font-weight:bold; color:var(--primary)">0</output>
                     </div>
 
@@ -280,31 +294,36 @@
                         Puntaje Glasgow Total: <span  id="glassgowTotal" style="color:var(--secondary)">15/15</span> Clasificación: <span id="glasgow_result"></span>
                     </div>
                     <br>
-                    <button class="btn btn-primary">Finalizar y Asignar Prioridad</button>
+                    <button class="btn btn-primary" onclick="finishTriageService()">Finalizar y Asignar Prioridad</button>
                 </div>
 
                 <div class="card">
-                    <h3>Clasificación de Prioridad (Catalog_Priority)</h3>
+                    <h3>Clasificación de Prioridad</h3>
                     <p style="font-size:12px; color:var(--text-muted)">Seleccione el nivel de urgencia basado en la valoración:</p>
                     
                     <div style="display:flex; flex-direction:column; gap:10px;">
-                        <label style="display:flex; align-items:center; gap:10px; padding:10px; border:2px solid #ef4444; border-radius:10px; cursor:pointer;">
-                            <input type="radio" name="prioridad" value="1">
+                        <label class="priority-level-one" >
+                            <input id="selector-1" type="radio" name="prioridad" value="1" disabled>
                             <span class="badge bg-red">Nivel 1 - Emergencia (Inmediata)</span>
                         </label>
-                        <label style="display:flex; align-items:center; gap:10px; padding:10px; border:1px solid #f59e0b; border-radius:10px; cursor:pointer;">
-                            <input type="radio" name="prioridad" value="2">
+                        <label class="priority-level-two">
+                            <input id="selector-2" type="radio" name="prioridad" value="2" disabled>
                             <span class="badge bg-yellow">Nivel 2 - Urgencia (< 15 min)</span>
                         </label>
-                        <label style="display:flex; align-items:center; gap:10px; padding:10px; border:1px solid #22c55e; border-radius:10px; cursor:pointer;">
-                            <input type="radio" name="prioridad" value="3" checked>
+                        <label class="priority-level-three">
+                            <input id="selector-3" type="radio" name="prioridad" value="3" disabled>
                             <span class="badge bg-green">Nivel 3 - No Urgente</span>
                         </label>
                     </div>
 
                     <div style="margin-top:25px;">
                         <label>Notas de Enfermería / Triage</label>
-                        <textarea rows="4" placeholder="Describa brevemente el estado general, alergias detectadas o síntomas principales..."></textarea>
+                        <textarea 
+                            aria-setsize="450" 
+                            rows="4" 
+                            placeholder="Describa brevemente el estado general, alergias detectadas o síntomas principales..."
+                            id="triage_note"
+                        ></textarea>
                     </div>
                 </div>
             </div>
