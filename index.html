@@ -7,6 +7,9 @@
         <script src="./js/script.js"></script>
         <script src="./js/triage.js"></script>
         <link rel="stylesheet" href="./styles/triage.css">
+        <link rel="stylesheet" href="./styles/consultation.css">
+        <link rel="stylesheet" href="./styles/toast.css">
+        <link rel="stylesheet" href="./styles/modal.css">
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
         <style>
             :root {
@@ -68,6 +71,7 @@
             .btn-primary { background: var(--primary); color: white; }
             .btn-secondary { background: #e2e8f0; color: var(--sidebar); }
             .btn-blue { background: var(--secondary); color: white; }
+            .btn-red { background: var(--danger); color: white; }
 
             /* Tables */
             table { width: 100%; border-collapse: collapse; }
@@ -87,6 +91,7 @@
         </style>
     </head>
     <body>
+    <script src="./js/consultation.js"></script>
     <div id="toast-container"></div>
     <aside class="sidebar">
         <div class="brand">
@@ -98,6 +103,8 @@
         </div>
 
         <div class="nav-group">
+
+
             <div class="nav-label">General</div>
             <div class="nav-item active" onclick="showModule('dashboard')"><span>📊</span> Dashboard</div>
         </div>
@@ -106,6 +113,8 @@
             <div class="nav-label">Operación Clínica</div>
             <div class="nav-item" onclick="showModule('recepcion')"><span>🧾</span> Admisión / Recepción</div>
             <div class="nav-item" onclick="showModule('triage')"><span>🩺</span> Triage / Urgencias</div>
+            <div class="nav-item" onclick="showModule('triage')"><span>🩺</span> Paciene</div>
+            <div class="nav-item" onclick="showModule('triage')"><span>🩺</span> Medico </div>
             <div class="nav-item" onclick="showModule('consulta')"><span>👨‍⚕️</span> Consulta Médica</div>
             <div class="nav-item" onclick="showModule('laboratorio')"><span>🧪</span> Laboratorio</div>
             <div class="nav-item" onclick="showModule('paramedicos')"><span>🚑</span> Paramédicos (FRAP)</div>
@@ -118,7 +127,6 @@
             <div class="nav-item" onclick="showModule('sistema')"><span>⚙️</span> Configuración</div>
         </div>
     </aside>
-
         <div class="main-container">
             <header>
                 <h2 id="module-title" style="margin:0; font-size: 20px;">Dashboard General</h2>
@@ -131,8 +139,7 @@
                 </div>
             </header>
 
-            <div class="content">
-                
+            <div class="content">  
                 <section id="dashboard" class="section active">
                     <div class="grid grid-4">
                         <div class="card kpi"><small>Pacientes Hoy</small><strong>24</strong><span>+12% vs ayer</span></div>
@@ -193,227 +200,383 @@
                         </div>
                     </div>
                 </section>
+
             <section id="triage" class="section">
-             <div class="grid grid-2">
-                <div class="card">
-                    <h3>Valoración de Signos Vitales</h3>
-                    <div class="grid grid-3">
-                        <div class="form-group">
-                            <label>Tensión Sistólica (mmHg)</label>
-                            <input type="number" id="sistolica" placeholder="120" required>
-                            <small class="error-message"></small>
-                        </div>
-                        <div class="form-group">
-                            <label>Tensión Diastólica (mmHg)</label>
-                            <input type="number" id="diastolica" placeholder="80" required >
-                            <small class="error-message"></small>
-                        </div>
-                        <div class="form-group">
-                            <label>Frec. Cardíaca (LPM)</label>
-                            <input type="number" id="lpm" placeholder="75" required >
-                            <small class="error-message"></small>
-                        </div>
-                        <div class="form-group">
-                            <label>Frec. Respiratoria (RPM)</label>
-                            <input type="number" id="respiratory" required placeholder="18">
-                            <small class="error-message"></small>
-                        </div>
-                        <div class="form-group">
-                            <label>Temperatura (°C)</label>
-                            <input type="number" id="temperature" required step="0.1" placeholder="36.5">
-                            <small class="error-message"></small>
-                        </div>
-                        <div class="form-group">
-                            <label>Sat. Oxígeno (SpO2 %)</label>
-                            <input type="number" id="oxygen" required placeholder="98">
-                            <small class="error-message"></small>
-
-                        </div>
-                        <div class="form-group">
-                            <label>Peso (kg)</label>
-                            <input type="number" step="0.1" id="wiegth" required placeholder="70.0">
-                            <small class="error-message"></small>
-
-                        </div>
-                        <div class="form-group">
-                            <label>Talla (cm)</label>
-                            <input type="number" id="height" required placeholder="170">
-                            <small class="error-message"></small>
-
-                        </div>
-                        <div class="form-group">
-                            <label>Glucosa (mg/dL)</label>
-                            <input type="number" id="glucose" required placeholder="90">
-                            <small class="error-message"></small>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Escala Visual Análoga del Dolor (EVA: 0-10)</label>
-                        <input type="range" min="0"  id="scale_visual_scale"  max="10" value="0" oninput="this.nextElementSibling.value = this.value">
-                        <output style="font-weight:bold; color:var(--primary)">0</output>
-                    </div>
-
-                    <hr style="margin:20px 0; border:0; border-top:1px solid var(--border)">
-                    
-                    <h3>Escala de Glasgow (Glasgow_Comma_Scale)</h3>
-                    <div class="grid grid-3">
-                        <div class="form-group">
-                            <label>Apertura Ocular</label>
-                            <select id="glasgow_ocular" onchange="watcherGlassgow()">
-                                <option value="4">4 - Espontánea</option>
-                                <option value="3">3 - Al orden</option>
-                                <option value="2">2 - Al dolor</option>
-                                <option value="1">1 - Ninguna</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Respuesta Verbal</label>
-                            <select id="glasgow_verbal" onchange="watcherGlassgow()">
-                                <option value="5">5 - Orientado</option>
-                                <option value="4">4 - Confuso</option>
-                                <option value="3">3 - Inapropiado</option>
-                                <option value="2">2 - Sonidos</option>
-                                <option value="1">1 - Ninguna</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Respuesta Motora</label>
-                            <select id="glasgow_motor" onchange="watcherGlassgow()">
-                                <option value="6">6 - Obedece</option>
-                                <option value="5">5 - Localiza</option>
-                                <option value="4">4 - Retira</option>
-                                <option value="3">3 - Flexión</option>
-                                <option value="2">2 - Extensión</option>
-                                <option value="1">1 - Ninguna</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div style="background:var(--bg-main); padding:10px; border-radius:8px; font-weight:bold;">
-                        Puntaje Glasgow Total: <span  id="glassgowTotal" style="color:var(--secondary)">15/15</span> Clasificación: <span id="glasgow_result"></span>
-                    </div>
-                    <br>
-                    <button class="btn btn-primary" onclick="finishTriageService()">Finalizar y Asignar Prioridad</button>
+                <div class="grid grid-6">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Paciente</th>
+                                <th>Motivo de Consulta</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="seleccionarPaciente()">
+                                <td>ADM-001</td>
+                                <td>Juan Pérez</td>
+                                <td>Dolor en antebrazo</td>
+                                <td class="badge bg-yellow">En espera</td>
+                            </tr>
+                            <tr onclick="seleccionarPaciente()">
+                                <td>ADM-002</td>
+                                <td>Elena Gil</td>
+                                <td>Aplicacion de inyeccion</td>
+                                <td class="badge bg-blue">En Atencion</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <div class="card">
-                    <h3>Clasificación de Prioridad</h3>
-                    <p style="font-size:12px; color:var(--text-muted)">Seleccione el nivel de urgencia basado en la valoración:</p>
-                    
-                    <div style="display:flex; flex-direction:column; gap:10px;">
-                        <label class="priority-level-one" >
-                            <input id="selector-1" type="radio" name="prioridad" value="1" disabled>
-                            <span class="badge bg-red">Nivel 1 - Emergencia (Inmediata)</span>
-                        </label>
-                        <label class="priority-level-two">
-                            <input id="selector-2" type="radio" name="prioridad" value="2" disabled>
-                            <span class="badge bg-yellow">Nivel 2 - Urgencia (< 15 min)</span>
-                        </label>
-                        <label class="priority-level-three">
-                            <input id="selector-3" type="radio" name="prioridad" value="3" disabled>
-                            <span class="badge bg-green">Nivel 3 - No Urgente</span>
-                        </label>
-                    </div>
-
-                    <div style="margin-top:25px;">
-                        <label>Notas de Enfermería / Triage</label>
-                        <textarea 
-                            aria-setsize="450" 
-                            rows="4" 
-                            placeholder="Describa brevemente el estado general, alergias detectadas o síntomas principales..."
-                            id="triage_note"
-                        ></textarea>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-                <section id="consulta" class="section">
-                    <div class="grid grid-2">
-                        <div class="card">
-                            <h3>Expediente Clínico</h3>
-                            <div class="form-group"><label>Motivo de Consulta</label><textarea rows="3"></textarea></div>
-                            <div class="form-group"><label>Exploración Física</label><textarea rows="3"></textarea></div>
-                            <div class="form-group"><label>Diagnóstico (CIE-10)</label><input type="text" placeholder="Ej. J00 - Rinofaringitis"></div>
-                            <button class="btn btn-primary">Finalizar Atención</button>
-                        </div>
-                        <div class="card">
-                            <h3>Receta Médica</h3>
-                            <div style="border: 1px dashed var(--border); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                                <div style="font-weight:700;">Paracetamol 500mg</div>
-                                <div style="font-size:12px;">1 tableta cada 8 hrs por 3 días</div>
+                <div class="grid grid-2" id="contenedorForm" style="display:none;">
+                    <div class="card">
+                        <h3>Valoración de Signos Vitales</h3>
+                        <div class="grid grid-3">
+                            <div class="form-group">
+                                <label>Tensión Sistólica (mmHg)</label>
+                                <input type="number" id="sistolica" placeholder="120" required>
+                                <small class="error-message"></small>
                             </div>
-                            <button class="btn btn-blue" style="width:100%; justify-content:center;">+ Agregar Medicamento</button>
+                            <div class="form-group">
+                                <label>Tensión Diastólica (mmHg)</label>
+                                <input type="number" id="diastolica" placeholder="80" required >
+                                <small class="error-message"></small>
+                            </div>
+                            <div class="form-group">
+                                <label>Frec. Cardíaca (LPM)</label>
+                                <input type="number" id="lpm" placeholder="75" required >
+                                <small class="error-message"></small>
+                            </div>
+                            <div class="form-group">
+                                <label>Frec. Respiratoria (RPM)</label>
+                                <input type="number" id="respiratory" required placeholder="18">
+                                <small class="error-message"></small>
+                            </div>
+                            <div class="form-group">
+                                <label>Temperatura (°C)</label>
+                                <input type="number" id="temperature" required step="0.1" placeholder="36.5">
+                                <small class="error-message"></small>
+                            </div>
+                            <div class="form-group">
+                                <label>Sat. Oxígeno (SpO2 %)</label>
+                                <input type="number" id="oxygen" required placeholder="98">
+                                <small class="error-message"></small>
+
+                            </div>
+                            <div class="form-group">
+                                <label>Peso (kg)</label>
+                                <input type="number" step="0.1" id="wiegth" required placeholder="70.0">
+                                <small class="error-message"></small>
+
+                            </div>
+                            <div class="form-group">
+                                <label>Talla (cm)</label>
+                                <input type="number" id="height" required placeholder="170">
+                                <small class="error-message"></small>
+
+                            </div>
+                            <div class="form-group">
+                                <label>Glucosa (mg/dL)</label>
+                                <input type="number" id="glucose" required placeholder="90">
+                                <small class="error-message"></small>
+
+                            </div>
                         </div>
-                    </div>
-                </section>
 
-                <section id="laboratorio" class="section">
-                    <div class="card">
-                        <h3>Órdenes de Laboratorio Pendientes</h3>
-                        <table>
-                            <thead><tr><th>ID</th><th>Paciente</th><th>Estudio</th><th>Estado</th><th>Acciones</th></tr></thead>
-                            <tbody>
-                                <tr><td>L-901</td><td>Pedro Infante</td><td>Biometría Hemática</td><td><span class="badge bg-yellow">En proceso</span></td><td><button class="btn btn-secondary">Subir PDF</button></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+                        <div class="form-group">
+                            <label>Escala Visual Análoga del Dolor (EVA: 0-10)</label>
+                            <input type="range" min="0"  id="scale_visual_scale"  max="10" value="0" oninput="this.nextElementSibling.value = this.value">
+                            <output style="font-weight:bold; color:var(--primary)">0</output>
+                        </div>
 
-                <section id="paramedicos" class="section">
-                    <div class="card" style="background:var(--sidebar); color:white;">
-                        <h3>Registro de Evento FRAP</h3>
+                        <hr style="margin:20px 0; border:0; border-top:1px solid var(--border)">
+                        
+                        <h3>Escala de Glasgow (Glasgow_Comma_Scale)</h3>
                         <div class="grid grid-3">
-                            <div class="form-group"><label style="color:white">Unidad</label><input type="text" value="AMB-01"></div>
-                            <div class="form-group"><label style="color:white">Salida</label><input type="time"></div>
-                            <div class="form-group"><label style="color:white">Arribo</label><input type="time"></div>
+                            <div class="form-group">
+                                <label>Apertura Ocular</label>
+                                <select id="glasgow_ocular" onchange="watcherGlassgow()">
+                                    <option value="4">4 - Espontánea</option>
+                                    <option value="3">3 - Al orden</option>
+                                    <option value="2">2 - Al dolor</option>
+                                    <option value="1">1 - Ninguna</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Respuesta Verbal</label>
+                                <select id="glasgow_verbal" onchange="watcherGlassgow()">
+                                    <option value="5">5 - Orientado</option>
+                                    <option value="4">4 - Confuso</option>
+                                    <option value="3">3 - Inapropiado</option>
+                                    <option value="2">2 - Sonidos</option>
+                                    <option value="1">1 - Ninguna</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Respuesta Motora</label>
+                                <select id="glasgow_motor" onchange="watcherGlassgow()">
+                                    <option value="6">6 - Obedece</option>
+                                    <option value="5">5 - Localiza</option>
+                                    <option value="4">4 - Retira</option>
+                                    <option value="3">3 - Flexión</option>
+                                    <option value="2">2 - Extensión</option>
+                                    <option value="1">1 - Ninguna</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group"><label style="color:white">Descripción del Incidente</label><textarea rows="4" style="background:#1e293b; border:0; color:white;"></textarea></div>
-                        <button class="btn btn-primary" style="background:var(--danger)">Cerrar Servicio</button>
+                        <div style="background:var(--bg-main); padding:10px; border-radius:8px; font-weight:bold;">
+                            Puntaje Glasgow Total: <span  id="glassgowTotal" style="color:var(--secondary)">15/15</span> Clasificación: <span id="glasgow_result"></span>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" onclick="finishTriageService()">Finalizar y Asignar Prioridad</button>
                     </div>
-                </section>
 
-                <section id="compras" class="section">
-                    <div class="grid grid-2">
-                        <div class="card">
-                            <h3>Orden de Compra</h3>
-                            <div class="form-group"><label>Proveedor</label><select><option>Médica Santa Cruz</option></select></div>
-                            <table>
-                                <thead><tr><th>Artículo</th><th>Cant.</th><th>Subtotal</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Solución Salina 500ml</td><td>20</td><td>$1,200</td></tr>
-                                </tbody>
-                            </table><br>
-                            <button class="btn btn-primary">Generar Solicitud</button>
-                        </div>
-                        <div class="card">
-                            <h3>Historial OC</h3>
-                            <div style="font-size:12px;">OC-550 - Autorizada - $4,500</div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="rrhh" class="section">
                     <div class="card">
-                        <h3>Expediente de Empleado</h3>
-                        <div class="grid grid-3">
-                            <div class="form-group"><label>Nombre</label><input type="text"></div>
-                            <div class="form-group"><label>Puesto</label><input type="text"></div>
-                            <div class="form-group"><label>Fecha Ingreso</label><input type="date"></div>
+                        <h3>Clasificación de Prioridad</h3>
+                        <p style="font-size:12px; color:var(--text-muted)">Seleccione el nivel de urgencia basado en la valoración:</p>
+                        
+                        <div style="display:flex; flex-direction:column; gap:10px;">
+                            <label class="priority-level-one" >
+                                <input id="selector-1" type="radio" name="prioridad" value="1" disabled>
+                                <span class="badge bg-red">Nivel 1 - Emergencia (Inmediata)</span>
+                            </label>
+                            <label class="priority-level-two">
+                                <input id="selector-2" type="radio" name="prioridad" value="2" disabled>
+                                <span class="badge bg-yellow">Nivel 2 - Urgencia (< 15 min)</span>
+                            </label>
+                            <label class="priority-level-three">
+                                <input id="selector-3" type="radio" name="prioridad" value="3" disabled>
+                                <span class="badge bg-green">Nivel 3 - No Urgente</span>
+                            </label>
                         </div>
-                        <button class="btn btn-primary">Guardar Empleado</button>
-                    </div>
-                </section>
 
-                <section id="sistema" class="section">
+                        <div style="margin-top:25px;">
+                            <label>Notas de Enfermería / Triage</label>
+                            <textarea 
+                                aria-setsize="450" 
+                                rows="4" 
+                                placeholder="Describa brevemente el estado general, alergias detectadas o síntomas principales..."
+                                id="triage_note"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="consulta" class="section">
+                <div class="grid grid-6" id="tableConsultationPatient">
+                    <table>
+                        <thead>
+                            <th>Folio</th>
+                            <th>Paciente</th>
+                            <th>Motivo</th>
+                            <th>Estado</th>
+                        </thead>
+                        <tbody>
+                            <tr onclick="seleccionarConsulta()">
+                                <td>ADM-001</td>
+                                <td>Juan Pérez</td>
+                                <td>Dolor de antebrazo</td>
+                                <td class="badge bg-blue">En espera</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="grid grid-2" id="patientConsultForm" style="display: none;" >
+                    <div class="card">
+                        <h3>Historial Clinico</h3>
+                        <div class="antecedentes-container">
+                        <div class="accordion">
+                            <div class="accordion-header">Antecedentes Heredofamiliares</div>
+                            <div class="accordion-content">
+                                <section id="backgound_list">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Pariente</th>
+                                                <th>Padecimiento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <section>
+                                    <button class="btn btn-primary" onclick="agregarAntecedente()">+ Agregar  antecedentes</button>
+                                </section>               
+                            </div>
+                        </div>
+
+                        <!-- 🧍 NO PATOLÓGICOS -->
+                        <div class="accordion">
+                            <div class="accordion-header">Antecedentes No Patológicos</div>
+                            <div class="accordion-content">
+
+                            <label>Tabaquismo:</label>
+                            <select id="apnp_tabaquismo">
+                                <option value="">Seleccionar</option>
+                                <option value="no">No</option>
+                                <option value="si">Sí</option>
+                                <option value="exfumador">Exfumador</option>
+                            </select><br>
+
+                            <label>Alcohol:</label>
+                            <select id="apnp_alcohol">
+                                <option value="">Seleccionar</option>
+                                <option value="nunca">Nunca</option>
+                                <option value="ocasional">Ocasional</option>
+                                <option value="frecuente">Frecuente</option>
+                            </select><br>
+
+                            <label>Actividad Física:</label>
+                            <select id="apnp_actividad">
+                                <option value="">Seleccionar</option>
+                                <option value="sedentario">Sedentario</option>
+                                <option value="moderado">Moderado</option>
+                                <option value="activo">Activo</option>
+                            </select><br>
+
+                            <label>Notas:</label>
+                            <textarea id="apnp_notas"></textarea>
+
+                            </div>
+                        </div>
+
+                        <!-- 🏥 PATOLÓGICOS -->
+                        <div class="accordion">
+                            <div class="accordion-header">Antecedentes Patológicos</div>
+                            <div class="accordion-content">
+
+                            <label>Enfermedades:</label>
+                            <select id="app_enfermedades" >
+                                <option value="diabetes_tipo_2">Diabetes Tipo 2</option>
+                                <option value="hipertension">Hipertensión</option>
+                                <option value="asma">Asma</option>
+                                <option value="cardiopatia">Cardiopatía</option>
+                            </select><br>
+                            <label>Tipo sanguinio</label>
+                            <select>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                            </select>
+
+                            <label>Descripción:</label>
+                            <textarea id="app_descripcion"></textarea>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <h3>Expediente Clínico</h3>
+                        <div class="form-group"><label>Motivo de Consulta</label><textarea rows="3"></textarea></div> 
+                        <div class="form-group"><label>Exploración Física</label><textarea rows="3"></textarea></div>
+                        <div class="form-group"><label>Diagnóstico (CIE-10)</label><input type="text" placeholder="Ej. J00 - Rinofaringitis"></div>
+                        <button class="btn btn-primary">Finalizar Atención</button>
+                    </div>
+                    <div class="card">
+                        <h3>Receta Médica</h3>
+                        <div style="border: 1px dashed var(--border); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                            <section>
+                                <table id="mediament_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Medicamento</th>
+                                            <th>Dosis</th>
+                                            <th>Frecuencia</th>
+                                            <th>Duracion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </div>
+                        <button class="btn btn-blue" onclick="showModalMedicaments()" style="width:100%; justify-content:center;">+ Agregar Medicamento</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="laboratorio" class="section">
+                <div class="card">
+                    <h3>Órdenes de Laboratorio Pendientes</h3>
+                    <table>
+                        <thead><tr><th>ID</th><th>Paciente</th><th>Estudio</th><th>Estado</th><th>Acciones</th></tr></thead>
+                        <tbody>
+                            <tr><td>L-901</td><td>Pedro Infante</td><td>Biometría Hemática</td><td><span class="badge bg-yellow">En proceso</span></td><td><button class="btn btn-secondary">Subir PDF</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="paramedicos" class="section">
+                <div class="card" style="background:var(--sidebar); color:white;">
+                    <h3>Registro de Evento FRAP</h3>
                     <div class="grid grid-3">
-                        <div class="card"><h4>Roles</h4><p style="font-size:12px;">Admin, Médico, Recepción</p></div>
-                        <div class="card"><h4>Sucursales</h4><p style="font-size:12px;">Matriz, Norte, Sur</p></div>
-                        <div class="card"><h4>Backup</h4><p style="font-size:12px;">Último: Hace 2 horas</p></div>
+                        <div class="form-group"><label style="color:white">Unidad</label><input type="text" value="AMB-01"></div>
+                        <div class="form-group"><label style="color:white">Salida</label><input type="time"></div>
+                        <div class="form-group"><label style="color:white">Arribo</label><input type="time"></div>
                     </div>
-                </section>
+                    <div class="form-group"><label style="color:white">Descripción del Incidente</label><textarea rows="4" style="background:#1e293b; border:0; color:white;"></textarea></div>
+                    <button class="btn btn-primary" style="background:var(--danger)">Cerrar Servicio</button>
+                </div>
+            </section>
+
+            <section id="compras" class="section">
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Orden de Compra</h3>
+                        <div class="form-group"><label>Proveedor</label><select><option>Médica Santa Cruz</option></select></div>
+                        <table>
+                            <thead><tr><th>Artículo</th><th>Cant.</th><th>Subtotal</th></tr></thead>
+                            <tbody>
+                                <tr><td>Solución Salina 500ml</td><td>20</td><td>$1,200</td></tr>
+                            </tbody>
+                        </table><br>
+                        <button class="btn btn-primary">Generar Solicitud</button>
+                    </div>
+                    <div class="card">
+                        <h3>Historial OC</h3>
+                        <div style="font-size:12px;">OC-550 - Autorizada - $4,500</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rrhh" class="section">
+                <div class="card">
+                    <h3>Expediente de Empleado</h3>
+                    <div class="grid grid-3">
+                        <div class="form-group"><label>Nombre</label><input type="text"></div>
+                        <div class="form-group"><label>Puesto</label><input type="text"></div>
+                        <div class="form-group"><label>Fecha Ingreso</label><input type="date"></div>
+                    </div>
+                    <button class="btn btn-primary">Guardar Empleado</button>
+                </div>
+            </section>
+
+            <section id="sistema" class="section">
+                <div class="grid grid-3">
+                    <div class="card"><h4>Roles</h4><p style="font-size:12px;">Admin, Médico, Recepción</p></div>
+                    <div class="card"><h4>Sucursales</h4><p style="font-size:12px;">Matriz, Norte, Sur</p></div>
+                    <div class="card"><h4>Backup</h4><p style="font-size:12px;">Último: Hace 2 horas</p></div>
+                </div>
+            </section>
             </div>
         </div>
     </body>
 </html>
+
+
