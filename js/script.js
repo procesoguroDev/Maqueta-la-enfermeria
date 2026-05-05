@@ -19,6 +19,7 @@ function showModule(id) {
         paramedicos: 'Servicios Paramédicos (FRAP)',
         compras: 'Gestión de Compras',
         rrhh: 'Recursos Humanos',
+        paciente: 'Vista del Paciente.',
         sistema: 'Configuración del Sistema'
     };
     document.getElementById('module-title').innerText = titles[id];

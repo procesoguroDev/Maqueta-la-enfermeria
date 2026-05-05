@@ -315,7 +315,7 @@ function showModalFinishConsultation(){
         {
           label: 'Aceptar',
           class: 'btn btn-primary',
-          onClick: () => renderTableMedicament()
+          onClick: () => console.log('hola')
         }
       ]
     })
