@@ -412,7 +412,6 @@
                                 </section>               
                             </div>
                         </div>
-
                         <!-- 🧍 NO PATOLÓGICOS -->
                         <div class="accordion">
                             <div class="accordion-header">Antecedentes No Patológicos</div>
@@ -447,14 +446,14 @@
 
                             </div>
                         </div>
-
                         <!-- 🏥 PATOLÓGICOS -->
                         <div class="accordion">
                             <div class="accordion-header">Antecedentes Patológicos</div>
                             <div class="accordion-content">
 
                             <label>Enfermedades:</label>
-                            <select id="app_enfermedades" >
+                            <select id="app_enfermedades">
+                                <option value="Nada">ninguna enfermedad</option>
                                 <option value="diabetes_tipo_2">Diabetes Tipo 2</option>
                                 <option value="hipertension">Hipertensión</option>
                                 <option value="asma">Asma</option>
@@ -477,14 +476,12 @@
 
                             </div>
                         </div>
-
                     </div>
                     <div class="card">
                         <h3>Expediente Clínico</h3>
                         <div class="form-group"><label>Motivo de Consulta</label><textarea rows="3"></textarea></div> 
                         <div class="form-group"><label>Exploración Física</label><textarea rows="3"></textarea></div>
                         <div class="form-group"><label>Diagnóstico (CIE-10)</label><input type="text" placeholder="Ej. J00 - Rinofaringitis"></div>
-                        <button class="btn btn-primary">Finalizar Atención</button>
                     </div>
                     <div class="card">
                         <h3>Receta Médica</h3>
@@ -506,7 +503,7 @@
                         </div>
                         <button class="btn btn-blue" onclick="showModalMedicaments()" style="width:100%; justify-content:center;">+ Agregar Medicamento</button>
                     </div>
-
+                    <button class="btn btn-primary" onclick="showModalFinishConsultation()" >Finalizar Atención</button>
                 </div>
             </section>
 

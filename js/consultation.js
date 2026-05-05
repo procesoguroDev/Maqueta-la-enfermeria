@@ -298,3 +298,29 @@ function  showModalMedicaments(){
   }
 }
 
+function showModalFinishConsultation(){
+  try {
+    modal.open({
+      title:'Finalizar consulta',
+      content:`
+        <div class="modal-content-class">
+          <span> estas seguro de finalizar la consulta. </span>
+        </div>
+      `,
+      actions: [
+        {
+          label:'Cancelar',
+          class: 'btn btn-red'
+        },
+        {
+          label: 'Aceptar',
+          class: 'btn btn-primary',
+          onClick: () => renderTableMedicament()
+        }
+      ]
+    })
+  } 
+  catch (error) {
+    console.error('error show modal medicament', error)  
+  }
+}
