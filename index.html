@@ -220,6 +220,7 @@
                         </div>
                     </div>
                 </section>
+
                 <section id="paciente" class="section">
                     <div class="grid grid-6" id="patient_table">
                         <table>
@@ -307,6 +308,7 @@
                         </div>
                     </div>
                 </section>
+
                 <section id="triage" class="section">
                     <div id="tableTriage" class="grid grid-6">
                         <table>
@@ -472,174 +474,247 @@
                 </section>
 
                 <section id="consulta" class="section">
-                    <div class="grid grid-6" id="tableConsultationPatient">
-                        <table>
-                            <thead>
-                                <th>Folio</th>
-                                <th>Paciente</th>
-                                <th>Motivo</th>
-                                <th>Estado</th>
-                            </thead>
-                            <tbody>
-                                <tr onclick="seleccionarConsulta()">
-                                    <td>ADM-001</td>
-                                    <td>Juan Pérez</td>
-                                    <td>Dolor de antebrazo</td>
-                                    <td class="badge bg-blue">En espera</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="grid grid-2" id="patientConsultForm" style="display: none;" >
-                        <div class="card">
-                            <h3>Historial Clinico</h3>
-                            <div class="antecedentes-container">
-                            <div class="accordion">
-                                <div class="accordion-header">Antecedentes Heredofamiliares</div>
-                                <div class="accordion-content">
-                                    <section id="backgound_list">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Pariente</th>
-                                                    <th>Padecimiento</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </section>
-                                    <section>
-                                        <button class="btn btn-primary" onclick="agregarAntecedente()">+ Agregar  antecedentes</button>
-                                    </section>               
-                                </div>
-                            </div>
-                            <!-- 🧍 NO PATOLÓGICOS -->
-                            <div class="accordion">
-                                <div class="accordion-header">Antecedentes No Patológicos</div>
-                                <div class="accordion-content">
+                    <div class="container mt-5">
+                        <ul class="nav nav-tabs" id="consultationTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button 
+                                    class="nav-link active"
+                                    id="home-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#home"
+                                    type="button"
+                                >
+                                    Paciente en consulta
+                                </button>
+                            </li>
 
-                                <label>Tabaquismo:</label>
-                                <select id="apnp_tabaquismo">
-                                    <option value="">Seleccionar</option>
-                                    <option value="no">No</option>
-                                    <option value="si">Sí</option>
-                                    <option value="exfumador">Exfumador</option>
-                                </select><br>
+                            <li class="nav-item" role="presentation">
+                                <button 
+                                    class="nav-link"
+                                    id="perfil-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#perfil"
+                                    type="button"
+                                >
+                                    Pacientes
+                                </button>
+                            </li>
+                        </ul>
 
-                                <label>Alcohol:</label>
-                                <select id="apnp_alcohol">
-                                    <option value="">Seleccionar</option>
-                                    <option value="nunca">Nunca</option>
-                                    <option value="ocasional">Ocasional</option>
-                                    <option value="frecuente">Frecuente</option>
-                                </select><br>
-
-                                <label>Actividad Física:</label>
-                                <select id="apnp_actividad">
-                                    <option value="">Seleccionar</option>
-                                    <option value="sedentario">Sedentario</option>
-                                    <option value="moderado">Moderado</option>
-                                    <option value="activo">Activo</option>
-                                </select><br>
-
-                                <label>Notas:</label>
-                                <textarea id="apnp_notas"></textarea>
-
-                                </div>
-                            </div>
-                            <!-- 🏥 PATOLÓGICOS -->
-                            <div class="accordion">
-                                <div class="accordion-header">Antecedentes Patológicos</div>
-                                <div class="accordion-content">
-
-                                <label>Enfermedades:</label>
-                                <select id="app_enfermedades">
-                                    <option value="Nada">ninguna enfermedad</option>
-                                    <option value="diabetes_tipo_2">Diabetes Tipo 2</option>
-                                    <option value="hipertension">Hipertensión</option>
-                                    <option value="asma">Asma</option>
-                                    <option value="cardiopatia">Cardiopatía</option>
-                                </select><br>
-                                <label>Tipo sanguinio</label>
-                                <select>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                </select>
-
-                                <label>Descripción:</label>
-                                <textarea id="app_descripcion"></textarea>
-
-                                </div>
-                            </div>
-                            <!-- Grupo etnico -->
-                             <div class="accordion">
-                                <div class="accordion-header">Grupo Etnico</div>
-                                <div class="accordion-content">
-                                    <label>¿Perteneces a un grupo ?</label>
-                                    <label>
-                                        <input 
-                                            type="checkbox" 
-                                            id="etnicalGroupCheckbox" 
-                                            onclick="etnicalGroup()"
-                                            value="si"
-                                        >
-                                        <span id="result">No</span>
-                                    </label>
-                                    
-                                    <br>
-                                    <div id="etnical-group" style="display: none;">
-                                        <label> Escribe cual: </label>
-                                        <textarea id="app_descripcion"></textarea>
-                                    </div>
-                                
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <h3>Expediente Clínico</h3>
-                            <div class="form-group"><label>Motivo de Consulta</label><textarea rows="3"></textarea></div> 
-                            <div class="form-group"><label>Exploración Física</label><textarea rows="3"></textarea></div>
-                            <div class="form-group"><label>Diagnóstico (CIE-10)</label><input type="text" placeholder="Ej. J00 - Rinofaringitis"></div>
-                        </div>
-                        <div class="card">
-                            <h3>Receta Médica</h3>
-                            <div style="border: 1px dashed var(--border); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                                <section>
-                                    <table id="mediament_table">
+                        <!-- CONTENIDO TAB -->
+                        <div class="tab-content border border-top-0 p-4 bg-white">
+                            <div 
+                                class="tab-pane fade show active"
+                                id="home"
+                            >
+                                <div class="grid grid-6" id="tableConsultationPatient">
+                                    <table>
                                         <thead>
-                                            <tr>
-                                                <th>Medicamento</th>
-                                                <th>Dosis</th>
-                                                <th>Frecuencia</th>
-                                                <th>Duracion</th>
-                                            </tr>
+                                            <th>Folio</th>
+                                            <th>Paciente</th>
+                                            <th>Motivo</th>
+                                            <th>Estado</th>
                                         </thead>
                                         <tbody>
+                                            <tr onclick="seleccionarConsulta()">
+                                                <td>ADM-001</td>
+                                                <td>Juan Pérez</td>
+                                                <td>Dolor de antebrazo</td>
+                                                <td class="badge bg-blue">En espera</td>
+                                            </tr>
                                         </tbody>
                                     </table>
-                                </section>
-                            </div>
-                            <button class="btn btn-blue" onclick="showModalMedicaments()" style="width:100%; justify-content:center;">+ Agregar Medicamento</button>
-                        </div>
-                        <div class="button-container">
+                                </div>
+                                <div class="grid grid-2" id="patientConsultForm" style="display: none;" >
+                                    <div class="card">
+                                        <div class="button-container">
+                                            <button class="btn btn-outline-secundary" onclick="regresarConsulta()">
+                                                Regresar
+                                            </button>
+                                        </div>
+                                        <h3>Historial Clinico</h3>
+                                        <div class="antecedentes-container">
+                                            <div class="accordion">
+                                                <div class="accordion-header">Antecedentes Heredofamiliares</div>
+                                                <div class="accordion-content">
+                                                    <section id="backgound_list">
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Pariente</th>
+                                                                    <th>Padecimiento</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </section>
+                                                    <section>
+                                                        <button class="btn btn-primary" onclick="agregarAntecedente()">+ Agregar  antecedentes</button>
+                                                    </section>               
+                                                </div>
+                                            </div>
+                                            <!-- 🧍 NO PATOLÓGICOS -->
+                                            <div class="accordion">
+                                                <div class="accordion-header">Antecedentes No Patológicos</div>
+                                                <div class="accordion-content">
 
-                            <button class="btn btn-primary" onclick="showModalFinishConsultation()" >Finalizar Atención</button>
-                            <button class="btn btn-primary"> <a href="./assets//receta.pdf" download target="_blank"> Imprimir receta </a></button>
+                                                <label>Tabaquismo:</label>
+                                                <select id="apnp_tabaquismo">
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="no">No</option>
+                                                    <option value="si">Sí</option>
+                                                    <option value="exfumador">Exfumador</option>
+                                                </select><br>
+
+                                                <label>Alcohol:</label>
+                                                <select id="apnp_alcohol">
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="nunca">Nunca</option>
+                                                    <option value="ocasional">Ocasional</option>
+                                                    <option value="frecuente">Frecuente</option>
+                                                </select><br>
+
+                                                <label>Actividad Física:</label>
+                                                <select id="apnp_actividad">
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="sedentario">Sedentario</option>
+                                                    <option value="moderado">Moderado</option>
+                                                    <option value="activo">Activo</option>
+                                                </select><br>
+
+                                                <label>Notas:</label>
+                                                <textarea id="apnp_notas"></textarea>
+
+                                                </div>
+                                            </div>
+                                            <!-- 🏥 PATOLÓGICOS -->
+                                            <div class="accordion">
+                                                <div class="accordion-header">Antecedentes Patológicos</div>
+                                                <div class="accordion-content">
+
+                                                <label>Enfermedades:</label>
+                                                <select id="app_enfermedades">
+                                                    <option value="Nada">ninguna enfermedad</option>
+                                                    <option value="diabetes_tipo_2">Diabetes Tipo 2</option>
+                                                    <option value="hipertension">Hipertensión</option>
+                                                    <option value="asma">Asma</option>
+                                                    <option value="cardiopatia">Cardiopatía</option>
+                                                </select><br>
+                                                <label>Tipo sanguinio</label>
+                                                <select>
+                                                    <option value="O+">O+</option>
+                                                    <option value="O-">O-</option>
+                                                    <option value="AB+">AB+</option>
+                                                    <option value="AB-">AB-</option>
+                                                    <option value="A+">A+</option>
+                                                    <option value="A-">A-</option>
+                                                    <option value="B+">B+</option>
+                                                    <option value="B-">B-</option>
+                                                </select>
+
+                                                <label>Descripción:</label>
+                                                <textarea id="app_descripcion"></textarea>
+
+                                                </div>
+                                            </div>
+                                            <!-- Grupo etnico -->
+                                            <div class="accordion">
+                                                <div class="accordion-header">Grupo Etnico</div>
+                                                <div class="accordion-content">
+                                                    <label>¿Perteneces a un grupo ?</label>
+                                                    <label>
+                                                        <input 
+                                                            type="checkbox" 
+                                                            id="etnicalGroupCheckbox" 
+                                                            onclick="etnicalGroup()"
+                                                            value="si"
+                                                        >
+                                                        <span id="result">No</span>
+                                                    </label>
+                                                    
+                                                    <br>
+                                                    <div id="etnical-group" style="display: none;">
+                                                        <label> Escribe cual: </label>
+                                                        <textarea id="app_descripcion"></textarea>
+                                                    </div>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3>Expediente Clínico</h3>
+                                            <div class="form-group"><label>Motivo de Consulta</label><textarea rows="3"></textarea></div> 
+                                            <div class="form-group"><label>Exploración Física</label><textarea rows="3"></textarea></div>
+                                            <div class="form-group"><label>Diagnóstico (CIE-10)</label><input type="text" placeholder="Ej. J00 - Rinofaringitis"></div>
+                                        </div>
+                                        <div class="card">
+                                            <h3>Receta Médica</h3>
+                                            <div style="border: 1px dashed var(--border); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                                                <section>
+                                                    <table id="mediament_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Medicamento</th>
+                                                                <th>Dosis</th>
+                                                                <th>Frecuencia</th>
+                                                                <th>Duracion</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </section>
+                                            </div>
+                                            <button class="btn btn-blue" onclick="showModalMedicaments()" style="width:100%; justify-content:center;">+ Agregar Medicamento</button>
+                                        </div>
+                                        <div class="button-container">
+                                            <button class="btn btn-primary" onclick="showModalFinishConsultation()" >Finalizar Atención</button>
+                                            <button class="btn btn-primary"> <a href="./assets//receta.pdf" download target="_blank"> Imprimir receta </a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div 
+                                class="tab-pane fade"
+                                id="perfil"
+                            >
+                            <div class="grid grid-6" id="tableConsultationPatient">
+                                    <table>
+                                        <thead>
+                                            <th>Folio</th>
+                                            <th>Paciente</th>
+                                            <th>Motivo</th>
+                                            <th>Ultima visita</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ADM-001</td>
+                                                <td>Juan Pérez</td>
+                                                <td>Dolor de antebrazo</td>
+                                                <td>2026/01/01 23:00 hrs</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div 
+                                class="tab-pane fade"
+                                id="config"
+                            >
+                                <h4>Configuración</h4>
+                                <p>Contenido de la pestaña Configuración.</p>
+                            </div>
                         </div>
-                    </div>
+                        </div>
+                    
                 </section>
 
                 <section id="laboratorio" class="section">
@@ -708,8 +783,8 @@
                 </section>
             </div>
         </div> 
-</body>
-
+    </body>
+    
 </html>
 
 

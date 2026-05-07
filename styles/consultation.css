@@ -22,3 +22,10 @@
 .accordion.active .accordion-content {
   display: block;
 }
+
+
+.message-container{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

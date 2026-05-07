@@ -77,9 +77,14 @@ function cargarDatos() {
 }
 
 function seleccionarConsulta() {
-  document.getElementById('tableConsultationPatient').style.display = 'none';
-  document.getElementById('patientConsultForm').style.display = 'grid';
-  console.log("consultation_data",consultation_data)
+   // ocultar tabla
+    document.getElementById('tableConsultationPatient').style.display = 'none';
+
+    // mostrar formulario
+    document.getElementById('patientConsultForm').style.display = 'grid';
+
+    // ocultar nav tabs
+    document.getElementById('consultationTabs').style.display = 'none';
 }
 
 
@@ -167,6 +172,7 @@ function renderTableMedicament(){
         <td>${item.duration}</td>
       </tr>
     `).join('');
+
   } 
   catch (error) {
     console.error('server error', error)
@@ -187,77 +193,194 @@ function agregarAntecedente() {
 
 function  showModalMedicaments(){
   try {
-      // 1. Crear contenedor
+      const modalContainer = document.createElement('div')
+      modalContainer.innerHTML = `     
+        <div class="modal fade" id="dynamicModal" tabindex="-1">
+
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+
+                <div class="modal-content">
+
+                    <!-- HEADER -->
+                    <div class="modal-header">
+
+                        <h5 class="modal-title">
+                            Agregar Medicamento
+                        </h5>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+                        </button>
+
+                    </div>
+
+                    <!-- FORM -->
+                    <form id="medicationForm">
+
+                        <!-- BODY -->
+                        <div class="modal-body">
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        Nombre Medicamento
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="name_medication"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        Dosis
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="dose_input"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        Frecuencia
+                                    </label>
+
+                                    <select
+                                        id="frecuency"
+                                        class="form-select">
+
+                                        <option value="2 horas">2 horas</option>
+                                        <option value="4 horas">4 horas</option>
+                                        <option value="8 horas">8 horas</option>
+                                        <option value="12 horas">12 horas</option>
+                                        <option value="24 horas">24 horas</option>
+                                        <option value="48 horas">48 horas</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        Duración
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="duration"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+
+                                    <label class="form-label">
+                                        Vía de administración
+                                    </label>
+
+                                    <select
+                                        id="administration"
+                                        class="form-select">
+
+                                        <option value="Oral">Oral</option>
+                                        <option value="Subcutánea">Subcutánea</option>
+                                        <option value="Intravenosa">Intravenosa</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- FOOTER -->
+                        <div class="modal-footer">
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+
+                                Cancelar
+
+                            </button>
+
+                            <button
+                              type="button"
+                              class="btn btn-primary"
+                              onclick="renderTableMedicament()"
+                              data-bs-dismiss="modal"
+                          >
+
+                                Guardar
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+      `
+      document.body.appendChild(modalContainer)
+      const modalElement = document.getElementById('dynamicModal')
+      const modal = new bootstrap.Modal(modalElement)
+      modal.show()
+      modalElement.addEventListener('hidden.bs.modal', () => {
+          modalContainer.remove()
+      })
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+function showModalFinishConsultation(){
+  try {
+    // 1. Crear contenedor
       const modalContainer = document.createElement('div')
 
       // 2. HTML del modal
-      modalContainer.innerHTML = `
-          <div class="modal fade" id="dynamicModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title">
-                             Agregar Medicamento
-                          </h5>
+      modalContainer.innerHTML = `     
+        <div class="modal fade" id="dynamicModal" tabindex="-1">
 
-                          <button 
-                              type="button" 
-                              class="btn-close" 
-                              data-bs-dismiss="modal">
-                          </button>
-                      </div>
+            <div class="modal-dialog modal-dialog-centered modal-lg">
 
-                      <div class="modal-body">
-                        <label>Nombre Medicamento</label>
-                        <input type="text" id="name_medication">
-                        <label>Dosis</label>
-                        <input type="text" id="dose_input">
+                <div class="modal-content">
+
+                    <!-- HEADER -->
+                    <div class="modal-header">
+
+                        <h5 class="modal-title">
+                          Atencion
+                        </h5>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+                        </button>
                     </div>
-                    <div class="modal-content-class">
-                      <form>
-                        <label>Frecuencia</label>
-                        <select id="frecuency">
-                            <option value="2 horas">2 horas</option>
-                            <option value="4 horas">4 horas</option>
-                            <option value="8 horas">8 horas</option>
-                            <option value="12 horas">12 horas</option>
-                            <option value="24 horas">24 horas</option>
-                            <option value="48 horas">48 horas</option>
-                        </select>
-                        <label>Duracion</label>
-                        <input type="text" id="duration">
+                    <div class="message-container">
+                      <p>Estas apunto de  finaliza la consulta estas seguro</p>
+                      <div class="button-container">
+                        <button class="btn btn-danger" data-bs-dismiss="modal">cancelar </button>
+                        <button class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                      </div>
                     </div>
-                    <div class="modal-content-class">
-                        <label>Via de admiinstracion:</label>
-                        <select id="administration">
-                            <option value="Oral">Oral</option>
-                            <option value="Suplementaria">Suplementaria</option>
-                            <option value="Intravenosa">Intravenosa</option>
-                        </select>
+                </div>
 
-                      </div>
+            </div>
 
-                      <div class="modal-footer">
-
-                          <button 
-                              type="button" 
-                              class="btn btn-secondary"
-                              data-bs-dismiss="modal">
-                              Cancelar
-                          </button>
-
-                          <button 
-                              type="button" 
-                              class="btn btn-primary"
-                              onclick="guardarDatos()">
-                              Guardar
-                          </button>
-
-                      </div>
-                    </form>
-                  </div>
-              </div>
-          </div>
+        </div>
       `
 
       // 3. Insertar al body
@@ -276,38 +399,11 @@ function  showModalMedicaments(){
       modalElement.addEventListener('hidden.bs.modal', () => {
           modalContainer.remove()
       })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-function showModalFinishConsultation(){
-  try {
-    modal.open({
-      title:'Finalizar consulta',
-      content:`
-        <div class="modal-content-class">
-          <span> estas seguro de finalizar la consulta. </span>
-        </div>
-      `,
-      actions: [
-        {
-          label:'Cancelar',
-          class: 'btn btn-red'
-        },
-        {
-          label: 'Aceptar',
-          class: 'btn btn-primary',
-          onClick: () => console.log('hola')
-        }
-      ]
-    })
   } 
   catch (error) {
     console.error('error show modal medicament', error)  
   }
 }
-
 
 
 function etnicalGroup(){
@@ -323,7 +419,14 @@ function etnicalGroup(){
   }
 
 }
+function regresarConsulta(){
 
+    document.getElementById('tableConsultationPatient').style.display = 'grid'
+
+    document.getElementById('patientConsultForm').style.display = 'none'
+
+    document.getElementById('consultationTabs').style.display = 'flex'
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const checkbox = document.getElementById('etnicalGroupCheckbox');
