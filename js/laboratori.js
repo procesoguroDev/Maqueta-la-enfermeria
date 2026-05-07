@@ -291,7 +291,7 @@ function agregarHojaConsumoTabla(paciente, nombreArchivo, pdfUrl) {
     fila.innerHTML = `
         <td>${paciente}</td>
         <td>
-            <a href="${pdfUrl}" target="_blank">${nombreArchivo}</a>
+            <a href="${pdfUrl}"  style="color: black;" target="_blank">${nombreArchivo}</a>
         </td>
         <td>
             <button class="btn btn-secondary" onclick="enviarHojaRecepcion()">

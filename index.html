@@ -9,6 +9,7 @@
         <script src="./js/triage.js"></script>
         <script src="./js/laboratori.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script><script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
         <link rel="stylesheet" href="./styles/triage.css">
         <link rel="stylesheet" href="./styles/laboratori.css">
         <link rel="stylesheet" href="./styles/consultation.css">
@@ -719,18 +720,212 @@
                     
                 </section>
 
+                <!-- inicio -->
                 <section id="laboratorio" class="section">
                     <div class="card">
-                        <h3>Órdenes de Laboratorio Pendientes</h3>
+                        <div class="card-header">
+                            <h3>Órdenes de Laboratorio Pendientes</h3>
+                        </div>
+
                         <table>
-                            <thead><tr><th>ID</th><th>Paciente</th><th>Estudio</th><th>Estado</th><th>Acciones</th></tr></thead>
-                            <tbody>
-                                <tr><td>L-901</td><td>Pedro Infante</td><td>Biometría Hemática</td><td><span class="badge bg-yellow">En proceso</span></td><td><button class="btn btn-secondary">Subir PDF</button></td></tr>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Paciente</th>
+                                    <th>Estudio</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                    <th>Archivo</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaLaboratorio">
+                                <tr>
+                                    <td>L-901</td>
+                                    <td>Pedro Infante</td>
+                                <td>
+                            <span class="estudios-lista">Biometría Hemática</span>
+
+                            <button class="btn-icon" onclick="abrirModalEstudios(this)" title="Editar estudios">
+                                ✏️
+                            </button>
+                        </td>
+                                    <td>
+                                        <span class="badge bg-yellow status-name">En proceso</span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-secondary" onclick="abrirModalEstado(this)">
+                                            Actualizar estado
+                                        </button>
+
+                                        <button class="btn btn-secondary" onclick="abrirModalEmail(this)">
+                                            Enviar resultados
+                                        </button>
+                                    </td>
+                                    <td>
+                            <input
+                                type="file"
+                                id="archivoLaboratorio901"
+                                class="input-archivo"
+                                onchange="mostrarArchivoSeleccionado(this)"
+                            >
+
+                            <button
+                                class="btn btn-secondary"
+                                onclick="document.getElementById('archivoLaboratorio901').click()"
+                            >
+                                Cargar archivo
+                            </button>
+
+                            <span class="archivo-nombre">Sin archivo</span>
+                        </td>
+                                </tr>
                             </tbody>
                         </table>
-                    </div>
-                </section>
+                        <!-- Apartado hoja de consumo -->
+                        <div class="consumo-layout">
+                            <div>
+                                <button class="btn btn-primary" onclick="abrirModalHojaConsumo()">
+                                    Generar Hoja de consumo
+                                </button>
+                            </div>
 
+                            <div class="hojas-consumo">
+                                <h3>Hojas de consumo</h3>
+
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Paciente</th>
+                                            <th>Archivo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaHojasConsumo">
+                                        <tr>
+                                            <td colspan="3">Sin hojas generadas</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- Model Actualizar estado-->
+                <div id="modalActualizarEstado" class="modal">
+                    <div class="modal-content">
+                        <h3>Actualizar estado</h3>
+
+                        <label for="Estado">Estado</label>
+                        <select id="Estado">
+                            <option value="">Selecciona el estado actual</option>
+                            <option value="Validación de estudio">Validación de estudio</option>
+                            <option value="Estudio en proceso">Estudio en proceso</option>
+                            <option value="Estudio finalizado">Estudio finalizado</option>
+                            <option value="Entrega de resultados">Entrega de resultados</option>
+                        </select>
+
+                        <div class="modal-actions">
+                            <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
+                            <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Estudio selector -->
+                <div id="modalEstudios" class="modal">
+                    <div class="modal-content">
+                        <h3>Editar estudios</h3>
+
+                        <label for="nuevoEstudio">Agregar estudio</label>
+                        <select id="nuevoEstudio">
+                            <option value="">Selecciona un estudio</option>
+                            <option value="Biometría Hemática">Biometría Hemática</option>
+                            <option value="Química Sanguínea">Química Sanguínea</option>
+                            <option value="Examen General de Orina">Examen General de Orina</option>
+                            <option value="Perfil Lipídico">Perfil Lipídico</option>
+                            <option value="Prueba de Glucosa">Prueba de Glucosa</option>
+                        </select>
+
+                        <label for="estudioEliminar">Quitar estudio</label>
+                        <select id="estudioEliminar">
+                            <option value="">Selecciona un estudio para quitar</option>
+                        </select>
+
+                        <div class="modal-actions">
+                            <button class="btn btn-secondary" onclick="cerrarModalEstudios()">Cerrar</button>
+                            <button class="btn btn-secondary" onclick="quitarEstudio()">Quitar</button>
+                            <button class="btn btn-primary" onclick="agregarEstudio()">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Enviar resulados  -->
+                <div id="modalEnviarResultados" class="modal">
+                    <div class="modal-content">
+                        <h3>Enviar resultados</h3>
+
+                        <label for="emailDestino">E-mail</label>
+                        <select id="emailDestino">
+                            <option value="">Selecciona el E-mail de destino</option>
+                            <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
+                            <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
+                            <option value="otro">Otro</option>
+                        </select>
+
+                        <div class="modal-actions">
+                            <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
+                            <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal hoja de consumo -->
+                <div id="modalHojaConsumo" class="modal">
+                    <div class="modal-content">
+                        <h3>Generar hoja de consumo</h3>
+
+                        <label for="pacienteConsumo">Paciente</label>
+                        <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
+                            <option value="">Selecciona un paciente</option>
+                            <option 
+                                value="Pedro Infante"
+                                data-nacimiento="1917-11-18"
+                                data-procedimiento="Biometría Hemática"
+                            >
+                                Pedro Infante
+                            </option>
+                        </select>
+
+                        <div id="formHojaConsumo" style="display: none;">
+                            <label for="nombrePacienteConsumo">Nombre del paciente</label>
+                            <input type="text" id="nombrePacienteConsumo">
+
+                            <label for="fechaNacimientoConsumo">Fecha de nacimiento</label>
+                            <input type="date" id="fechaNacimientoConsumo">
+
+                            <label for="procedimientoConsumo">Procedimiento</label>
+                            <input type="text" id="procedimientoConsumo">
+
+                            <label for="fechaConsumo">Fecha</label>
+                            <input type="date" id="fechaConsumo">
+
+                            <label for="horaConsumo">Hora</label>
+                            <input type="time" id="horaConsumo">
+
+                            <label for="turnoConsumo">Turno</label>
+                            <input type="text" id="turnoConsumo">
+
+                            <label for="quimicoConsumo">Nombre del químico</label>
+                            <input type="text" id="quimicoConsumo">
+                        </div>
+
+                        <div class="modal-actions">
+                            <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
+                            <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- fin -->
+              
                 <section id="paramedicos" class="section">
                     <div class="card" style="background:var(--sidebar); color:white;">
                         <h3>Registro de Evento FRAP</h3>
