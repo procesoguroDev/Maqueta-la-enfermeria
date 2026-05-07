@@ -1,66 +1,3 @@
-class Modal{
-    constructor() {
-        this.create();
-        this.bindEvents();
-    }
-
-    create() {
-        this.overlay = document.createElement('div');
-        this.overlay.className = 'modal-overlay hidden';
-
-        this.overlay.innerHTML = `
-            <div class="modal">
-              <div class="modal-header">
-              <h3 class="modal-title"></h3>
-              <button class="modal-close">&times;</button>
-              </div>
-              <div class="modal-body"></div>
-              <div class="modal-footer"></div>
-            </div>
-            `;
-        document.body.appendChild(this.overlay);
-        this.title = this.overlay.querySelector('.modal-title');
-        this.body = this.overlay.querySelector('.modal-body');
-        this.footer = this.overlay.querySelector('.modal-footer');
-        this.closeBtn = this.overlay.querySelector('.modal-close');
-    }
-
-    close() {
-        this.overlay.classList.add('hidden');
-    }
-
-    bindEvents() {
-        this.closeBtn.addEventListener('click', () => this.close());
-
-        this.overlay.addEventListener('click', (e) => {
-            if(e.target === this.overlay) this.close();
-        });
-    }
-
-    open({ title='', content= '', actions=[]}){
-      this.title.textContent = title;
-      this.body.innerHTML = content;
-      this.footer.innerHTML = '';
-
-      actions.forEach(action => {
-        const btn = document.createElement('button');
-        btn.textContent = action.label;
-        btn.className = action.class || '';
-
-        btn.addEventListener('click', () => {
-            action.onClick?.();
-            this.close();
-        });
-
-        this.footer.appendChild(btn);
-      });
-      this.overlay.classList.remove('hidden');
-    }
-
-}
-
-const modal = new Modal();
-
 let medicament = []
 
 const  consultation_data = {
@@ -250,49 +187,95 @@ function agregarAntecedente() {
 
 function  showModalMedicaments(){
   try {
-     modal.open({
-      title:'Agregar Medicamento',
-      content:`
-        <div class="modal-content-class">
-            <label>Nombre Medicamento</label>
-            <input type="text" id="name_medication">
-            <label>Dosis</label>
-            <input type="text" id="dose_input">
-        </div>
-        <div class="modal-content-class">
-            <label>Frecuencia</label>
-            <select id="frecuency">
-                <option value="2 horas">2 horas</option>
-                <option value="4 horas">4 horas</option>
-                <option value="8 horas">8 horas</option>
-                <option value="12 horas">12 horas</option>
-                <option value="24 horas">24 horas</option>
-                <option value="48 horas">48 horas</option>
-            </select>
-            <label>Duracion</label>
-            <input type="text" id="duration">
-        </div>
-        <div class="modal-content-class">
-            <label>Via de admiinstracion:</label>
-            <select id="administration">
-                <option value="Oral">Oral</option>
-                <option value="Suplementaria">Suplementaria</option>
-                <option value="Intravenosa">Intravenosa</option>
-            </select>
-        </div>
-      `,
-      actions: [
-        {
-          label:'Cancelar',
-          class: 'btn btn-red'
-        },
-        {
-          label: 'Aceptar',
-          class: 'btn btn-primary',
-          onClick: () => renderTableMedicament()
-        }
-      ]
-    })
+      // 1. Crear contenedor
+      const modalContainer = document.createElement('div')
+
+      // 2. HTML del modal
+      modalContainer.innerHTML = `
+          <div class="modal fade" id="dynamicModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title">
+                             Agregar Medicamento
+                          </h5>
+
+                          <button 
+                              type="button" 
+                              class="btn-close" 
+                              data-bs-dismiss="modal">
+                          </button>
+                      </div>
+
+                      <div class="modal-body">
+                        <label>Nombre Medicamento</label>
+                        <input type="text" id="name_medication">
+                        <label>Dosis</label>
+                        <input type="text" id="dose_input">
+                    </div>
+                    <div class="modal-content-class">
+                      <form>
+                        <label>Frecuencia</label>
+                        <select id="frecuency">
+                            <option value="2 horas">2 horas</option>
+                            <option value="4 horas">4 horas</option>
+                            <option value="8 horas">8 horas</option>
+                            <option value="12 horas">12 horas</option>
+                            <option value="24 horas">24 horas</option>
+                            <option value="48 horas">48 horas</option>
+                        </select>
+                        <label>Duracion</label>
+                        <input type="text" id="duration">
+                    </div>
+                    <div class="modal-content-class">
+                        <label>Via de admiinstracion:</label>
+                        <select id="administration">
+                            <option value="Oral">Oral</option>
+                            <option value="Suplementaria">Suplementaria</option>
+                            <option value="Intravenosa">Intravenosa</option>
+                        </select>
+
+                      </div>
+
+                      <div class="modal-footer">
+
+                          <button 
+                              type="button" 
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal">
+                              Cancelar
+                          </button>
+
+                          <button 
+                              type="button" 
+                              class="btn btn-primary"
+                              onclick="guardarDatos()">
+                              Guardar
+                          </button>
+
+                      </div>
+                    </form>
+                  </div>
+              </div>
+          </div>
+      `
+
+      // 3. Insertar al body
+      document.body.appendChild(modalContainer)
+
+      // 4. Obtener modal
+      const modalElement = document.getElementById('dynamicModal')
+
+      // 5. Inicializar Bootstrap
+      const modal = new bootstrap.Modal(modalElement)
+
+      // 6. Mostrar
+      modal.show()
+
+      // 7. Limpiar al cerrar
+      modalElement.addEventListener('hidden.bs.modal', () => {
+          modalContainer.remove()
+      })
   } catch (error) {
     console.error(error)
   }
@@ -324,3 +307,36 @@ function showModalFinishConsultation(){
     console.error('error show modal medicament', error)  
   }
 }
+
+
+
+function etnicalGroup(){
+  const checkbox = document.getElementById('eticalGroupCheckbox');
+  const target = document.getElementById('etnical-group');
+
+  if (checkbox.checked) {
+    target.style.display = 'block';
+    console.log('Está marcado (true)');
+  } else {
+    target.style.display = 'none';
+    console.log('No está marcado (false)');
+  }
+
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const checkbox = document.getElementById('etnicalGroupCheckbox');
+    const target = document.getElementById('etnical-group');
+    const resultado = document.getElementById('result');
+
+    checkbox.addEventListener('change', () => {
+        const valor = checkbox.checked ? 'Sí' : 'No';
+
+        // Mostrar en pantalla
+        resultado.textContent = valor;
+
+        // Mostrar/ocultar textarea
+        target.style.display = checkbox.checked ? 'block' : 'none';
+    });
+});

@@ -226,3 +226,8 @@ function seleccionarPaciente() {
 }
 
 
+/* 
+luchar, perder, morir,
+Es el orden natural de este mundo eel destino es uno que no se puede eludir
+
+*/
