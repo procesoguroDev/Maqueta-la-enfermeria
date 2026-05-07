@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERP Clínica La Enfermería - Sistema Integral</title>
+    <link rel="stylesheet" href="./Styles/labratori.css">
+   <script src="./Script/laboratori.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -341,153 +343,215 @@
             </div>
         </section> -->
 
+<!-- Laboratorio sección --> 
 <section id="laboratorio" class="section">
     <div class="card">
         <div class="card-header">
             <h3>Órdenes de Laboratorio Pendientes</h3>
-            <button class="btn btn-primary" onclick="abrirModalEstudio()">Nuevo estudio</button>
         </div>
+
+   <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Paciente</th>
+            <th>Estudio</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+            <th>Archivo</th>
+        </tr>
+    </thead>
+
+    <tbody id="tablaLaboratorio">
+        <tr>
+            <td>L-901</td>
+            <td>Pedro Infante</td>
+           <td>
+    <span class="estudios-lista">Biometría Hemática</span>
+
+    <button class="btn-icon" onclick="abrirModalEstudios(this)" title="Editar estudios">
+        ✏️
+    </button>
+</td>
+            <td>
+                <span class="badge bg-yellow status-name">En proceso</span>
+            </td>
+            <td>
+                <button class="btn btn-secondary" onclick="abrirModalEstado(this)">
+                    Actualizar estado
+                </button>
+
+                <button class="btn btn-secondary" onclick="abrirModalEmail(this)">
+                    Enviar resultados
+                </button>
+            </td>
+            <td>
+    <input
+        type="file"
+        id="archivoLaboratorio901"
+        class="input-archivo"
+        onchange="mostrarArchivoSeleccionado(this)"
+    >
+
+    <button
+        class="btn btn-secondary"
+        onclick="document.getElementById('archivoLaboratorio901').click()"
+    >
+        Cargar archivo
+    </button>
+
+    <span class="archivo-nombre">Sin archivo</span>
+</td>
+        </tr>
+    </tbody>
+</table>
+<!-- Apartado hoja de consumo -->
+<div class="consumo-layout">
+    <div>
+        <button class="btn btn-primary" onclick="abrirModalHojaConsumo()">
+            Generar Hoja de consumo
+        </button>
+    </div>
+
+    <div class="hojas-consumo">
+        <h3>Hojas de consumo</h3>
 
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Paciente</th>
-                    <th>Estudio</th>
-                    <th>Estado</th>
+                    <th>Archivo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="tablaLaboratorio">
+            <tbody id="tablaHojasConsumo">
                 <tr>
-                    <td>L-901</td>
-                    <td>Pedro Infante</td>
-                    <td>Biometría Hemática</td>
-                    <td><span class="badge bg-yellow">En proceso</span></td>
-                    <td><button class="btn btn-secondary">Subir PDF</button></td>
+                    <td colspan="3">Sin hojas generadas</td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>
+    </div>
+
 </section>
-
-<div id="modalNuevoEstudio" class="modal">
+<!-- Model Actualizar estado-->
+<div id="modalActualizarEstado" class="modal">
     <div class="modal-content">
-        <h3>Nuevo estudio</h3>
+        <h3>Actualizar estado</h3>
 
-        <label for="paciente">Paciente</label>
-        <select id="paciente">
-            <option value="">Selecciona un paciente</option>
-            <option value="Pedro Infante">Pedro Infante</option>
-            <option value="María Félix">María Félix</option>
-            <option value="Jorge Negrete">Jorge Negrete</option>
+        <label for="Estado">Estado</label>
+        <select id="Estado">
+            <option value="">Selecciona el estado actual</option>
+            <option value="Validación de estudio">Validación de estudio</option>
+            <option value="Estudio en proceso">Estudio en proceso</option>
+            <option value="Estudio finalizado">Estudio finalizado</option>
+            <option value="Entrega de resultados">Entrega de resultados</option>
         </select>
 
-        <label for="estudio">Estudio</label>
-        <select id="estudio">
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
+            <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
+        </div>
+    </div>
+</div>
+<!-- Modal Estudio selector -->
+<div id="modalEstudios" class="modal">
+    <div class="modal-content">
+        <h3>Editar estudios</h3>
+
+        <label for="nuevoEstudio">Agregar estudio</label>
+        <select id="nuevoEstudio">
             <option value="">Selecciona un estudio</option>
             <option value="Biometría Hemática">Biometría Hemática</option>
             <option value="Química Sanguínea">Química Sanguínea</option>
             <option value="Examen General de Orina">Examen General de Orina</option>
             <option value="Perfil Lipídico">Perfil Lipídico</option>
+            <option value="Prueba de Glucosa">Prueba de Glucosa</option>
+        </select>
+
+        <label for="estudioEliminar">Quitar estudio</label>
+        <select id="estudioEliminar">
+            <option value="">Selecciona un estudio para quitar</option>
         </select>
 
         <div class="modal-actions">
-            <button class="btn btn-secondary" onclick="cerrarModalEstudio()">Cancelar</button>
-            <button class="btn btn-primary" onclick="guardarNuevoEstudio()">Guardar</button>
+            <button class="btn btn-secondary" onclick="cerrarModalEstudios()">Cerrar</button>
+            <button class="btn btn-secondary" onclick="quitarEstudio()">Quitar</button>
+            <button class="btn btn-primary" onclick="agregarEstudio()">Agregar</button>
         </div>
     </div>
 </div>
+<!-- Modal Enviar resulados  -->
+<div id="modalEnviarResultados" class="modal">
+    <div class="modal-content">
+        <h3>Enviar resultados</h3>
 
-<style>
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 16px;
-    }
+        <label for="emailDestino">E-mail</label>
+        <select id="emailDestino">
+            <option value="">Selecciona el E-mail de destino</option>
+            <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
+            <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
+            <option value="otro">Otro</option>
+        </select>
 
-    .modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
+            <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
+        </div>
+    </div>
+</div>
+<div id="toast-container"></div>
+<!-- Modal hoja de consumo -->
+ <div id="modalHojaConsumo" class="modal">
+    <div class="modal-content">
+        <h3>Generar hoja de consumo</h3>
 
-    .modal-content {
-        width: min(420px, calc(100% - 32px));
-        background: #fff;
-        padding: 24px;
-        border-radius: 8px;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-    }
+        <label for="pacienteConsumo">Paciente</label>
+        <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
+            <option value="">Selecciona un paciente</option>
+            <option 
+                value="Pedro Infante"
+                data-nacimiento="1917-11-18"
+                data-procedimiento="Biometría Hemática"
+            >
+                Pedro Infante
+            </option>
+        </select>
 
-    .modal-content label {
-        display: block;
-        margin-top: 14px;
-        margin-bottom: 6px;
-        font-weight: 600;
-    }
+        <div id="formHojaConsumo" style="display: none;">
+            <label for="nombrePacienteConsumo">Nombre del paciente</label>
+            <input type="text" id="nombrePacienteConsumo">
 
-    .modal-content select {
-        width: 100%;
-        padding: 10px;
-    }
+            <label for="fechaNacimientoConsumo">Fecha de nacimiento</label>
+            <input type="date" id="fechaNacimientoConsumo">
 
-    .modal-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 22px;
-    }
-</style>
+            <label for="procedimientoConsumo">Procedimiento</label>
+            <input type="text" id="procedimientoConsumo">
 
-<script>
-    let contadorLaboratorio = 902;
+            <label for="fechaConsumo">Fecha</label>
+            <input type="date" id="fechaConsumo">
 
-    function abrirModalEstudio() {
-        document.getElementById('modalNuevoEstudio').style.display = 'flex';
-    }
+            <label for="horaConsumo">Hora</label>
+            <input type="time" id="horaConsumo">
 
-    function cerrarModalEstudio() {
-        document.getElementById('modalNuevoEstudio').style.display = 'none';
-        document.getElementById('paciente').value = '';
-        document.getElementById('estudio').value = '';
-    }
+            <label for="turnoConsumo">Turno</label>
+            <input type="text" id="turnoConsumo">
 
-    function guardarNuevoEstudio() {
-        const paciente = document.getElementById('paciente').value;
-        const estudio = document.getElementById('estudio').value;
+            <label for="quimicoConsumo">Nombre del químico</label>
+            <input type="text" id="quimicoConsumo">
+        </div>
 
-        if (!paciente || !estudio) {
-            alert('Selecciona un paciente y un estudio.');
-            return;
-        }
-
-        const tabla = document.getElementById('tablaLaboratorio');
-        const fila = document.createElement('tr');
-
-        fila.innerHTML = `
-            <td>L-${contadorLaboratorio}</td>
-            <td>${paciente}</td>
-            <td>${estudio}</td>
-            <td><span class="badge bg-yellow">En proceso</span></td>
-            <td><button class="btn btn-secondary">Subir PDF</button></td>
-        `;
-
-        tabla.appendChild(fila);
-        contadorLaboratorio++;
-
-        cerrarModalEstudio();
-    }
-</script>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
+            <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
-         <!--Fin sección laboratorio -->
+<!--Fin sección laboratorio -->
 
         <section id="paramedicos" class="section">
             <div class="card" style="background:var(--sidebar); color:white;">
