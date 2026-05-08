@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Clínica La Enfermería - Recepción Avanzada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div>
+        <div class="brand">🏥 LA ENFERMERÍA</div>
+        <div class="brand-subtitle">ERP clínico · Módulo de recepción</div>
+    </div>
+    <div class="nav-item active">🧾 Recepción</div>
+    <div class="nav-item">🩺 Triage</div>
+    <div class="nav-item">👨‍⚕️ Consulta</div>
+    <div class="nav-item">🩻 Rayos X</div>
+    <div class="nav-item">🔬 Laboratorio</div>
+    <div class="nav-item">💳 Caja</div>
+    <div class="nav-item">📊 Reportes</div>
+</aside>
+
+<div class="main-container">
+    <header>
+        <div class="header-title">
+            <h2 style="margin:0">Admisión Clínica</h2>
+            <span style="font-size:13px; color:var(--text-muted)">Registro, clasificación y control de flujo operativo.</span>
+        </div>
+        <button class="btn btn-danger" onclick="openUrgencia()">🚨 Pase directo a urgencias</button>
+    </header>
+
+    <div class="content" id="main-scroll">
+        <section class="stats-grid">
+            <div class="stat-card"><small>Pacientes activos</small><strong id="stat-activos">0</strong></div>
+            <div class="stat-card"><small>En espera</small><strong id="stat-espera">0</strong></div>
+            <div class="stat-card"><small>Urgencias</small><strong id="stat-urgencias">0</strong></div>
+            <div class="stat-card"><small>Finalizados</small><strong id="stat-finalizados">0</strong></div>
+        </section>
+
+        <nav class="tab-menu">
+            <button class="tab-btn active" id="btn-tab-directorio" onclick="openSubTab(event, 'tab-directorio')">Directorio de Pacientes</button>
+            <button class="tab-btn" id="btn-tab-admision" onclick="openSubTab(event, 'tab-admision')">Ficha de Ingreso</button>
+            <button class="tab-btn" id="btn-tab-atencion" onclick="openSubTab(event, 'tab-atencion')">Monitor Clínico</button>
+        </nav>
+
+        <div id="tab-directorio" class="tab-content active">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px; align-items:center;">
+                    <h3 style="margin:0">Expediente Digital</h3>
+                    <input type="text" placeholder="Buscar por nombre, CURP, correo..." style="max-width:350px" onkeyup="filterTable(this)">
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>CURP</th>
+                            <th>Teléfono</th>
+                            <th>Membresía</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-directorio"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="tab-admision" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3 style="margin:0">Ficha de Ingreso Administrativo</h3>
+                    <button class="btn btn-outline" onclick="limpiarForm()">Limpiar formulario</button>
+                </div>
+                
+                <div class="grid grid-3" style="margin-top:20px;">
+                    <div><label class="required">Nombre(s)</label><input type="text" id="adm-nom" placeholder="Ej. Luis Alberto"></div>
+                    <div><label class="required">Apellido Paterno</label><input type="text" id="adm-pat" placeholder="Ej. Mendoza"></div>
+                    <div><label>Apellido Materno</label><input type="text" id="adm-mat" placeholder="Ej. Arriaga"></div>
+                </div>
+
+                <div class="grid grid-4" style="margin-top:15px">
+                    <div><label class="required">CURP</label><input type="text" id="adm-curp" maxlength="18" placeholder="18 caracteres" oninput="handleCURP(this.value)"></div>
+                    <div><label class="required">Fecha Nacimiento</label><input type="date" id="adm-fec" onchange="calcEdad(this.value)"></div>
+                    <div><label>Edad Calculada</label><input type="text" id="adm-edad" readonly placeholder="Automático"></div>
+                    <div><label class="required">Teléfono</label><input type="tel" id="adm-tel" maxlength="10" placeholder="10 dígitos"></div>
+                </div>
+
+                <div class="section-title">Datos Administrativos</div>
+                <div class="grid grid-4">
+                    <div><label>Sexo</label>
+                        <select id="adm-sexo">
+                            <option value="">Seleccione...</option>
+                            <option>Femenino</option>
+                            <option>Masculino</option>
+                            <option>Otro / No especifica</option>
+                        </select>
+                    </div>
+                    <div><label>Correo</label><input type="email" id="adm-correo" placeholder="correo@dominio.com"></div>
+                    <div><label>Tipo de Paciente</label>
+                        <select id="adm-tipo-paciente" onchange="checkMembresiaManual(this.value)">
+                            <option value="Particular">Particular</option>
+                            <option value="Membresía">Membresía</option>
+                            <option value="Aseguradora">Aseguradora</option>
+                            <option value="Convenio">Convenio empresarial</option>
+                        </select>
+                    </div>
+                    <div><label>Forma de Pago</label>
+                        <select id="adm-pago">
+                            <option>Efectivo</option>
+                            <option>Tarjeta</option>
+                            <option>Transferencia</option>
+                            <option>Pago pendiente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-title">Servicio Solicitado</div>
+                <div class="grid grid-4">
+                    <div><label class="required">Servicio</label>
+                        <select id="adm-serv" onchange="toggleExtra(this.value)">
+                            <option value="">Seleccione servicio...</option>
+                            <option value="consulta">🩺 Consulta Médica</option>
+                            <option value="rx">🩻 Rayos X / Imagen</option>
+                            <option value="laboratorio">🔬 Laboratorio</option>
+                            <option value="enfermeria">💉 Enfermería / Inyecciones</option>
+                            <option value="urgencias">🚨 Urgencias</option>
+                        </select>
+                    </div>
+                    <div><label class="required">Prioridad</label>
+                        <select id="adm-prio">
+                            <option value="Normal">Normal / Verde</option>
+                            <option value="Urgente">Urgente / Amarillo</option>
+                            <option value="Crítico">Crítico / Rojo</option>
+                        </select>
+                    </div>
+                    <div><label>Sucursal / Área</label>
+                        <select id="adm-sucursal">
+                            <option>Clínica Principal</option>
+                            <option>Urgencias</option>
+                            <option>Imagenología</option>
+                            <option>Laboratorio</option>
+                            <option>Enfermería</option>
+                        </select>
+                    </div>
+                    <div><label>Cubículo / Cama</label>
+                        <select id="adm-cubiculo">
+                            <option value="No asignado">No asignado</option>
+                            <option value="Sala de Choque">Sala de Choque</option>
+                            <option value="Observación 1">Observación 1</option>
+                            <option value="Observación 2">Observación 2</option>
+                            <option value="Terapia Intensiva">Terapia Intensiva</option>
+                            <option value="Pediatría">Pediatría</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="extra-consulta" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                    <div class="grid grid-2">
+                        <div>
+                            <label>Motivo principal de consulta</label>
+                            <select id="adm-motivo-sel">
+                                <option value="">Seleccione motivo...</option>
+                                <option value="Certificado Médico">Certificado Médico</option>
+                                <option value="Contusión">Contusión</option>
+                                <option value="Curación">Curación</option>
+                                <option value="Diarrea">Diarrea</option>
+                                <option value="Dolor abdominal">Dolor abdominal</option>
+                                <option value="Dolor de cabeza">Dolor de cabeza</option>
+                                <option value="Dolor de garganta">Dolor de garganta</option>
+                                <option value="Fiebre">Fiebre</option>
+                                <option value="Lavado ótico">Lavado ótico</option>
+                                <option value="Malestar general">Malestar general</option>
+                                <option value="Náusea">Náusea</option>
+                                <option value="Oído">Oído (Molestias/Infección)</option>
+                                <option value="Ojos">Ojos (Molestias/Infección)</option>
+                                <option value="Picadura de alacrán">Picadura de alacrán</option>
+                                <option value="Retiro de puntos">Retiro de puntos</option>
+                                <option value="Toma de presión arterial">Toma de presión arterial</option>
+                                <option value="Toma de signos">Toma de signos</option>
+                                <option value="Tos">Tos</option>
+                                <option value="Vómito">Vómito</option>
+                                <option value="Otros">Otros</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <label>Comentarios libres / Signos referidos por el paciente</label>
+                        <textarea id="adm-comentarios" rows="2" placeholder="Ej. El paciente refiere dolor intenso desde hace 2 días..."></textarea>
+                    </div>
+                </div>
+
+                <div id="extra-rx" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                    <div class="grid grid-3">
+                        <div><label>Estudio Solicitado</label><input type="text" id="rx-tipo" placeholder="Ej. Tele de Tórax"></div>
+                        <div><label>Médico Solicitante</label><input type="text" id="rx-med" placeholder="Nombre del médico"></div>
+                        <div>
+                            <label>Adjuntar Orden Médica</label>
+                            <input type="file" id="rx-orden" accept=".pdf, image/jpeg, image/png" style="background:#f8fafc; cursor:pointer; padding:8px;">
+                        </div>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <label>Comentarios / Indicaciones Especiales</label>
+                        <textarea id="rx-comentarios" rows="2" placeholder="Ej. Paciente en silla de ruedas, sospecha de fractura en extremidad superior..."></textarea>
+                    </div>
+                </div>
+
+                <div id="extra-lab" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                    <div class="grid grid-2">
+                        <div><label>Exámenes Solicitados</label><input type="text" id="lab-tipo" placeholder="Ej. Biometría Hemática, Química de 6 elementos"></div>
+                        <div><label>Médico Solicitante</label><input type="text" id="lab-med" placeholder="Nombre del médico que remite"></div>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <label>Comentarios / Condiciones del paciente</label>
+                        <textarea id="lab-comentarios" rows="2" placeholder="Ej. Viene en ayuno de 8 horas, paciente geriátrico de difícil acceso venoso..."></textarea>
+                    </div>
+                </div>
+
+                <div id="extra-enfermeria" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                    <div class="grid grid-3">
+                        <div><label>Procedimiento / Inyección</label><input type="text" id="enf-proc" placeholder="Ej. Aplicación de Ketorolaco IM"></div>
+                        <div><label>Trae Receta Médica?</label><select id="enf-receta"><option>Sí (Física)</option><option>Sí (Digital)</option><option>No (Requiere Valoración)</option></select></div>
+                        <div style="display:flex; align-items:flex-end;">
+                            <button type="button" id="btn-firma" class="btn btn-outline" style="width:100%; border-color:var(--primary); color:var(--primary);" onclick="abrirFirma()">✍️ Recabar Consentimiento</button>
+                        </div>
+                    </div>
+                    <p style="font-size:11px; color:var(--text-muted); margin-top:10px;">* De acuerdo a la NOM, toda administración de medicamento inyectable requiere el consentimiento del paciente o responsable.</p>
+                </div>
+
+                <div id="panel-membresia">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <h4 id="mem-titulo" style="margin:0;"></h4>
+                        <span style="font-size:10px; font-weight:900; opacity:0.7;">VIGENCIA: ACTIVA</span>
+                    </div>
+                    <div id="mem-lista" style="display:grid; grid-template-columns: repeat(2, minmax(150px, 1fr)); gap:10px;"></div>
+                </div>
+
+                <button id="btn-guardar-adm" class="btn btn-primary" onclick="finalizarNormal()" style="width:100%; margin-top:25px; padding:15px; font-size:16px;">
+                    Confirmar Ingreso a Atención
+                </button>
+            </div>
+        </div>
+
+        <div id="tab-atencion" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h3 style="margin:0">Monitor de Pacientes Activos</h3>
+                    <button class="btn btn-outline" onclick="limpiarAtencion()">Limpiar monitor</button>
+                </div>
+                <div id="lista-atencion" class="grid grid-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mod-folio" class="modal-overlay">
+    <div class="modal-content">
+        <h2 style="margin:0">Ingreso Registrado</h2>
+        <p style="color:var(--text-muted); font-size:14px;">El paciente ha sido ingresado al flujo de atención.</p>
+        <div style="background:#f1f5f9; padding:25px; border-radius:15px; margin:20px 0; border:2px dashed #cbd5e1;">
+            <small style="font-weight:900; color:var(--primary);">NÚMERO DE FOLIO</small>
+            <div id="fol-num" style="font-size:42px; font-weight:900; color:var(--sidebar);"></div>
+        </div>
+        <button class="btn btn-primary" onclick="closeModal('mod-folio')" style="width:100%; padding:12px;">Entendido</button>
+    </div>
+</div>
+
+<div id="mod-historial" class="modal-overlay">
+    <div class="modal-content" style="width: min(500px, 100%); text-align: left;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="margin:0">Resumen Clínico</h3>
+            <button class="btn btn-outline" style="padding: 5px 10px;" onclick="closeModal('mod-historial')">Cerrar</button>
+        </div>
+        
+        <div id="hist-paciente-info" style="background: var(--bg-main); padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 13px; line-height: 1.6; border: 1px solid var(--border);"></div>
+
+        <h4 style="margin: 0 0 15px 0; color: var(--sidebar);">Últimas Visitas Registradas</h4>
+        <div id="hist-visitas"></div>
+        
+        <button class="btn btn-primary" id="btn-hist-admision" style="width:100%; margin-top:20px;">Ingresar a Admisión</button>
+    </div>
+</div>
+
+<div id="mod-firma" class="modal-overlay">
+    <div class="modal-content" style="width: 500px;">
+        <h3 style="margin:0 0 10px 0; color:var(--sidebar);">Consentimiento Informado</h3>
+        <p style="font-size:12px; color:var(--text-muted); text-align:justify; line-height:1.5;">
+            Autorizo al personal de enfermería de La Enfermería a administrar el medicamento inyectable solicitado. Comprendo que toda administración conlleva riesgos inherentes y deslindo a la clínica de reacciones adversas propias del fármaco. Confirmo contar con indicación médica.
+        </p>
+        
+        <canvas id="canvas-firma" width="440" height="200"></canvas>
+        
+        <div style="display:flex; justify-content:space-between; margin-top:15px;">
+            <button class="btn btn-outline" onclick="limpiarCanvas()">Borrar</button>
+            <div style="display:flex; gap:10px;">
+                <button class="btn btn-outline" onclick="closeModal('mod-firma')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarFirma()">Aceptar y Firmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
