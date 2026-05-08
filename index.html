@@ -20,339 +20,12 @@
     <link rel="stylesheet" href="./styles/consultation.css">
     <link rel="stylesheet" href="./styles/patient.css">
     <link rel="stylesheet" href="./styles/toast.css">
-    <!-- <link rel="stylesheet" href="./styles/general.css"> -->
+    <link rel="stylesheet" href="./styles/reception.css">
+    <link rel="stylesheet" href="./styles/general.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap"
         rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0d9488;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --secondary: #6366f1;
-            --bg-main: #f8fafc;
-            --sidebar: #0f172a;
-            --white: #ffffff;
-            --border: #e2e8f0;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --shadow: 0 10px 25px rgba(15, 23, 42, .08);
-            --radius: 16px;
-        }
-
-        * {
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            margin: 0;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            background: var(--sidebar);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 24px 18px;
-            overflow-y: auto;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .brand-logo {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, #14b8a6, #2563eb);
-            border-radius: 12px;
-            display: grid;
-            place-items: center;
-            font-weight: 900;
-            font-size: 18px;
-        }
-
-        .nav-group {
-            margin-bottom: 25px;
-        }
-
-        .nav-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            color: #475569;
-            letter-spacing: 1.2px;
-            font-weight: 700;
-            margin: 0 0 10px 12px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
-            border-radius: 12px;
-            cursor: pointer;
-            color: #94a3b8;
-            text-decoration: none;
-            transition: 0.2s;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .nav-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-        }
-
-        .nav-item.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
-        }
-
-        /* Main */
-        .main-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
-            padding: 18px 30px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .content {
-            padding: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* Cards & Grids */
-        .card {
-            background: var(--white);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            padding: 24px;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-        }
-
-        .grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .grid-2 {
-            grid-template-columns: 2fr 1fr;
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        /* KPI Cards */
-        .kpi {
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kpi strong {
-            display: block;
-            font-size: 28px;
-            margin: 8px 0;
-        }
-
-        .kpi span {
-            font-size: 12px;
-            color: var(--success);
-            font-weight: 600;
-        }
-
-        /* Forms */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #475569;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 11px 14px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 14px;
-            outline: none;
-            transition: 0.2s;
-            background: #fff;
-        }
-
-        input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-soft);
-        }
-
-        .btn {
-            padding: 11px 20px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #e2e8f0;
-            color: var(--sidebar);
-        }
-
-        .btn-blue {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-red {
-            background: var(--danger);
-            color: white;
-        }
-
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 2px solid var(--border);
-            color: var(--text-muted);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 14px 12px;
-            border-bottom: 1px solid var(--border);
-            font-size: 13px;
-        }
-
-        tr:hover td {
-            background: #f8fafc;
-        }
-
-        .badge {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .bg-red {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .bg-yellow {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .bg-green {
-            background: #dcfce7;
-            color: #16a34a;
-        }
-
-        .bg-blue {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .section {
-            display: none;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        a {
-            text-decoration: none;
-            color: white;
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        .button-container {
-            --bs-btn-padding-y: .25rem;
-            --bs-btn-padding-x: .5rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -1403,52 +1076,155 @@
 
 
     <!-- Modal section -->
-     <!--  <div id="mod-folio" class="modal-overlay">
-                <div class="modal-content">
-                    <h2 style="margin:0">Ingreso Registrado</h2>
-                    <p style="color:var(--text-muted); font-size:14px;">El paciente ha sido ingresado al flujo de atención.</p>
-                    <div style="background:#f1f5f9; padding:25px; border-radius:15px; margin:20px 0; border:2px dashed #cbd5e1;">
-                        <small style="font-weight:900; color:var(--primary);">NÚMERO DE FOLIO</small>
-                        <div id="fol-num" style="font-size:42px; font-weight:900; color:var(--sidebar);"></div>
-                    </div>
-                    <button class="btn btn-primary" onclick="closeModal('mod-folio')" style="width:100%; padding:12px;">Entendido</button>
-                </div>
-            </div>
+<!-- MODAL FOLIO -->
+        <div class="modal fade" id="modFolio" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4">
 
-            <div id="mod-historial" class="modal-overlay">
-                <div class="modal-content" style="width: min(500px, 100%); text-align: left;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                        <h3 style="margin:0">Resumen Clínico</h3>
-                        <button class="btn btn-outline" style="padding: 5px 10px;" onclick="closeModal('mod-historial')">Cerrar</button>
-                    </div>
-                    
-                    <div id="hist-paciente-info" style="background: var(--bg-main); padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 13px; line-height: 1.6; border: 1px solid var(--border);"></div>
+                    <div class="modal-body p-4">
+                        <h2 class="mb-2">Ingreso Registrado</h2>
 
-                    <h4 style="margin: 0 0 15px 0; color: var(--sidebar);">Últimas Visitas Registradas</h4>
-                    <div id="hist-visitas"></div>
-                    
-                    <button class="btn btn-primary" id="btn-hist-admision" style="width:100%; margin-top:20px;">Ingresar a Admisión</button>
-                </div>
-            </div>
+                        <p class="text-muted small">
+                            El paciente ha sido ingresado al flujo de atención.
+                        </p>
 
-            <div id="mod-firma" class="modal-overlay">
-                <div class="modal-content" style="width: 500px;">
-                    <h3 style="margin:0 0 10px 0; color:var(--sidebar);">Consentimiento Informado</h3>
-                    <p style="font-size:12px; color:var(--text-muted); text-align:justify; line-height:1.5;">
-                        Autorizo al personal de enfermería de La Enfermería a administrar el medicamento inyectable solicitado. Comprendo que toda administración conlleva riesgos inherentes y deslindo a la clínica de reacciones adversas propias del fármaco. Confirmo contar con indicación médica.
-                    </p>
-                    
-                    <canvas id="canvas-firma" width="440" height="200"></canvas>
-                    
-                    <div style="display:flex; justify-content:space-between; margin-top:15px;">
-                        <button class="btn btn-outline" onclick="limpiarCanvas()">Borrar</button>
-                        <div style="display:flex; gap:10px;">
-                            <button class="btn btn-outline" onclick="closeModal('mod-firma')">Cancelar</button>
-                            <button class="btn btn-primary" onclick="guardarFirma()">Aceptar y Firmar</button>
+                        <div class="bg-light p-4 rounded-4 border border-2 border-dashed mt-4 mb-4 text-center">
+                            <small class="fw-bold text-success">
+                                NÚMERO DE FOLIO
+                            </small>
+
+                            <div id="fol-num"
+                                class="fw-bold display-5 text-dark">
+                            </div>
                         </div>
+
+                        <button
+                            class="btn btn-primary w-100 py-2"
+                            data-bs-dismiss="modal">
+                            Entendido
+                        </button>
                     </div>
+
                 </div>
-            </div> -->
+            </div>
+        </div>
+
+
+
+        <!-- MODAL HISTORIAL -->
+        <div class="modal fade" id="modHistorial" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0 shadow rounded-4">
+
+                    <div class="modal-header border-0">
+                        <h3 class="modal-title">
+                            Resumen Clínico
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div
+                            id="hist-paciente-info"
+                            class="bg-light border rounded-4 p-3 mb-4 small">
+                        </div>
+
+                        <h5 class="mb-3">
+                            Últimas Visitas Registradas
+                        </h5>
+
+                        <div id="hist-visitas"></div>
+
+                    </div>
+
+                    <div class="modal-footer border-0">
+                        <button
+                            class="btn btn-primary w-100"
+                            id="btn-hist-admision">
+                            Ingresar a Admisión
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- MODAL FIRMA -->
+        <div class="modal fade" id="modFirma" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4">
+
+                    <div class="modal-header border-0">
+                        <h3 class="modal-title">
+                            Consentimiento Informado
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <p class="small text-muted text-justify">
+                            Autorizo al personal de enfermería de La Enfermería
+                            a administrar el medicamento inyectable solicitado.
+                            Comprendo que toda administración conlleva riesgos
+                            inherentes y deslindo a la clínica de reacciones
+                            adversas propias del fármaco. Confirmo contar con
+                            indicación médica.
+                        </p>
+
+                        <div class="border rounded-4 overflow-hidden">
+                            <canvas
+                                id="canvas-firma"
+                                width="440"
+                                height="200"
+                                style="width:100%; background:white;">
+                            </canvas>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer border-0 d-flex justify-content-between">
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="limpiarCanvas()">
+                            Borrar
+                        </button>
+
+                        <div class="d-flex gap-2">
+
+                            <button
+                                class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">
+                                Cancelar
+                            </button>
+
+                            <button
+                                class="btn btn-primary"
+                                onclick="guardarFirma()">
+                                Aceptar y Firmar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     <!-- Model Actualizar estado-->
     <div id="modalActualizarEstado" class="modal">
