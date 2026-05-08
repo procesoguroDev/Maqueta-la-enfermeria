@@ -26,3 +26,110 @@
   height: 200px;
   margin: 15px 0;
 }
+
+    body{
+        background:#f4f7fb;
+    }
+
+    #tab-admision{
+        max-width:1400px;
+        margin:auto;
+    }
+
+    #tab-admision .card{
+        background:white;
+        border:none;
+        border-radius:24px;
+        padding:32px;
+        box-shadow:
+            0 4px 20px rgba(0,0,0,0.04),
+            0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    #tab-admision h3{
+        font-weight:700;
+        color:#1e293b;
+    }
+
+    #tab-admision .section-title{
+        font-size:22px;
+        font-weight:700;
+        color:#1e293b;
+        margin-top:35px;
+        margin-bottom:20px;
+        padding-bottom:10px;
+        border-bottom:1px solid #e2e8f0;
+    }
+
+    #tab-admision label{
+        font-size:14px;
+        font-weight:600;
+        color:#334155;
+        margin-bottom:8px;
+        display:block;
+    }
+
+    #tab-admision .form-control,
+    #tab-admision .form-select{
+
+        height:52px;
+        border-radius:14px;
+        border:1px solid #dbe2ea;
+        background:#fff;
+        transition:all .2s ease;
+    }
+
+    #tab-admision textarea.form-control{
+        height:auto;
+    }
+
+    #tab-admision .form-control:focus,
+    #tab-admision .form-select:focus{
+
+        border-color:#2563eb;
+        box-shadow:0 0 0 .2rem rgba(37,99,235,.15);
+    }
+
+    #tab-admision .btn-primary{
+
+        background:#2563eb;
+        border:none;
+        border-radius:16px;
+        height:58px;
+        font-size:18px;
+        font-weight:600;
+        transition:.2s;
+    }
+
+    #tab-admision .btn-primary:hover{
+        transform:translateY(-1px);
+        background:#1d4ed8;
+    }
+
+    #tab-admision .btn-outline-secondary{
+
+        border-radius:14px;
+        height:48px;
+        padding-inline:22px;
+    }
+
+    #panel-membresia{
+
+        background:#f8fafc;
+        border:1px solid #e2e8f0;
+        border-radius:18px;
+        padding:20px;
+        margin-top:25px;
+    }
+
+    @media(max-width:768px){
+
+        #tab-admision .card{
+            padding:20px;
+        }
+
+        #tab-admision h3{
+            font-size:24px;
+        }
+
+    }
