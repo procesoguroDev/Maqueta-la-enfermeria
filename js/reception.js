@@ -118,15 +118,24 @@ const CONFIG_MEM = {
     }
 
     function abrirFirma() {
-        document.getElementById('mod-firma').style.display = 'flex';
-        // Ajustar el canvas al abrir el modal para evitar offset
+
+        const modal = new bootstrap.Modal(
+            document.getElementById('modFirma')
+        );
+
+        modal.show();
+
         setTimeout(() => {
+
             const rect = canvas.getBoundingClientRect();
+
             canvas.width = rect.width;
             canvas.height = rect.height;
+
             ctx.lineWidth = 3;
             ctx.lineCap = 'round';
-        }, 50);
+
+        }, 300);
     }
 
     function limpiarCanvas() {
@@ -142,7 +151,9 @@ const CONFIG_MEM = {
         const btn = document.getElementById('btn-firma');
         btn.className = 'btn btn-success'; 
         btn.innerHTML = '✅ Consentimiento Firmado';
-        closeModal('mod-firma');
+        bootstrap.Modal
+    .getInstance(document.getElementById('modFirma'))
+    .hide();
     }
 
     // --- HISTORIAL CLÍNICO ---
@@ -172,11 +183,15 @@ const CONFIG_MEM = {
 
         const btnAdmision = document.getElementById('btn-hist-admision');
         btnAdmision.onclick = function() {
-            closeModal('mod-historial');
+            bootstrap.Modal
+            .getInstance(document.getElementById('modHistorial'))
+            .hide();
             quickAdm(p.curp);
         };
 
-        document.getElementById('mod-historial').style.display = 'flex';
+        new bootstrap.Modal(
+            document.getElementById('modHistorial')
+        ).show();
     }
 
     // --- ADMISIÓN RÁPIDA ---
@@ -234,7 +249,9 @@ const CONFIG_MEM = {
         guardarYSincronizar();
         
         document.getElementById('fol-num').innerText = folio;
-        document.getElementById('mod-folio').style.display = 'flex';
+        new bootstrap.Modal(
+            document.getElementById('modFolio')
+        ).show();
     }
 
     function completarDatos(i) {
@@ -309,14 +326,20 @@ const CONFIG_MEM = {
         guardarYSincronizar();
         
         document.getElementById('fol-num').innerText = folio;
-        document.getElementById('mod-folio').style.display = 'flex';
+        new bootstrap.Modal(
+            document.getElementById('modFolio')
+        ).show();
         limpiarForm();
     }
 
     function renderAtencion() {
         const lista = document.getElementById('lista-atencion');
         if (pacientesActivos.length === 0) {
-            lista.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:var(--text-muted); border: 1px dashed var(--border); border-radius: 12px;">No hay pacientes activos por el momento.</div>';
+            lista.innerHTML = `
+                <div style="grid-column: 1/-1; text-align:center; padding:40px; color:var(--text-muted); border: 1px dashed var(--border); border-radius: 12px;">
+                    No hay pacientes activos por el momento.
+                </div>
+            `;
             return;
         }
         lista.innerHTML = pacientesActivos.map((p, i) => {
@@ -396,11 +419,6 @@ const CONFIG_MEM = {
             </tr>
             `;
         }).join('');
-    }
-
-    function closeModal(id) { 
-        document.getElementById(id).style.display = 'none'; 
-        if (id === 'mod-folio') document.getElementById('btn-tab-atencion').click();
     }
 
     function filterTable(input) {
