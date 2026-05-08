@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERP Clínica La Enfermería - Sistema Integral</title>
     <script src="./js/script.js"></script>
-    <script src="./js/patient.js"></script>
     <script src="./js/triage.js"></script>
     <script src="./js/laboratori.js"></script>
     <script src="./js/reception.js"></script>
+    <script src="./js/patient.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./styles/consultation.css">
     <link rel="stylesheet" href="./styles/patient.css">
     <link rel="stylesheet" href="./styles/toast.css">
-    <link rel="stylesheet" href="./styles/general.css">
+    <!-- <link rel="stylesheet" href="./styles/general.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap"
@@ -839,6 +839,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </section>
 
             <section id="triage" class="section">
@@ -987,7 +988,7 @@
                                 <span class="badge bg-red">Nivel 1 - Emergencia (Inmediata)</span>
                             </label>
                             <label class="priority-level-two">
-                                <input id="selector-2" type="radio" name="prioridad" value="2" disabled>
+                                <input id="selector-2" type="radio" name="prioridad" value="2" disabled> 
                                 <span class="badge bg-yellow">Nivel 2 - Urgencia (< 15 min)</span>
                             </label>
                             <label class="priority-level-three">
@@ -1045,7 +1046,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="grid grid-2" id="patientConsultForm" style="display: none;">
+                            <div class="grid grid-2" id="patientConsultForm" >
                                 <div class="card">
                                     <div class="button-container">
                                         <button class="btn btn-outline-secundary" onclick="regresarConsulta()">
@@ -1402,7 +1403,7 @@
 
 
     <!-- Modal section -->
-      <div id="mod-folio" class="modal-overlay">
+     <!--  <div id="mod-folio" class="modal-overlay">
                 <div class="modal-content">
                     <h2 style="margin:0">Ingreso Registrado</h2>
                     <p style="color:var(--text-muted); font-size:14px;">El paciente ha sido ingresado al flujo de atención.</p>
@@ -1447,7 +1448,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
     <!-- Model Actualizar estado-->
     <div id="modalActualizarEstado" class="modal">
