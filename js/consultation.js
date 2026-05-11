@@ -421,11 +421,11 @@ function etnicalGroup(){
 }
 function regresarConsulta(){
 
-    document.getElementById('tableConsultationPatient').style.display = 'grid'
+    document.getElementById('tableConsultationPatient').style.display = 'grid';
 
-    document.getElementById('patientConsultForm').style.display = 'none'
+    document.getElementById('patientConsultForm').style.display = 'none';
 
-    document.getElementById('consultationTabs').style.display = 'flex'
+    document.getElementById('consultationTabs').style.display = 'flex';
 }
 
 document.addEventListener('DOMContentLoaded', () => {

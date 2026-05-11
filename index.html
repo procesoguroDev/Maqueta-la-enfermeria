@@ -9,7 +9,6 @@
     <script src="./js/triage.js"></script>
     <script src="./js/laboratori.js"></script>
     <script src="./js/reception.js"></script>
-    <script src="./js/patient.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
@@ -30,6 +29,8 @@
 
 <body>
     <script src="./js/consultation.js"></script>
+    <script src="./js/patient.js"></script>
+
     <div id="toast-container"></div>
     <aside class="sidebar">
         <div class="brand">
@@ -105,19 +106,19 @@
                                 <tr>
                                     <td>Ana Torres</td>
                                     <td>Triage</td>
-                                    <td><span class="badge bg-yellow">En espera</span></td>
+                                    <td><span class="badge  text-bg-danger">En espera</span></td>
                                     <td>5m</td>
                                 </tr>
                                 <tr>
                                     <td>Luis Mendoza</td>
                                     <td>Consulta 2</td>
-                                    <td><span class="badge bg-blue">Atención</span></td>
+                                    <td><span class="badge text-bg-primary">Atención</span></td>
                                     <td>15m</td>
                                 </tr>
                                 <tr>
                                     <td>María López</td>
                                     <td>Admisión</td>
-                                    <td><span class="badge bg-green">Registro</span></td>
+                                    <td><span class="badge text-bg-success">Registro</span></td>
                                     <td>2m</td>
                                 </tr>
                             </tbody>
@@ -782,69 +783,151 @@
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP3lC0SfgqCcTGipFh64hddM6xgBYQj90wOA&s">
                         <h2><strong>Pedro Infante Cruz</strong></h2>
                     </div>
-                    <div class="card">
-                        <div class="antecedentes-container">
-                            <div class="accordion">
-                                <div class="accordion-header">Informacion personal</div>
-                                <div class="accordion-content">
-                                    <div class="personal-patient-information">
-                                        <div class="group_personal_information_patient">
-                                            <p>Nombre:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Apellido Paterno:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Apellido Materno:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                        </div>
-                                        <div class="group_personal_information_patient">
-                                            <p>Curp:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Fecha Nacimiento:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Edad:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Genero:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                        </div>
-                                        <div class="group_personal_information_patient">
-                                            <p>Direccion:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                        </div>
+                    <div class="container py-5">
+
+                        <!-- DATOS GENERALES -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+
+                                <div class="row">
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="fw-bold">Nombre</label>
+                                        <p id="nombrePaciente"></p>
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="fw-bold">Edad</label>
+                                        <p id="edadPaciente"></p>
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="fw-bold">Sexo</label>
+                                        <p id="sexoPaciente"></p>
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="fw-bold">CURP</label>
+                                        <p id="curpPaciente"></p>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="fw-bold">Direccion</label>
+                                        <p id="addressPaciente"></p>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="fw-bold">Tipo de Sangre</label>
+                                        <p id="bloodType"></p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION -->
+                        <div class="accordion shadow-sm" id="accordionHistorial">
+
+                            <!-- ULTIMAS VISITAS -->
+                            <div class="accordion-item">
+
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseVisitas">
+
+                                        Últimas Visitas
+                                    </button>
+                                </h2>
+
+                                <div id="collapseVisitas"
+                                    class="accordion-collapse collapse show"
+                                    data-bs-parent="#accordionHistorial">
+
+                                    <div class="accordion-body">
+
+                                        <div id="visitasContainer"></div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="antecedentes-container">
-                            <div class="accordion">
-                                <div class="accordion-header">Historial clinico</div>
-                                <div class="accordion-content">
-                                    <div class="personal-patient-information">
-                                        <div class="group_personal_information_patient">
-                                            <p>Nombre:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Apellido Paterno:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Apellido Materno:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                        </div>
-                                        <div class="group_personal_information_patient">
-                                            <p>Curp:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Fecha Nacimiento:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Edad:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                            <p>Genero:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                        </div>
-                                        <div class="group_personal_information_patient">
-                                            <p>Direccion:</p>
-                                            <input class="patient_input_disabled" type="text" disabled>
-                                        </div>
+
+                            <!-- MEDICAMENTOS -->
+                            <div class="accordion-item">
+
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseMedicamentos">
+
+                                        Medicamentos Recetados
+                                    </button>
+                                </h2>
+
+                                <div id="collapseMedicamentos"
+                                    class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionHistorial">
+
+                                    <div class="accordion-body">
+
+                                        <ul class="list-group" id="medicamentosContainer"></ul>
+
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- HISTORIAL CLINICO -->
+                            <div class="accordion-item">
+
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseHistorial">
+
+                                        Historial Clínico
+                                    </button>
+                                </h2>
+
+                                <div id="collapseHistorial"
+                                    class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionHistorial">
+
+                                    <div class="accordion-body">
+
+                                        <div id="historialContainer"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ANTECEDENTES -->
+                            <div class="accordion-item">
+
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseAntecedentes">
+
+                                        Antecedentes Heredofamiliares
+                                    </button>
+                                </h2>
+
+                                <div id="collapseAntecedentes"
+                                    class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionHistorial">
+
+                                    <div class="accordion-body">
+
+                                        <ul class="list-group" id="antecedentesContainer"></ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </section>
@@ -865,13 +948,13 @@
                                 <td>ADM-001</td>
                                 <td>Juan Pérez</td>
                                 <td>Dolor en antebrazo</td>
-                                <td class="badge bg-yellow">En espera</td>
+                                <td class="badge text-bg-warning">En espera</td>
                             </tr>
                             <tr onclick="seleccionarPaciente()">
                                 <td>ADM-002</td>
                                 <td>Elena Gil</td>
                                 <td>Aplicacion de inyeccion</td>
-                                <td class="badge bg-blue">En Atencion</td>
+                                <td class="badge text-bg-primary">En Atencion</td>
                             </tr>
                         </tbody>
                     </table>
@@ -996,11 +1079,11 @@
                             </label>
                             <label class="priority-level-two">
                                 <input id="selector-2" type="radio" name="prioridad" value="2" disabled> 
-                                <span class="badge bg-yellow">Nivel 2 - Urgencia (< 15 min)</span>
+                                <span class="badge  text-bg-danger">Nivel 2 - Urgencia (< 15 min)</span>
                             </label>
                             <label class="priority-level-three">
                                 <input id="selector-3" type="radio" name="prioridad" value="3" disabled>
-                                <span class="badge bg-green">Nivel 3 - No Urgente</span>
+                                <span class="badge text-bg-success">Nivel 3 - No Urgente</span>
                             </label>
                         </div>
 
@@ -1031,8 +1114,6 @@
                             </button>
                         </li>
                     </ul>
-
-                    <!-- CONTENIDO TAB -->
                     <div class="tab-content border border-top-0 p-4 bg-white">
                         <div class="tab-pane fade show active" id="home">
                             <div class="grid grid-6" id="tableConsultationPatient">
@@ -1048,12 +1129,12 @@
                                             <td>ADM-001</td>
                                             <td>Juan Pérez</td>
                                             <td>Dolor de antebrazo</td>
-                                            <td class="badge bg-blue">En espera</td>
+                                            <td class="badge text-bg-primary">En espera</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="grid grid-2" id="patientConsultForm" >
+                            <div class="grid grid-2" id="patientConsultForm" style="display: none;" >
                                 <div class="card">
                                     <div class="button-container">
                                         <button class="btn btn-outline-secundary" onclick="regresarConsulta()">
@@ -1201,7 +1282,7 @@
                                                 </table>
                                             </section>
                                         </div>
-                                        <button class="btn btn-blue" onclick="showModalMedicaments()"
+                                        <button class="btn btn btn-success" onclick="showModalMedicaments()"
                                             style="width:100%; justify-content:center;">+ Agregar Medicamento</button>
                                     </div>
                                     <div class="button-container">
@@ -1274,7 +1355,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <span class="badge bg-yellow status-name">En proceso</span>
+                                    <span class="badge  text-bg-danger status-name">En proceso</span>
                                 </td>
                                 <td>
                                     <button class="btn btn-secondary" onclick="abrirModalEstado(this)">
@@ -1565,7 +1646,7 @@
             </div>
         </div>
 
-    <!-- Model Actualizar estado-->
+    <!-- Modal Actualizar estado-->
     <div id="modalActualizarEstado" class="modal">
         <div class="modal-content">
             <h3>Actualizar estado</h3>
