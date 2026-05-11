@@ -266,7 +266,8 @@
 
                                 <div
                                     class="tab-pane fade show active"
-                                    id="tab-directorio">
+                                    id="tab-directorio"
+                                >
 
                                     <div class="card border-0 bg-light rounded-4">
 
@@ -316,211 +317,336 @@
                                 </div>
 
                                 <!-- ADMISION -->
-                                    <div id="tab-admision" class="container-fluid py-4">
+                                <div id="tab-admision" class="tab-pane fade container-fluid py-4">
 
-                                        <div class="card border-0 shadow-sm rounded-4">
+                                    <div class="card border-0 shadow-sm rounded-4">
 
-                                            <div class="card-body p-4 p-lg-5">
+                                        <div class="card-body p-4 p-lg-5">
 
-                                                <!-- HEADER -->
-                                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                                            <!-- HEADER -->
+                                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
 
-                                                    <div>
-                                                        <h3 class="fw-bold mb-1">
-                                                            Ficha de Ingreso Administrativo
-                                                        </h3>
+                                                <div>
+                                                    <h3 class="fw-bold mb-1">
+                                                        Ficha de Ingreso Administrativo
+                                                    </h3>
 
-                                                        <p class="text-muted mb-0">
-                                                            Registro administrativo y asignación de atención
-                                                        </p>
-                                                    </div>
+                                                    <p class="text-muted mb-0">
+                                                        Registro administrativo y asignación de atención
+                                                    </p>
+                                                </div>
 
-                                                    <button
-                                                        class="btn btn-outline-secondary rounded-pill px-4"
-                                                        onclick="limpiarForm()">
+                                                <button
+                                                    class="btn btn-outline-secondary rounded-pill px-4"
+                                                    onclick="limpiarForm()">
 
-                                                        Limpiar formulario
+                                                    Limpiar formulario
 
-                                                    </button>
+                                                </button>
+
+                                            </div>
+
+                                            <!-- DATOS PERSONALES -->
+                                            <div class="border-bottom pb-3 mb-4">
+                                                <h5 class="fw-bold text-primary mb-0">
+                                                    Datos Personales
+                                                </h5>
+                                            </div>
+
+                                            <div class="row g-4">
+
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label fw-semibold required">
+                                                        Nombre(s)
+                                                    </label>
+
+                                                    <input
+                                                        type="text"
+                                                        id="adm-nom"
+                                                        class="form-control form-control-lg"
+                                                        placeholder="Ej. Luis Alberto">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label fw-semibold required">
+                                                        Apellido Paterno
+                                                    </label>
+
+                                                    <input
+                                                        type="text"
+                                                        id="adm-pat"
+                                                        class="form-control form-control-lg"
+                                                        placeholder="Ej. Mendoza">
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label fw-semibold">
+                                                        Apellido Materno
+                                                    </label>
+
+                                                    <input
+                                                        type="text"
+                                                        id="adm-mat"
+                                                        class="form-control form-control-lg"
+                                                        placeholder="Ej. Arriaga">
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row g-4 mt-1">
+
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label class="form-label fw-semibold required">
+                                                        CURP
+                                                    </label>
+
+                                                    <input
+                                                        type="text"
+                                                        id="adm-curp"
+                                                        class="form-control form-control-lg"
+                                                        maxlength="18"
+                                                        placeholder="18 caracteres"
+                                                        oninput="handleCURP(this.value)">
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label class="form-label fw-semibold required">
+                                                        Fecha Nacimiento
+                                                    </label>
+
+                                                    <input
+                                                        type="date"
+                                                        id="adm-fec"
+                                                        class="form-control form-control-lg"
+                                                        onchange="calcEdad(this.value)">
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label class="form-label fw-semibold">
+                                                        Edad Calculada
+                                                    </label>
+
+                                                    <input
+                                                        type="text"
+                                                        id="adm-edad"
+                                                        readonly
+                                                        class="form-control form-control-lg bg-light"
+                                                        placeholder="Automático">
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-6">
+                                                    <label class="form-label fw-semibold required">
+                                                        Teléfono
+                                                    </label>
+
+                                                    <input
+                                                        type="tel"
+                                                        id="adm-tel"
+                                                        class="form-control form-control-lg"
+                                                        maxlength="10"
+                                                        placeholder="10 dígitos">
+                                                </div>
+
+                                            </div>
+
+                                            <!-- DATOS ADMINISTRATIVOS -->
+                                            <div class="border-bottom pb-3 mt-5 mb-4">
+                                                <h5 class="fw-bold text-primary mb-0">
+                                                    Datos Administrativos
+                                                </h5>
+                                            </div>
+
+                                            <div class="row g-4">
+
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold">
+                                                        Sexo
+                                                    </label>
+
+                                                    <select id="adm-sexo"
+                                                        class="form-select form-select-lg">
+
+                                                        <option value="">Seleccione...</option>
+                                                        <option>Femenino</option>
+                                                        <option>Masculino</option>
+                                                        <option>Otro / No especifica</option>
+
+                                                    </select>
 
                                                 </div>
 
-                                                <!-- DATOS PERSONALES -->
-                                                <div class="border-bottom pb-3 mb-4">
-                                                    <h5 class="fw-bold text-primary mb-0">
-                                                        Datos Personales
-                                                    </h5>
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold">
+                                                        Correo
+                                                    </label>
+
+                                                    <input
+                                                        type="email"
+                                                        id="adm-correo"
+                                                        class="form-control form-control-lg"
+                                                        placeholder="correo@dominio.com">
+
                                                 </div>
+
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold">
+                                                        Tipo de Paciente
+                                                    </label>
+
+                                                    <select
+                                                        id="adm-tipo-paciente"
+                                                        class="form-select form-select-lg"
+                                                        onchange="checkMembresiaManual(this.value)">
+
+                                                        <option value="Particular">Particular</option>
+                                                        <option value="Membresía">Membresía</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold">
+                                                        Forma de Pago
+                                                    </label>
+
+                                                    <select
+                                                        id="adm-pago"
+                                                        class="form-select form-select-lg">
+
+                                                        <option>Efectivo</option>
+                                                        <option>Tarjeta</option>
+                                                        <option>Transferencia</option>
+                                                        <option>Pago pendiente</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- SERVICIO -->
+                                            <div class="border-bottom pb-3 mt-5 mb-4">
+                                                <h5 class="fw-bold text-primary mb-0">
+                                                    Servicio Solicitado
+                                                </h5>
+                                            </div>
+
+                                            <div class="row g-4">
+
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold required">
+                                                        Servicio
+                                                    </label>
+
+                                                    <select
+                                                        id="adm-serv"
+                                                        class="form-select form-select-lg"
+                                                        onchange="toggleExtra(this.value)">
+
+                                                        <option value="">Seleccione servicio...</option>
+                                                        <option value="consulta">🩺 Consulta Médica</option>
+                                                        <option value="rx">🩻 Rayos X / Imagen</option>
+                                                        <option value="laboratorio">🔬 Laboratorio</option>
+                                                        <option value="enfermeria">💉 Enfermería / Inyecciones</option>
+                                                        <option value="urgencias">🚨 Urgencias</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold required">
+                                                        Prioridad
+                                                    </label>
+
+                                                    <select
+                                                        id="adm-prio"
+                                                        class="form-select form-select-lg">
+
+                                                        <option value="Normal">Normal / Verde</option>
+                                                        <option value="Urgente">Urgente / Amarillo</option>
+                                                        <option value="Crítico">Crítico / Rojo</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold">
+                                                        Sucursal / Área
+                                                    </label>
+
+                                                    <select
+                                                        id="adm-sucursal"
+                                                        class="form-select form-select-lg">
+
+                                                        <option>Clínica Principal</option>
+                                                        <option>Urgencias</option>
+                                                        <option>Imagenología</option>
+                                                        <option>Laboratorio</option>
+                                                        <option>Enfermería</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-6">
+
+                                                    <label class="form-label fw-semibold">
+                                                        Cubículo / Cama
+                                                    </label>
+
+                                                    <select
+                                                        id="adm-cubiculo"
+                                                        class="form-select form-select-lg">
+
+                                                        <option value="No asignado">No asignado</option>
+                                                        <option value="Sala de Choque">Sala de Choque</option>
+                                                        <option value="Observación 1">Observación 1</option>
+                                                        <option value="Observación 2">Observación 2</option>
+                                                        <option value="Terapia Intensiva">Terapia Intensiva</option>
+                                                        <option value="Pediatría">Pediatría</option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- EXTRA CONSULTA -->
+                                            <div id="extra-consulta"
+                                                class="border-top mt-5 pt-4"
+                                                style="display:none;">
+
+                                                <h5 class="fw-bold mb-4 text-secondary">
+                                                    Información de Consulta
+                                                </h5>
 
                                                 <div class="row g-4">
 
-                                                    <div class="col-lg-4 col-md-6">
-                                                        <label class="form-label fw-semibold required">
-                                                            Nombre(s)
-                                                        </label>
-
-                                                        <input
-                                                            type="text"
-                                                            id="adm-nom"
-                                                            class="form-control form-control-lg"
-                                                            placeholder="Ej. Luis Alberto">
-                                                    </div>
-
-                                                    <div class="col-lg-4 col-md-6">
-                                                        <label class="form-label fw-semibold required">
-                                                            Apellido Paterno
-                                                        </label>
-
-                                                        <input
-                                                            type="text"
-                                                            id="adm-pat"
-                                                            class="form-control form-control-lg"
-                                                            placeholder="Ej. Mendoza">
-                                                    </div>
-
-                                                    <div class="col-lg-4 col-md-6">
-                                                        <label class="form-label fw-semibold">
-                                                            Apellido Materno
-                                                        </label>
-
-                                                        <input
-                                                            type="text"
-                                                            id="adm-mat"
-                                                            class="form-control form-control-lg"
-                                                            placeholder="Ej. Arriaga">
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="row g-4 mt-1">
-
-                                                    <div class="col-lg-3 col-md-6">
-                                                        <label class="form-label fw-semibold required">
-                                                            CURP
-                                                        </label>
-
-                                                        <input
-                                                            type="text"
-                                                            id="adm-curp"
-                                                            class="form-control form-control-lg"
-                                                            maxlength="18"
-                                                            placeholder="18 caracteres"
-                                                            oninput="handleCURP(this.value)">
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-                                                        <label class="form-label fw-semibold required">
-                                                            Fecha Nacimiento
-                                                        </label>
-
-                                                        <input
-                                                            type="date"
-                                                            id="adm-fec"
-                                                            class="form-control form-control-lg"
-                                                            onchange="calcEdad(this.value)">
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-                                                        <label class="form-label fw-semibold">
-                                                            Edad Calculada
-                                                        </label>
-
-                                                        <input
-                                                            type="text"
-                                                            id="adm-edad"
-                                                            readonly
-                                                            class="form-control form-control-lg bg-light"
-                                                            placeholder="Automático">
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-                                                        <label class="form-label fw-semibold required">
-                                                            Teléfono
-                                                        </label>
-
-                                                        <input
-                                                            type="tel"
-                                                            id="adm-tel"
-                                                            class="form-control form-control-lg"
-                                                            maxlength="10"
-                                                            placeholder="10 dígitos">
-                                                    </div>
-
-                                                </div>
-
-                                                <!-- DATOS ADMINISTRATIVOS -->
-                                                <div class="border-bottom pb-3 mt-5 mb-4">
-                                                    <h5 class="fw-bold text-primary mb-0">
-                                                        Datos Administrativos
-                                                    </h5>
-                                                </div>
-
-                                                <div class="row g-4">
-
-                                                    <div class="col-lg-3 col-md-6">
+                                                    <div class="col-lg-6">
 
                                                         <label class="form-label fw-semibold">
-                                                            Sexo
+                                                            Motivo principal de consulta
                                                         </label>
 
-                                                        <select id="adm-sexo"
+                                                        <select
+                                                            id="adm-motivo-sel"
                                                             class="form-select form-select-lg">
 
-                                                            <option value="">Seleccione...</option>
-                                                            <option>Femenino</option>
-                                                            <option>Masculino</option>
-                                                            <option>Otro / No especifica</option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-
-                                                        <label class="form-label fw-semibold">
-                                                            Correo
-                                                        </label>
-
-                                                        <input
-                                                            type="email"
-                                                            id="adm-correo"
-                                                            class="form-control form-control-lg"
-                                                            placeholder="correo@dominio.com">
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-
-                                                        <label class="form-label fw-semibold">
-                                                            Tipo de Paciente
-                                                        </label>
-
-                                                        <select
-                                                            id="adm-tipo-paciente"
-                                                            class="form-select form-select-lg"
-                                                            onchange="checkMembresiaManual(this.value)">
-
-                                                            <option value="Particular">Particular</option>
-                                                            <option value="Membresía">Membresía</option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-
-                                                        <label class="form-label fw-semibold">
-                                                            Forma de Pago
-                                                        </label>
-
-                                                        <select
-                                                            id="adm-pago"
-                                                            class="form-select form-select-lg">
-
-                                                            <option>Efectivo</option>
-                                                            <option>Tarjeta</option>
-                                                            <option>Transferencia</option>
-                                                            <option>Pago pendiente</option>
+                                                            <option value="">Seleccione motivo...</option>
+                                                            <option value="Certificado Médico">Certificado Médico</option>
+                                                            <option value="Contusión">Contusión</option>
+                                                            <option value="Curación">Curación</option>
+                                                            <option value="Diarrea">Diarrea</option>
 
                                                         </select>
 
@@ -528,188 +654,63 @@
 
                                                 </div>
 
-                                                <!-- SERVICIO -->
-                                                <div class="border-bottom pb-3 mt-5 mb-4">
-                                                    <h5 class="fw-bold text-primary mb-0">
-                                                        Servicio Solicitado
-                                                    </h5>
-                                                </div>
+                                                <div class="mt-4">
 
-                                                <div class="row g-4">
+                                                    <label class="form-label fw-semibold">
+                                                        Comentarios libres / Signos referidos por el paciente
+                                                    </label>
 
-                                                    <div class="col-lg-3 col-md-6">
-
-                                                        <label class="form-label fw-semibold required">
-                                                            Servicio
-                                                        </label>
-
-                                                        <select
-                                                            id="adm-serv"
-                                                            class="form-select form-select-lg"
-                                                            onchange="toggleExtra(this.value)">
-
-                                                            <option value="">Seleccione servicio...</option>
-                                                            <option value="consulta">🩺 Consulta Médica</option>
-                                                            <option value="rx">🩻 Rayos X / Imagen</option>
-                                                            <option value="laboratorio">🔬 Laboratorio</option>
-                                                            <option value="enfermeria">💉 Enfermería / Inyecciones</option>
-                                                            <option value="urgencias">🚨 Urgencias</option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-
-                                                        <label class="form-label fw-semibold required">
-                                                            Prioridad
-                                                        </label>
-
-                                                        <select
-                                                            id="adm-prio"
-                                                            class="form-select form-select-lg">
-
-                                                            <option value="Normal">Normal / Verde</option>
-                                                            <option value="Urgente">Urgente / Amarillo</option>
-                                                            <option value="Crítico">Crítico / Rojo</option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-
-                                                        <label class="form-label fw-semibold">
-                                                            Sucursal / Área
-                                                        </label>
-
-                                                        <select
-                                                            id="adm-sucursal"
-                                                            class="form-select form-select-lg">
-
-                                                            <option>Clínica Principal</option>
-                                                            <option>Urgencias</option>
-                                                            <option>Imagenología</option>
-                                                            <option>Laboratorio</option>
-                                                            <option>Enfermería</option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-md-6">
-
-                                                        <label class="form-label fw-semibold">
-                                                            Cubículo / Cama
-                                                        </label>
-
-                                                        <select
-                                                            id="adm-cubiculo"
-                                                            class="form-select form-select-lg">
-
-                                                            <option value="No asignado">No asignado</option>
-                                                            <option value="Sala de Choque">Sala de Choque</option>
-                                                            <option value="Observación 1">Observación 1</option>
-                                                            <option value="Observación 2">Observación 2</option>
-                                                            <option value="Terapia Intensiva">Terapia Intensiva</option>
-                                                            <option value="Pediatría">Pediatría</option>
-
-                                                        </select>
-
-                                                    </div>
+                                                    <textarea
+                                                        id="adm-comentarios"
+                                                        rows="3"
+                                                        class="form-control"
+                                                        placeholder="Ej. El paciente refiere dolor intenso desde hace 2 días..."></textarea>
 
                                                 </div>
 
-                                                <!-- EXTRA CONSULTA -->
-                                                <div id="extra-consulta"
-                                                    class="border-top mt-5 pt-4"
-                                                    style="display:none;">
+                                            </div>
 
-                                                    <h5 class="fw-bold mb-4 text-secondary">
-                                                        Información de Consulta
-                                                    </h5>
+                                            <!-- PANEL MEMBRESIA -->
+                                            <div id="panel-membresia"
+                                                class="bg-light border rounded-4 p-4 mt-5">
 
-                                                    <div class="row g-4">
+                                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
 
-                                                        <div class="col-lg-6">
+                                                    <h4 id="mem-titulo"
+                                                        class="fw-bold m-0">
+                                                    </h4>
 
-                                                            <label class="form-label fw-semibold">
-                                                                Motivo principal de consulta
-                                                            </label>
-
-                                                            <select
-                                                                id="adm-motivo-sel"
-                                                                class="form-select form-select-lg">
-
-                                                                <option value="">Seleccione motivo...</option>
-                                                                <option value="Certificado Médico">Certificado Médico</option>
-                                                                <option value="Contusión">Contusión</option>
-                                                                <option value="Curación">Curación</option>
-                                                                <option value="Diarrea">Diarrea</option>
-
-                                                            </select>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="mt-4">
-
-                                                        <label class="form-label fw-semibold">
-                                                            Comentarios libres / Signos referidos por el paciente
-                                                        </label>
-
-                                                        <textarea
-                                                            id="adm-comentarios"
-                                                            rows="3"
-                                                            class="form-control"
-                                                            placeholder="Ej. El paciente refiere dolor intenso desde hace 2 días..."></textarea>
-
-                                                    </div>
+                                                    <span class="badge bg-success px-3 py-2">
+                                                        VIGENCIA: ACTIVA
+                                                    </span>
 
                                                 </div>
 
-                                                <!-- PANEL MEMBRESIA -->
-                                                <div id="panel-membresia"
-                                                    class="bg-light border rounded-4 p-4 mt-5">
-
-                                                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-
-                                                        <h4 id="mem-titulo"
-                                                            class="fw-bold m-0">
-                                                        </h4>
-
-                                                        <span class="badge bg-success px-3 py-2">
-                                                            VIGENCIA: ACTIVA
-                                                        </span>
-
-                                                    </div>
-
-                                                    <div id="mem-lista"
-                                                        class="row g-3">
-                                                    </div>
-
+                                                <div id="mem-lista"
+                                                    class="row g-3">
                                                 </div>
 
-                                                <!-- BOTON -->
-                                                <div class="mt-5">
+                                            </div>
 
-                                                    <button
-                                                        id="btn-guardar-adm"
-                                                        class="btn btn-primary btn-lg w-100 py-3 fw-bold rounded-4"
-                                                        onclick="finalizarNormal()">
+                                            <!-- BOTON -->
+                                            <div class="mt-5">
 
-                                                        Confirmar Ingreso a Atención
+                                                <button
+                                                    id="btn-guardar-adm"
+                                                    class="btn btn-primary btn-lg w-100 py-3 fw-bold rounded-4"
+                                                    onclick="finalizarNormal()">
 
-                                                    </button>
+                                                    Confirmar Ingreso a Atención
 
-                                                </div>
+                                                </button>
 
                                             </div>
 
                                         </div>
 
                                     </div>
+
+                                </div>
                                 <!-- MONITOR -->
 
                                 <div
@@ -752,7 +753,6 @@
                                 </div>
 
                             </div>
-
                         </div>
 
                     </div>
