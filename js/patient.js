@@ -23,15 +23,18 @@ const paciente = {
       fecha: "2026-05-01",
       motivo: "Dolor de cabeza",
       diagnostico: "Migraña",
+      medicaments: ['Ibuprofeno 400mg']
     },
     {
       fecha: "2026-03-15",
       motivo: "Dolor abdominal",
       diagnostico: "Gastritis",
+      medicaments: ['Paracetamol 500mg','Omeprezol 20mg']
     },
   ],
 
-  medicamentos: ["Paracetamol 500mg", "Omeprazol 20mg", "Ibuprofeno 400mg"],
+  medicamentos: ['Insulina'],
+  padecimientos: ['Diabetes tipo 2'],
 
   historial_clinico: [
     {
@@ -78,6 +81,9 @@ function loadPatient() {
     const visitasContainer = document.getElementById("visitasContainer");
 
     paciente.ultimas_visitas.forEach((visita) => {
+      const medicament_array =  visita.medicaments.map((medicament) => {return `
+          <strong>${medicament}</strong>
+        `})
       visitasContainer.innerHTML += `
     
         <div class="card mb-3 border-0 shadow-sm">
@@ -86,12 +92,15 @@ function loadPatient() {
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">${visita.motivo}</h6>
                     <span class="badge bg-primary">
-                        ${visita.fecha}
+                      ${visita.fecha}
                     </span>
                 </div>
-
+ 
                 <p class="mb-0">
-                    Diagnóstico: ${visita.diagnostico}
+                  Diagnóstico: ${visita.diagnostico}
+                </p>
+                <p class="mb-0">
+                  Tratamiento: ${medicament_array}
                 </p>
 
             </div>
@@ -99,7 +108,22 @@ function loadPatient() {
 
     `;
     });
+/* =========================================
+   PADECIMIENTOS
+========================================= */
+  const padecimientosContainer = document.getElementById(
+      "padecimientosContainer",
+    );
 
+    paciente.padecimientos.forEach((padecimiento) => {
+      padecimientosContainer.innerHTML += `
+    
+        <li class="list-group-item">
+            ${padecimiento}
+        </li>
+
+    `;
+    });
 /* =========================================
    MEDICAMENTOS
 ========================================= */

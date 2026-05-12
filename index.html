@@ -9,6 +9,7 @@
     <script src="./js/triage.js"></script>
     <script src="./js/laboratori.js"></script>
     <script src="./js/reception.js"></script>
+    <script src="./js/paramedic.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="./styles/consultation.css">
     <link rel="stylesheet" href="./styles/patient.css">
     <link rel="stylesheet" href="./styles/toast.css">
+    <link rel="stylesheet" href="./styles/paramedics.css">
     <link rel="stylesheet" href="./styles/reception.css">
     <link rel="stylesheet" href="./styles/general.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -818,7 +820,7 @@
                                         <label class="fw-bold">Tipo de Sangre</label>
                                         <p id="bloodType"></p>
                                     </div>
-
+                                    
                                 </div>
 
                             </div>
@@ -873,6 +875,30 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- PADECIMIENTOS PREVIOS -->
+                            <div class="accordion-item">
+
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapsePadecimientos">
+
+                                        <p>Padecimientos</p>
+                                    </button>
+                                </h2>
+
+                                <div id="collapsePadecimientos"
+                                    class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionHistorial">
+                                    <div class="accordion-body">
+
+                                        <ul class="list-group" id="padecimientosContainer"></ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- MEDICAMENTOS -->
                             <div class="accordion-item">
 
@@ -882,7 +908,7 @@
                                         data-bs-toggle="collapse"
                                         data-bs-target="#collapseMedicamentos">
 
-                                        Medicamentos Recetados
+                                        Medicamentos
                                     </button>
                                 </h2>
 
@@ -1020,7 +1046,7 @@
 
                         <hr style="margin:20px 0; border:0; border-top:1px solid var(--border)">
 
-                        <h3>Escala de Glasgow (Glasgow_Comma_Scale)</h3>
+                        <h3>Escala de Glasgow</h3>
                         <div class="grid grid-3">
                             <div class="form-group">
                                 <label>Apertura Ocular</label>
@@ -1072,11 +1098,11 @@
                         <div style="display:flex; flex-direction:column; gap:10px;">
                             <label class="priority-level-one">
                                 <input id="selector-1" type="radio" name="prioridad" value="1" disabled>
-                                <span class="badge bg-red">Nivel 1 - Emergencia (Inmediata)</span>
+                                <span class="badge text-bg-danger">Nivel 1 - Emergencia (Inmediata)</span>
                             </label>
                             <label class="priority-level-two">
                                 <input id="selector-2" type="radio" name="prioridad" value="2" disabled> 
-                                <span class="badge  text-bg-danger">Nivel 2 - Urgencia (< 15 min)</span>
+                                <span class="badge  text-bg-warning">Nivel 2 - Urgencia (< 15 min)</span>
                             </label>
                             <label class="priority-level-three">
                                 <input id="selector-3" type="radio" name="prioridad" value="3" disabled>
@@ -1089,7 +1115,9 @@
                             <textarea aria-setsize="450" rows="4"
                                 placeholder="Describa brevemente el estado general, alergias detectadas o síntomas principales..."
                                 id="triage_note"></textarea>
-                        </div>
+                        </div>  
+                        .
+
                     </div>
                 </div>
             </section>
@@ -1409,17 +1437,66 @@
             </section>
 
             <section id="paramedicos" class="section">
-                <div class="card" style="background:var(--sidebar); color:white;">
-                    <h3>Registro de Evento FRAP</h3>
-                    <div class="grid grid-3">
-                        <div class="form-group"><label style="color:white">Unidad</label><input type="text"
-                                value="AMB-01"></div>
-                        <div class="form-group"><label style="color:white">Salida</label><input type="time"></div>
-                        <div class="form-group"><label style="color:white">Arribo</label><input type="time"></div>
+                <div class="container mt-5">
+                    <ul class="nav nav-tabs" id="consultationTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#activeServices"
+                                type="button">
+                                Servicios
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="perfil-tab" data-bs-toggle="tab" data-bs-target="#services"
+                                type="button">
+                                Servicios activos
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content border border-top-0 p-4 bg-white">
+                        <div class="tab-pane fade show active" id="activeServices">
+                            <div class="container" id="container-table-service-paramedic-active">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Servicio</th>
+                                            <th>Unidad</th>
+                                            <th>direccion</th>
+                                            <th>Paramedicos asignados</th>
+                                            <th>Salida de base</th>
+                                            <th>Entrada de Base</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="service-paramedic-active">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="services">
+                             <div class="continer-button-ambulance-service">
+                                <button class="btn btn-primary"  onclick="createNewService()">Crear Servicio de Ambulancia</button>
+                            </div>
+                            <div class="container" id="container-table-service-paramedic">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Servicio</th>
+                                            <th>Unidad</th>
+                                            <th>direccion</th>
+                                            <th>Paramedicos asignados</th>
+                                            <th>Salida de base</th>
+                                            <th>LLegada a base</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="service-paramedic">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group"><label style="color:white">Descripción del Incidente</label><textarea
-                            rows="4" style="background:#1e293b; border:0; color:white;"></textarea></div>
-                    <button class="btn btn-primary" style="background:var(--danger)">Cerrar Servicio</button>
                 </div>
             </section>
 
@@ -1643,163 +1720,162 @@
             </div>
         </div>
 
-    <!-- Modal Actualizar estado-->
-    <div id="modalActualizarEstado" class="modal">
-        <div class="modal-content">
-            <h3>Actualizar estado</h3>
+        <!-- Modal Actualizar estado-->
+        <div id="modalActualizarEstado" class="modal">
+            <div class="modal-content">
+                <h3>Actualizar estado</h3>
 
-            <label for="Estado">Estado</label>
-            <select id="Estado">
-                <option value="">Selecciona el estado actual</option>
-                <option value="Validación de estudio">Validación de estudio</option>
-                <option value="Estudio en proceso">Estudio en proceso</option>
-                <option value="Estudio finalizado">Estudio finalizado</option>
-                <option value="Entrega de resultados">Entrega de resultados</option>
-            </select>
+                <label for="Estado">Estado</label>
+                <select id="Estado">
+                    <option value="">Selecciona el estado actual</option>
+                    <option value="Validación de estudio">Validación de estudio</option>
+                    <option value="Estudio en proceso">Estudio en proceso</option>
+                    <option value="Estudio finalizado">Estudio finalizado</option>
+                    <option value="Entrega de resultados">Entrega de resultados</option>
+                </select>
 
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
-                <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Modal Estudio selector -->
-    <div id="modalEstudios" class="modal">
-        <div class="modal-content">
-            <h3>Editar estudios</h3>
+        <!-- Modal Estudio selector -->
+        <div id="modalEstudios" class="modal">
+            <div class="modal-content">
+                <h3>Editar estudios</h3>
 
-            <label for="nuevoEstudio">Agregar estudio</label>
-            <select id="nuevoEstudio">
-                <option value="">Selecciona un estudio</option>
-                <option value="Biometría Hemática">Biometría Hemática</option>
-                <option value="Química Sanguínea">Química Sanguínea</option>
-                <option value="Examen General de Orina">Examen General de Orina</option>
-                <option value="Perfil Lipídico">Perfil Lipídico</option>
-                <option value="Prueba de Glucosa">Prueba de Glucosa</option>
-            </select>
+                <label for="nuevoEstudio">Agregar estudio</label>
+                <select id="nuevoEstudio">
+                    <option value="">Selecciona un estudio</option>
+                    <option value="Biometría Hemática">Biometría Hemática</option>
+                    <option value="Química Sanguínea">Química Sanguínea</option>
+                    <option value="Examen General de Orina">Examen General de Orina</option>
+                    <option value="Perfil Lipídico">Perfil Lipídico</option>
+                    <option value="Prueba de Glucosa">Prueba de Glucosa</option>
+                </select>
 
-            <label for="estudioEliminar">Quitar estudio</label>
-            <select id="estudioEliminar">
-                <option value="">Selecciona un estudio para quitar</option>
-            </select>
+                <label for="estudioEliminar">Quitar estudio</label>
+                <select id="estudioEliminar">
+                    <option value="">Selecciona un estudio para quitar</option>
+                </select>
 
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="cerrarModalEstudios()">Cerrar</button>
-                <button class="btn btn-secondary" onclick="quitarEstudio()">Quitar</button>
-                <button class="btn btn-primary" onclick="agregarEstudio()">Agregar</button>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModalEstudios()">Cerrar</button>
+                    <button class="btn btn-secondary" onclick="quitarEstudio()">Quitar</button>
+                    <button class="btn btn-primary" onclick="agregarEstudio()">Agregar</button>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Modal Enviar resulados  -->
-    <div id="modalEnviarResultados" class="modal">
-        <div class="modal-content">
-            <h3>Enviar resultados</h3>
+        <!-- Modal Enviar resulados  -->
+        <div id="modalEnviarResultados" class="modal">
+            <div class="modal-content">
+                <h3>Enviar resultados</h3>
 
-            <label for="emailDestino">E-mail</label>
-            <select id="emailDestino">
-                <option value="">Selecciona el E-mail de destino</option>
-                <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
-                <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
-                <option value="otro">Otro</option>
-            </select>
+                <label for="emailDestino">E-mail</label>
+                <select id="emailDestino">
+                    <option value="">Selecciona el E-mail de destino</option>
+                    <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
+                    <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
+                    <option value="otro">Otro</option>
+                </select>
 
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
-                <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Modal hoja de consumo -->
-    <div id="modalHojaConsumo" class="modal">
-        <div class="modal-content">
-            <h3>Generar hoja de consumo</h3>
+        <!-- Modal hoja de consumo -->
+        <div id="modalHojaConsumo" class="modal">
+            <div class="modal-content">
+                <h3>Generar hoja de consumo</h3>
 
-            <label for="pacienteConsumo">Paciente</label>
-            <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
-                <option value="">Selecciona un paciente</option>
-                <option value="Pedro Infante" data-nacimiento="1917-11-18" data-procedimiento="Biometría Hemática">
-                    Pedro Infante
-                </option>
-            </select>
-            <div id="formHojaConsumo" class="container-fluid" style="display: none;">
+                <label for="pacienteConsumo">Paciente</label>
+                <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
+                    <option value="">Selecciona un paciente</option>
+                    <option value="Pedro Infante" data-nacimiento="1917-11-18" data-procedimiento="Biometría Hemática">
+                        Pedro Infante
+                    </option>
+                </select>
+                <div id="formHojaConsumo" class="container-fluid" style="display: none;">
 
-                <div class="row g-3">
+                    <div class="row g-3">
 
-                    <!-- Nombre del paciente -->
-                    <div class="col-md-6">
-                        <label for="nombrePacienteConsumo" class="form-label">
-                            Nombre del paciente
-                        </label>
+                        <!-- Nombre del paciente -->
+                        <div class="col-md-6">
+                            <label for="nombrePacienteConsumo" class="form-label">
+                                Nombre del paciente
+                            </label>
 
-                        <input type="text" id="nombrePacienteConsumo" class="form-control">
-                    </div>
+                            <input type="text" id="nombrePacienteConsumo" class="form-control">
+                        </div>
 
-                    <!-- Fecha de nacimiento -->
-                    <div class="col-md-6">
-                        <label for="fechaNacimientoConsumo" class="form-label">
-                            Fecha de nacimiento
-                        </label>
+                        <!-- Fecha de nacimiento -->
+                        <div class="col-md-6">
+                            <label for="fechaNacimientoConsumo" class="form-label">
+                                Fecha de nacimiento
+                            </label>
 
-                        <input type="date" id="fechaNacimientoConsumo" class="form-control">
-                    </div>
+                            <input type="date" id="fechaNacimientoConsumo" class="form-control">
+                        </div>
 
-                    <!-- Procedimiento -->
-                    <div class="col-md-6">
-                        <label for="procedimientoConsumo" class="form-label">
-                            Procedimiento
-                        </label>
+                        <!-- Procedimiento -->
+                        <div class="col-md-6">
+                            <label for="procedimientoConsumo" class="form-label">
+                                Procedimiento
+                            </label>
 
-                        <input type="text" id="procedimientoConsumo" class="form-control">
-                    </div>
+                            <input type="text" id="procedimientoConsumo" class="form-control">
+                        </div>
 
-                    <!-- Fecha -->
-                    <div class="col-md-3">
-                        <label for="fechaConsumo" class="form-label">
-                            Fecha
-                        </label>
+                        <!-- Fecha -->
+                        <div class="col-md-3">
+                            <label for="fechaConsumo" class="form-label">
+                                Fecha
+                            </label>
 
-                        <input type="date" id="fechaConsumo" class="form-control">
-                    </div>
+                            <input type="date" id="fechaConsumo" class="form-control">
+                        </div>
 
-                    <!-- Hora -->
-                    <div class="col-md-3">
-                        <label for="horaConsumo" class="form-label">
-                            Hora
-                        </label>
+                        <!-- Hora -->
+                        <div class="col-md-3">
+                            <label for="horaConsumo" class="form-label">
+                                Hora
+                            </label>
 
-                        <input type="time" id="horaConsumo" class="form-control">
-                    </div>
+                            <input type="time" id="horaConsumo" class="form-control">
+                        </div>
 
-                    <!-- Turno -->
-                    <div class="col-md-6">
-                        <label for="turnoConsumo" class="form-label">
-                            Turno
-                        </label>
+                        <!-- Turno -->
+                        <div class="col-md-6">
+                            <label for="turnoConsumo" class="form-label">
+                                Turno
+                            </label>
 
-                        <input type="text" id="turnoConsumo" class="form-control">
-                    </div>
+                            <input type="text" id="turnoConsumo" class="form-control">
+                        </div>
 
-                    <!-- Químico -->
-                    <div class="col-md-6">
-                        <label for="quimicoConsumo" class="form-label">
-                            Nombre del químico
-                        </label>
+                        <!-- Químico -->
+                        <div class="col-md-6">
+                            <label for="quimicoConsumo" class="form-label">
+                                Nombre del químico
+                            </label>
 
-                        <input type="text" id="quimicoConsumo" class="form-control">
+                            <input type="text" id="quimicoConsumo" class="form-control">
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
-
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
-                <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- fin -->
-
+        <!-- fin -->
     <!-- end modal section -->
 </body>
 

@@ -61,7 +61,6 @@ function validateField(id, min, max, required = true) {
     return num
 }
 
-
 function classifyTriage(data) {
 
     const {
@@ -78,43 +77,40 @@ function classifyTriage(data) {
     if (
         oxygen < 85 ||
         sistolicTension < 80 ||
+        distolicTension > 120 ||
         CardiacFrequency > 150 ||
         CardiacFrequency < 40 ||
         respiratory > 35 ||
         temperature > 41 ||
         glucose < 50
     ) {
-        return { level: 'ROJO', message: 'Atención inmediata' }
+        return {
+            level: 'ROJO',
+            message: 'Atención inmediata'
+        }
     }
-
-    /*  
-    // 🟠 URGENTE
-    if (
-        oxygen < 90 ||
-        sistolicTension < 90 ||
-        sistolicTension > 180 ||
-        CardiacFrequency > 120 ||
-        respiratory > 25 ||
-        temperature > 39 ||
-        glucose > 300
-    ) {
-        return { level: 'NARANJA', message: 'Urgente' }
-    } 
-    */
 
     // 🟡 PRIORITARIO
     if (
         oxygen < 94 ||
         sistolicTension > 140 ||
+        distolicTension > 90 ||
         CardiacFrequency > 100 ||
         temperature > 37.5
     ) {
-        return { level: 'AMARILLO', message: 'Prioritario' }
+        return {
+            level: 'AMARILLO',
+            message: 'Prioritario'
+        }
     }
 
     // 🟢 NORMAL
-    return { level: 'VERDE', message: 'No urgente' }
+    return {
+        level: 'VERDE',
+        message: 'No urgente'
+    }
 }
+
 
 function showToast(message, type = 'success', duration = 3000) {
   const container = document.getElementById('toast-container');
@@ -227,7 +223,7 @@ function seleccionarPaciente() {
 
 
 /* 
-luchar, perder, morir,
-Es el orden natural de este mundo eel destino es uno que no se puede eludir
-
+    Luchar, perder, morir,
+    Es el orden natural de este mundo eel destino es uno que no se puede eludir.
 */
+
