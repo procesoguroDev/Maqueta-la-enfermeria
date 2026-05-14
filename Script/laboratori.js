@@ -306,3 +306,183 @@ function agregarHojaConsumoTabla(paciente, nombreArchivo, pdfUrl) {
 function enviarHojaRecepcion() {
     mostrarToast('Hoja enviada a Recepción.', 'success');
 }
+/* Hoja de consumo ENF */
+
+let contadorHojaConsumoENF = 1;
+
+function abrirModalHojaConsumoENF() {
+    document.getElementById('modalHojaConsumoENF').style.display = 'flex';
+}
+
+function cerrarModalHojaConsumoENF() {
+    document.getElementById('modalHojaConsumoENF').style.display = 'none';
+    document.getElementById('pacienteConsumoENF').value = '';
+    document.getElementById('procedimientoConsumoENF').value = '';
+}
+
+function obtenerTurno(hora) {
+    const horaNumero = Number(hora.split(':')[0]);
+
+    if (horaNumero >= 7 && horaNumero < 15) {
+        return 'Matutino';
+    }
+
+    if (horaNumero >= 15 && horaNumero < 22) {
+        return 'Vespertino';
+    }
+
+    return 'Nocturno';
+}
+
+function generarHojaConsumoPDFENF() {
+    const selectPaciente = document.getElementById('pacienteConsumoENF');
+    const paciente = selectPaciente.value;
+    const curacion = document.getElementById('procedimientoConsumoENF').value;
+
+    if (!paciente) {
+        mostrarToast('Selecciona un paciente.', 'warning');
+        return;
+    }
+
+    if (!curacion) {
+        mostrarToast('Selecciona el tipo de curación.', 'warning');
+        return;
+    }
+
+    const opcionPaciente = selectPaciente.options[selectPaciente.selectedIndex];
+    const nacimiento = opcionPaciente.getAttribute('data-nacimiento') || '';
+
+    const ahora = new Date();
+    const fecha = ahora.toISOString().split('T')[0];
+    const hora = ahora.toTimeString().slice(0, 5);
+    const turno = obtenerTurno(hora);
+    const enfermero = 'Dr. Roberto Ramírez';
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
+
+    pdf.setFontSize(18);
+    pdf.text('Hoja de consumo - Enfermería', 20, 20);
+
+    pdf.setFontSize(12);
+    pdf.text(`Nombre del paciente: ${paciente}`, 20, 40);
+    pdf.text(`Fecha de nacimiento: ${nacimiento}`, 20, 50);
+    pdf.text('Procedimiento: Curación', 20, 60);
+    pdf.text(`Tipo de curación: ${curacion}`, 20, 70);
+    pdf.text(`Fecha: ${fecha}`, 20, 80);
+    pdf.text(`Hora: ${hora}`, 20, 90);
+    pdf.text(`Turno: ${turno}`, 20, 100);
+    pdf.text(`Nombre del enfermero: ${enfermero}`, 20, 110);
+
+    const nombreArchivo = `hoja-consumo-curacion-${paciente.replaceAll(' ', '-')}.pdf`;
+    const pdfBlob = pdf.output('blob');
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+
+    agregarHojaConsumoTablaENF(paciente, nombreArchivo, pdfUrl);
+    cerrarModalHojaConsumoENF();
+
+    mostrarToast('Hoja de consumo de curación generada.', 'success');
+}
+
+/* Medicamento ENF */
+
+function abrirModalMedicamentoENF() {
+    document.getElementById('modalMedicamentoENF').style.display = 'flex';
+}
+
+function cerrarModalMedicamentoENF() {
+    document.getElementById('modalMedicamentoENF').style.display = 'none';
+    document.getElementById('pacienteMedicamentoENF').value = '';
+
+    const selectMedicamento = document.getElementById('medicamentoConsumoENF');
+    Array.from(selectMedicamento.options).forEach(option => {
+        option.selected = false;
+    });
+}
+
+function generarHojaMedicamentoPDFENF() {
+    const selectPaciente = document.getElementById('pacienteMedicamentoENF');
+    const paciente = selectPaciente.value;
+
+    const medicamentosSeleccionados = Array.from(
+        document.getElementById('medicamentoConsumoENF').selectedOptions
+    ).map(option => option.value);
+
+    if (!paciente) {
+        mostrarToast('Selecciona un paciente.', 'warning');
+        return;
+    }
+
+    if (medicamentosSeleccionados.length === 0) {
+        mostrarToast('Selecciona al menos un medicamento.', 'warning');
+        return;
+    }
+
+    const opcionPaciente = selectPaciente.options[selectPaciente.selectedIndex];
+    const nacimiento = opcionPaciente.getAttribute('data-nacimiento') || '';
+
+    const ahora = new Date();
+    const fecha = ahora.toISOString().split('T')[0];
+    const hora = ahora.toTimeString().slice(0, 5);
+    const turno = obtenerTurno(hora);
+    const enfermero = 'Dr. Roberto Ramírez';
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
+
+    pdf.setFontSize(18);
+    pdf.text('Hoja de consumo - Enfermería', 20, 20);
+
+    pdf.setFontSize(12);
+    pdf.text(`Nombre del paciente: ${paciente}`, 20, 40);
+    pdf.text(`Fecha de nacimiento: ${nacimiento}`, 20, 50);
+    pdf.text('Procedimiento: Aplicación de medicamento', 20, 60);
+    pdf.text(`Medicamentos: ${medicamentosSeleccionados.join(', ')}`, 20, 70);
+    pdf.text(`Fecha: ${fecha}`, 20, 80);
+    pdf.text(`Hora: ${hora}`, 20, 90);
+    pdf.text(`Turno: ${turno}`, 20, 100);
+    pdf.text(`Nombre del enfermero: ${enfermero}`, 20, 110);
+
+    const nombreArchivo = `hoja-consumo-medicamento-${paciente.replaceAll(' ', '-')}.pdf`;
+    const pdfBlob = pdf.output('blob');
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+
+    agregarHojaConsumoTablaENF(paciente, nombreArchivo, pdfUrl);
+    cerrarModalMedicamentoENF();
+
+    mostrarToast('Hoja de consumo de medicamento generada.', 'success');
+}
+
+/* Tabla hojas de consumo ENF */
+
+function agregarHojaConsumoTablaENF(paciente, nombreArchivo, pdfUrl) {
+    const tabla = document.getElementById('tablaHojaConsumoENF');
+
+    if (tabla.children.length === 1 && tabla.children[0].children[0].colSpan === 4) {
+        tabla.innerHTML = '';
+    }
+
+    const idHoja = `ENF-${String(contadorHojaConsumoENF).padStart(3, '0')}`;
+    contadorHojaConsumoENF++;
+
+    const fila = document.createElement('tr');
+
+    fila.innerHTML = `
+        <td>${idHoja}</td>
+        <td>${paciente}</td>
+        <td>
+            <a href="${pdfUrl}" target="_blank">${nombreArchivo}</a>
+        </td>
+        <td>
+            <button class="btn btn-secondary" onclick="enviarHojaRecepcion()">
+                Enviar a Recepción
+            </button>
+        </td>
+    `;
+
+    tabla.appendChild(fila);
+}
+
+function enviarHojaRecepcion() {
+    mostrarToast('Hoja enviada a Recepción.', 'success');
+}

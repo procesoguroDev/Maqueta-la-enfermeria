@@ -128,3 +128,53 @@
     font-size: 16px;
     margin-bottom: 10px;
 }
+/* Enfermería Css */
+.enfermeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.enfermeria-card {
+    border: 1px solid #e1e7ef;
+    border-radius: 8px;
+    padding: 18px;
+    background: #fff;
+}
+
+.enfermeria-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.enfermeria-card-header h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.enfermeria-texto {
+    margin: 0 0 12px;
+    font-weight: 600;
+}
+
+.enfermeria-detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+.bg-blue {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.bg-red {
+    background: #fee2e2;
+    color: #b91c1c;
+}
