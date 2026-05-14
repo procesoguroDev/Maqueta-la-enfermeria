@@ -313,12 +313,8 @@ tr:hover td {
 
 a {
   text-decoration: none;
-  color: white !important;
 }
 
-a:hover {
-  color: white;
-}
 
 .button-container {
   --bs-btn-padding-y: 0.25rem;

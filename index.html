@@ -1538,7 +1538,7 @@
                                 <span>Paciente: Pedro Infante</span>
                                 <span>Procedimiento: Limpieza y aseo</span>
                             </div>
-                            <button class="btn btn-secondary" onclick="abrirModalHojaConsumoENF()">
+                            <button class="btn btn-secondary" onclick="abrirModal('modalHojaConsumoENF')">
                                 Generar Hoja de consumo
                             </button>
                         </div>
@@ -1555,7 +1555,7 @@
                                 <span>Paciente: Ana Torres</span>
                                 <span>Medicamento: Paracetamol</span>
                             </div>
-                            <button class="btn btn-secondary" onclick="abrirModalMedicamentoENF()">Generar Hoja de consumo</button>
+                            <button class="btn btn-secondary" onclick="abrirModal('modalMedicamentoENF')">Generar Hoja de consumo</button>
                         </div>
 
                         <div class="enfermeria-card">
@@ -1971,6 +1971,7 @@
             </div>
             
             <div id="modalHojaConsumoENF" class="modal">
+                <div class="modal-dialog moodal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <h3>Solicitud</h3>
 
@@ -1992,14 +1993,15 @@
                         </select>
 
                         <div class="modal-actions">
-                            <button class="btn btn-secondary" onclick="cerrarModalHojaConsumoENF()">
+                            <button class="btn btn-secondary" onclick="cerrarModal('modalHojaConsumoENF')">
                                 Cancelar
                             </button>
-                            <button class="btn btn-primary" onclick="generarHojaConsumoPDFENF()">
+                            <button class="btn btn-primary" onclick="crearPDFConsumo()">
                                 Generar hoja de consumo
                             </button>
                         </div>
                     </div>
+                </div>
             </div>
 
             <div id="modalMedicamentoENF" class="modal">
@@ -2041,7 +2043,7 @@
                             </div>
                         </div>
                         <div class="modal-actions">
-                            <button class="btn btn-secondary" onclick="cerrarModalMedicamentoENF()">
+                            <button class="btn btn-secondary" onclick="cerrarModal('modalMedicamentoENF')">
                                 Cancelar
                             </button>
 
