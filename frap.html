@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="frap.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Wizard Vanilla JS</title>
+</head>
+
+<body>
+    <div class="wizard">
+
+        <div class="progress">
+            Paso <span id="currentStep">1</span> de 2
+        </div>
+
+        <!-- PASO 1 -->
+        <div class="step">
+            <div class="accordion" id="accordionFirstPartFRAP">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseGeneralData" aria-expanded="true"
+                            aria-controls="collapseGeneralData">
+                            Caracteristicas personales
+                        </button>
+                    </h2>
+                    <div id="collapseGeneralData" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionGeneralData">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    Dia de la Semana:
+                                    <input disabled type="text" value="Miercoles">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    fecha:
+                                    <input disabled type="date" value="2026-05-01">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    Llamada:
+                                    <input disabled type="time" id="llamada" value="08:00">
+                                </div>
+
+                                <div class="col-md-2">
+                                    Salida:
+                                    <input disabled type="time" id="salida" value="08:10">
+                                </div>
+
+                                <div class="col-md-2">
+                                    Traslado:
+                                    <input disabled type="time" id="traslado" value="08:25">
+                                </div>
+
+                                <div class="col-md-2">
+                                    Hospital:
+                                    <input disabled type="time" id="hospital" value="08:40">
+                                </div>
+
+                                <div class="col-md-2">
+                                    Base:
+                                    <input disabled type="time" value="09:10">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    Motivo atencion:
+                                    <input disabled type="text" value="Translado">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    Direccion del servicio:
+                                    <input disabled type="text"
+                                        value="Boeing 35-43, La Purísima, 76146 La Purísima, Qro.">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-6">
+                                    Lugar de la incidiencia:
+                                    <div class="check-container mb-3">
+                                        Hogar <input type="checkbox"> Via publica <input type="checkbox"> Via publica
+                                        <input type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-6">
+                                    Unidad:
+                                    <input disabled type="text" value="AMB-01">
+                                </div>
+                                <div class="col-md-6 mb-6">
+                                    Numero economico de la unidad :
+                                    <input disabled type="text" value="AMB-01">
+                                </div>
+                                <div class="col-md-6 mb-6">
+                                    Operador:
+                                    <input disabled type="text" value="Thomas">
+                                </div>
+                                <div class="col-md-6 mb-6">
+                                    Medico regulador:
+                                    <input disabled type="text" value="Genaro">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsePatient" aria-expanded="false" aria-controls="collapsePatient">
+                            Datos del paciente
+                        </button>
+                    </h2>
+                    <div id="collapsePatient" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionFirstPartFRAP">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-ml-5">
+                                    Esta afiliado <input type="checkbox" id="followerCheck">
+                                </div>
+                                <div class="col-md-6">
+                                    sexo:
+                                    Mujer<input type="checkbox">
+                                    Hombre<input type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Años: <input disabled type="text" value="0">
+
+                                </div>
+                                <div class="col-md-3">
+                                    Meses<input disabled type="text" value="0">
+                                </div>
+
+                                <div class="col-md-6">
+                                    Calle y Numero
+                                    <!-- Boeing 35-43, La Purísima, 76146 La Purísima, Qro. -->
+                                    <input type="text" disabled value=" Boeing 35-43">
+                                </div>
+                                <div class="col-md-4">
+                                    colonia
+                                    <input type="text" disabled value="La Purisima">
+                                </div>
+                                <div class="col-md-7">
+                                    Municipio
+                                    <input type="text" disabled value="La Purisima">
+                                </div>
+                                <div class="col-md-6">
+                                    Telefono
+                                    <input type="text" disabled value="4432552078">
+                                </div>
+                                <div class="col-md-4">
+                                    ocupacion
+                                    <input type="text" disabled value="Estudiante">
+                                </div>
+                                <div class="col-md-8">
+                                    Derechohabiente a
+                                    <input type="text" disabled value="">
+                                </div>
+                                <div class="col-md-8">
+                                    compañia de seguros:
+                                    <input type="text" disabled value="NA">
+                                </div>
+
+                            </div>
+                            <div class="row"></div>
+                            <div class="row"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseReflection" aria-expanded="false"
+                            aria-controls="collapseReflection">
+                            Toma de reflejos
+                        </button>
+                    </h2>
+                    <div id="collapseReflection" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionFirstPartFRAP">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <p>
+                                    <strong>
+                                        Nivel de conciencia
+                                    </strong>
+                                </p>
+                                <div class="col-md-10 mb-3">
+                                    Alerta: <input type="checkbox">
+                                    Verbal: <input type="checkbox">
+                                    Doloroso: <input type="checkbox">
+                                    Inconsiente: <input type="checkbox">
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="grid grid-3">
+                                        <div class="form-group">
+                                            <label><strong>Apertura Ocular</strong>: </label>
+                                            <select id="glasgow_ocular" onchange="watcherGlassgow()">
+                                                <option value="4">4 - Espontánea</option>
+                                                <option value="3">3 - Al orden</option>
+                                                <option value="2">2 - Al dolor</option>
+                                                <option value="1">1 - Ninguna</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Respuesta Verbal</strong>: </label>
+                                            <select id="glasgow_verbal" onchange="watcherGlassgow()">
+                                                <option value="5">5 - Orientado</option>
+                                                <option value="4">4 - Confuso</option>
+                                                <option value="3">3 - Inapropiado</option>
+                                                <option value="2">2 - Sonidos</option>
+                                                <option value="1">1 - Ninguna</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Respuesta Motora</strong>: </label>
+                                            <select id="glasgow_motor" onchange="watcherGlassgow()">
+                                                <option value="6">6 - Obedece</option>
+                                                <option value="5">5 - Localiza</option>
+                                                <option value="4">4 - Retira</option>
+                                                <option value="3">3 - Flexión</option>
+                                                <option value="2">2 - Extensión</option>
+                                                <option value="1">1 - Ninguna</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3"> 
+                                    <p><strong> Via aérea: </strong></p>
+                                    Permeable: <input type="checkbox">
+                                    comprometida:<input type="checkbox">
+                                </div>
+                                <div class="col-md-2">
+                                    <p><strong>Reflejo de deglución</strong>:</p>
+                                    <div class="check-container">
+                                        Pacial:<input type="checkbox">
+                                        Comprometida Total:<input type="checkbox">
+                                        Presente:<input type="checkbox">
+                                        Ausente:<input type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-1">
+                                    <p><strong>Ciculación</strong>:</p>
+                                    <div class="check-container">
+                                        Pulso:<input type="checkbox">
+                                        Radial:<input type="checkbox">
+                                        Carotideo:<input type="checkbox">
+                                        Ausennte:<input type="checkbox">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <p><strong>Calidad del pulso</strong>:</p>
+                                    <div class="check-container">
+                                        Rápida:<input type="checkbox">
+                                        Lento:<input type="checkbox">
+                                        Rítmico:<input type="checkbox">
+                                        Arritmico:<input type="checkbox">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <p><strong>Piel</strong>:</p>
+                                    <select>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Pálida">Pálida</option>
+                                        <option value="Ciaótica">Ciaótica</option>
+                                        <option value="Ictérica">Ictérica</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <p><strong>Características de la piel</strong>:</p>
+                                    <select>
+                                        <option value="Caliente">Caliente</option>
+                                        <option value="Fría">Fría</option>
+                                        <option value="Diforensis">Diforensis</option>
+                                        <option value="Seca">Seca</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <p><strong>Ventilacion</strong>:</p>
+                                    <select>
+                                        <option value="Automatimo regular">Automatimo regular</option>
+                                        <option value="Automatismo irregular">Automatismo irregular</option>
+                                        <option value="Ventilacion Superficial">Ventilacion Superficial</option>
+                                        <option value="Ventilacion rápida">Ventilacion rápida</option>
+                                        <option value="Apnea">Apnea</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <p><strong>Austcultación</strong>:</p>
+                                    <select>
+                                        <option value="Automatimo regular">Automatimo regular</option>
+                                        <option value="Automatismo irregular">Automatismo irregular</option>
+                                        <option value="Ventilacion Superficial">Ventilacion Superficial</option>
+                                        <option value="Ventilacion rápida">Ventilacion rápida</option>
+                                        <option value="Apnea">Apnea</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <p><strong>Hemitorax</strong>:</p>
+                                    <select>
+                                        <option value="Derecho">Derecho</option>
+                                        <option value="Izquierdo">Izquierdo</option>
+                                        <option value="otro">otro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    (sitio)
+                                    <select>
+                                        <option value="Apical">Apical</option>
+                                        <option value="Base">Base</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div class="step active">
+        <div class="accordion" id="accordionSecondPartFRAP">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseGeneralData" aria-expanded="true"
+                        aria-controls="collapseGeneralData">
+                        Signos vitales
+                    </button>
+                </h2>
+                <div id="collapseGeneralData" class="accordion-collapse collapse show"
+                    data-bs-parent="#accordionGeneralData">
+                    <div class="accordion-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>HORA</th>
+                                    <th>FR</th>
+                                    <th>FC</th>
+                                    <th>TAD</th>
+                                    <th>TAS</th>
+                                    <th>Sa02%</th>
+                                    <th>TEM</th>
+                                    <th>GLUCOSA</th>
+                                    <th>LLENADO CAPILAR</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vital-signs-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#colllapseExploration" aria-expanded="false" aria-controls="colllapseExploration">
+                        Exploracion, antecedentes y condicion
+                    </button>
+                </h2>
+                <div id="colllapseExploration" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFirstPartFRAP">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p><strong>Exploracion Fisica</strong></p>
+                                <select>
+                                    <option value="">Ninguna</option>
+                                    <option value="">Deformidades</option>
+                                    <option value="">Contusiones</option>
+                                    <option value="">Abrasiiones</option>
+                                    <option value="">Penetraciones</option>
+                                    <option value="">Movimiento paradójico</option>
+                                    <option value="">crepitación</option>
+                                    <option value="">Heridas</option>
+                                    <option value="">Facturas</option>
+                                    <option value="">Enfisema subcutáneo</option>
+                                    <option value="">Quemaduras</option>
+                                    <option value="">Laceraciones</option>
+                                    <option value="">Edema</option>
+                                    <option value="">Alteracion de sensibillidad</option>
+                                    <option value="">Alteracion de Movilidad</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 mt-3">
+                                <p>
+                                    <strong>Condicion del paciente</strong>:
+                                </p>
+                                <div class="form-group">
+                                    <button class="btn btn-success" disabled>Verde</button>
+                                    <button class="btn btn-warning" >Amarillo</button>
+                                    <button class="btn btn-danger" disabled>Rojo</button>
+                                    <button class="btn btn-dark" disabled>Negro</button>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <p>
+                                        <strong>Estado</strong>:
+                                    </p>
+                                    <input type="checkbox" checked> estable
+                                    <input type="checkbox"> inestable
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Enfermedades:</label>
+                                <select id="app_enfermedades" disabled>
+                                    <option value="Nada">ninguna enfermedad</option>
+                                </select>
+                                <br>
+                                <label>Tipo sanguinio</label>
+                                <select disabled>
+                                    <option value="O+">O+</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Descripción:</label>
+                                <input type="text" disabled></input>
+                                <label>Medicamentos:</label>
+                                <input disabled value="ninguna"></input>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p>
+                                    <strong>Hora de ultima comida</strong>
+                                </p>
+                                <input type="datetime-local" min="2026-05-05">
+                            </div>
+                            <div class="col-md-8">
+                                <p>
+                                    <strong>
+                                        Eventos preevios relacionados
+                                    </strong>
+                                    <input type="text" disabled value="Sin eventos previos"></input>
+                                </p>
+                                <p>
+                                    <strong>
+                                        Riesgos
+                                    </strong>
+                                </p>
+                                <input   type="text" disabled value="Sin riesgos"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PASO 3 -->
+<!--     <div class="step">
+        <h2>Finalizar</h2>
+        <p>Confirma la información</p>
+    </div> -->
+
+    <div class="buttons">
+        <button id="prevBtn">Anterior</button>
+        <button id="nextBtn">Siguiente</button>
+    </div>
+
+    </div>
+
+    
+
+    <script src="frap.js"></script>
+
+</body>
+
+</html>

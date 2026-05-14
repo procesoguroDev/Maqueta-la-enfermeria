@@ -253,7 +253,8 @@ function  showModalMedicaments(){
 
                                     <select
                                         id="frecuency"
-                                        class="form-select">
+                                        class="form-select"
+                                      >
 
                                         <option value="2 horas">2 horas</option>
                                         <option value="4 horas">4 horas</option>

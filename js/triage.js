@@ -191,8 +191,6 @@ function finishTriageService() {
             triage
         })
 
-
-
         // 👇 Mostrar en pantalla
     if (triage.level === 'AMARILLO'){
         document.getElementById('selector-2').removeAttribute('disabled')
@@ -211,8 +209,6 @@ function finishTriageService() {
     showToast('Guardado correctamente', 'success')
    
 }
-
-
 
 
 function seleccionarPaciente() {

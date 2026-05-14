@@ -20,6 +20,7 @@ function showModule(id) {
         compras: 'Gestión de Compras',
         rrhh: 'Recursos Humanos',
         paciente: 'Vista del Paciente.',
+        enfermeria: 'Vista de Enfermeria.',
         sistema: 'Configuración del Sistema'
     };
     document.getElementById('module-title').innerText = titles[id];
