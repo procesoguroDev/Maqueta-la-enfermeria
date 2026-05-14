@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urgencias Pro - La Enfermería</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/urgencias.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="brand">🏥 LA ENFERMERÍA</div>
+    <div class="nav-item">🧾 Recepción</div>
+    <div class="nav-item active">🚨 Urgencias</div>
+    <div class="nav-item">🩺 Triage</div>
+</aside>
+
+<div class="main-container">
+    <header>
+        <div>
+            <h2 style="margin:0; font-weight: 800;">Monitor de Estancia</h2>
+            <span style="font-size:14px; color:var(--text-muted);">Pedro Infante Cruz • Seguimiento Completo</span>
+        </div>
+    </header>
+
+    <div class="content-grid">
+        <article class="patient-card" style="border-top: 4px solid var(--danger);">
+            <div class="card-header">
+                <span class="status-pill bg-red">🔴 PRIORIDAD CRÍTICA</span>
+                <div style="display:flex; justify-content:space-between; align-items: center;">
+                    <h3 style="margin:0;">Pedro Infante Cruz</h3>
+                    <strong style="color:var(--danger)" id="timer-pedro">02:10:45</strong>
+                </div>
+                <small style="color:var(--text-muted)">URG-045 • 39 años • <b>Cama 02</b></small>
+            </div>
+
+            <div class="card-body">
+                <div class="vitals-row">
+                    <div class="vital-tag"><small>T/A</small><strong>120/80</strong></div>
+                    <div class="vital-tag"><small>FC</small><strong>78</strong></div>
+                    <div class="vital-tag"><small>T°</small><strong>36.6</strong></div>
+                    <div class="vital-tag"><small>SpO2</small><strong>98%</strong></div>
+                    <div class="vital-tag"><small>GLU</small><strong>105</strong></div>
+                </div>
+
+                <div id="estudios-pedro">
+                    <small style="font-weight: 800; color: var(--primary);">ESTUDIOS REALIZADOS</small>
+                    <div class="study-view">
+                        <b>🩻 RAYOS X CRÁNEO</b>
+                        Interpretación: Sin trazos de fractura evidentes.
+                    </div>
+                </div>
+
+                <div class="timeline" id="timeline-pedro">
+                    <div class="timeline-item"><b>12:15 PM - Evolución:</b> Paciente estable tras analgésico.</div>
+                    <div class="timeline-item"><b>10:45 AM - Ingreso:</b> Traumatismo craneoencefálico leve.</div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn-sm btn-outline" onclick="openModal('mod-signos')">🩺 Signos</button>
+                <button class="btn-sm btn-outline" onclick="openModal('mod-nota')">📋 Nota Med.</button>
+                <button class="btn-sm btn-outline" onclick="openModal('mod-estudios')">🩻 Estudios</button>
+                <button class="btn-sm btn-outline" onclick="openModal('mod-insumos')">💊 Insumos</button>
+                <button class="btn-sm btn-success" style="margin-left: auto;" onclick="openModal('mod-alta')">✅ Alta</button>
+                <button class="btn-sm btn-danger" onclick="openModal('mod-referencia')">🚑 Ref.</button>
+            </div>
+        </article>
+    </div>
+</div>
+
+<div id="mod-signos" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Actualizar Signos Vitales</h3>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <input type="text" placeholder="T/A (Ej. 120/80)">
+            <input type="text" placeholder="F. Cardiaca">
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button class="btn-sm btn-outline" onclick="closeModal()">Cancelar</button>
+            <button class="btn-sm btn-primary" onclick="addNote('SIGNOS', 'Toma de signos vitales actualizada.'); closeModal()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<div id="mod-nota" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Nota de Evolución / Seguimiento</h3>
+        <textarea id="txt-nota" rows="5" placeholder="Escriba los hallazgos médicos actuales..."></textarea>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button class="btn-sm btn-outline" onclick="closeModal()">Cancelar</button>
+            <button class="btn-sm btn-primary" onclick="guardarEvolucion()">Guardar Nota</button>
+        </div>
+    </div>
+</div>
+
+<div id="mod-estudios" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Solicitud y Resultados de Estudios</h3>
+        <select id="sel-estudio">
+            <option>Electrocardiograma</option>
+            <option>Laboratorio (BH/QS)</option>
+            <option>Rayos X</option>
+            <option>Ultrasonido</option>
+        </select>
+        <textarea id="res-estudio" rows="3" placeholder="Capture el resultado o interpretación aquí..."></textarea>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button class="btn-sm btn-outline" onclick="closeModal()">Cancelar</button>
+            <button class="btn-sm btn-primary" onclick="guardarEstudio()">Registrar Estudio</button>
+        </div>
+    </div>
+</div>
+
+<div id="mod-insumos" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Carga de Insumos (Enfermería)</h3>
+        <p style="font-size:12px; color:var(--text-muted)">Estos artículos se sumarán a la cuenta en Recepción.</p>
+        <select id="sel-insumo">
+            <option>Solución Salina 500ml</option>
+            <option>Ketorolaco Ampolleta</option>
+            <option>Jeringa 5ml</option>
+            <option>Catéter Venoso #20</option>
+        </select>
+        <input type="number" id="qty-insumo" value="1">
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button class="btn-sm btn-outline" onclick="closeModal()">Cancelar</button>
+            <button class="btn-sm btn-primary" onclick="guardarInsumo()">Cargar a Cuenta</button>
+        </div>
+    </div>
+</div>
+
+<div id="mod-alta" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Cierre de Estancia / Alta Médica</h3>
+        <textarea id="plan-alta" rows="4" placeholder="Instrucciones de egreso y signos de alarma..."></textarea>
+        <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; margin-top: 15px;">
+            <small style="font-weight: 800; color: var(--primary);">RESUMEN PARA CAJA:</small>
+            <div style="font-size: 11px;">• Estancia Urgencias<br>• Cargos de Insumos y Estudios Registrados</div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button class="btn-sm btn-outline" onclick="closeModal()">Cancelar</button>
+            <button class="btn-sm btn-success" onclick="finalizarTodo()">Confirmar Alta y Enviar</button>
+        </div>
+    </div>
+</div>
+
+<div id="mod-referencia" class="modal-overlay">
+    <div class="modal-content" style="width: 750px;">
+        <div id="hoja-ref" style="border: 2px solid #000; padding: 25px; font-family: 'Courier New', monospace; background: white;">
+            <h2 style="text-align:center; border-bottom: 2px solid #000; margin: 0 0 15px 0;">HOJA DE REFERENCIA (TRASLADO)</h2>
+            <div style="font-size: 13px;">
+                <strong>PACIENTE:</strong> PEDRO INFANTE CRUZ | 39 AÑOS<br>
+                <strong>UNIDAD RECEPTORA:</strong> [HOSPITAL 2DO NIVEL]<br>
+                <hr>
+                <strong>ESTUDIOS ADJUNTOS:</strong><br>
+                <div id="ref-estudios-lista">- Rx Cráneo (Reporte Incluido)</div>
+            </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button class="btn-sm btn-outline" onclick="closeModal()">Cerrar</button>
+            <button class="btn-sm btn-danger" onclick="window.print()">Imprimir Traslado</button>
+        </div>
+    </div>
+</div>
+<script src="js/urgencias.js"></script>
+</body>
+</html>

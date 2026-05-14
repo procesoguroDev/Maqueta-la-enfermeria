@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Clínica La Enfermería - Rayos X e Imagenología</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div>
+        <div class="brand">🏥 LA ENFERMERÍA</div>
+        <div class="brand-subtitle">ERP clínico · Módulo Imagenología</div>
+    </div>
+    <div class="nav-item">🧾 Recepción</div>
+    <div class="nav-item">🩺 Triage</div>
+    <div class="nav-item">👨‍⚕️ Consulta</div>
+    <div class="nav-item active">🩻 Rayos X</div>
+    <div class="nav-item">🔬 Laboratorio</div>
+    <div class="nav-item">💳 Caja</div>
+    <div class="nav-item">📊 Reportes</div>
+</aside>
+
+<div class="main-container">
+    <header>
+        <div class="header-title">
+            <h2 style="margin:0">Rayos X</h2>
+            <span style="font-size:13px; color:var(--text-muted)">Control de sala, toma de estudios radiológicos e interpretación.</span>
+        </div>
+        <button class="btn btn-outline" style="border-color:#eab308; color:#ca8a04;">⚠️ Reportar falla en equipo</button>
+    </header>
+
+    <div class="content" id="main-scroll">
+        <section class="stats-grid">
+            <div class="stat-card"><small>En espera de toma</small><strong id="stat-espera-rx">1</strong></div>
+            <div class="stat-card"><small>En sala (Captura)</small><strong id="stat-en-sala">0</strong></div>
+            <div class="stat-card"><small>Para interpretar</small><strong id="stat-interpretar">1</strong></div>
+            <div class="stat-card"><small>Estudios hoy</small><strong id="stat-estudios-hoy">8</strong></div>
+        </section>
+
+        <nav class="tab-menu">
+            <button class="tab-btn active" id="btn-tab-espera" onclick="openSubTab(event, 'tab-espera')">Sala de Espera RX</button>
+            <button class="tab-btn" id="btn-tab-captura" onclick="openSubTab(event, 'tab-captura')">Captura de Estudio</button>
+            <button class="tab-btn" id="btn-tab-interpretacion" onclick="openSubTab(event, 'tab-interpretacion')">Interpretaciones</button>
+        </nav>
+
+        <div id="tab-espera" class="tab-content active">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px; align-items:center;">
+                    <h3 style="margin:0">Pacientes Pendientes de Estudio</h3>
+                    <input type="text" placeholder="Buscar folio o paciente..." style="max-width:350px" onkeyup="filterTable(this)">
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Paciente</th>
+                            <th>Estudio Solicitado</th>
+                            <th>Prioridad</th>
+                            <th>Tiempo Espera</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-espera-rx">
+                        <tr>
+                            <td><strong>#RX-1042</strong></td>
+                            <td>Mendoza Arriaga, Luis Alberto</td>
+                            <td>Tele de Tórax (PA y Lateral)</td>
+                            <td><span style="color:#ca8a04; font-weight:bold;">En espera</span></td>
+                            <td>12 min</td>
+                            <td><button class="btn btn-primary" style="padding: 5px 10px; font-size:12px;" onclick="llamarPaciente('RX-1042')">Llamar a Sala</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="tab-captura" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h3 style="margin:0">Panel de Toma Radiológica</h3>
+                    <div style="background:#f1f5f9; padding:5px 15px; border-radius:20px; font-size:13px; font-weight:600;">
+                        Paciente en Sala: <span id="paciente-actual-rx" style="color:var(--primary);">Ninguno</span>
+                    </div>
+                </div>
+
+                <div class="section-title">Datos del Estudio Solicitado</div>
+                <div class="grid grid-3" style="align-items: start;">
+                    <div>
+                        <label>Folio Activo</label>
+                        <input type="text" id="cap-folio" readonly placeholder="Ej. #RX-1042">
+                        <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 10px; border-color: var(--primary); color: var(--primary);" onclick="verOrdenMedica()">
+                            📄 Ver Orden Escaneada
+                        </button>
+                    </div>
+                    <div>
+                        <label>Médico Remitente</label>
+                        <input type="text" id="cap-medico" readonly placeholder="Automático">
+                    </div>
+                    <div>
+                        <label>Indicaciones Clínicas / Recepción</label>
+                        <textarea id="cap-indicaciones" readonly rows="4" placeholder="Notas previas de recepción o médico tratante..." style="background-color: #f1f5f9; cursor: not-allowed; resize: none;"></textarea>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top:20px;">Parámetros Técnicos</div>
+                <div class="grid grid-4">
+                    <div>
+                        <label class="required">Técnico Radiólogo</label>
+                        <input type="text" id="cap-tecnico" placeholder="Nombre del T.R.">
+                    </div>
+                    <div>
+                        <label class="required">Proyecciones Realizadas</label>
+                        <select id="cap-proyecciones">
+                            <option>Seleccione...</option>
+                            <option>AP (Anteroposterior)</option>
+                            <option>PA (Posteroanterior)</option>
+                            <option>Lateral</option>
+                            <option>Oblicua</option>
+                            <option>Serie completa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Equipo Utilizado</label>
+                        <select id="cap-equipo">
+                            <option>Sala RX 1 (Mesa)</option>
+                            <option>Sala RX 2 (Bucky Mural)</option>
+                            <option>Equipo Portátil</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Calidad de Imagen</label>
+                        <select id="cap-calidad">
+                            <option>Óptima</option>
+                            <option>Aceptable</option>
+                            <option>Repetición por movimiento</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top:20px;">Digitalización y Evidencia</div>
+                <div class="grid grid-2">
+                    <div>
+                        <label>Subir Imágenes (DICOM, JPG, PNG)</label>
+                        <div style="border:2px dashed #cbd5e1; border-radius:8px; padding:30px; text-align:center; background:#f8fafc; cursor:pointer;" onclick="document.getElementById('file-dicom').click()">
+                            <span style="font-size:24px;">📁</span><br>
+                            <small style="color:var(--text-muted);">Haz clic para seleccionar o arrastra los archivos aquí</small>
+                            <input type="file" id="file-dicom" multiple accept=".dcm, image/jpeg, image/png" style="display:none;">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Observaciones del Técnico (Eventos en sala)</label>
+                        <textarea id="cap-notas" rows="4" placeholder="Observaciones"></textarea>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:15px; margin-top:25px;">
+                    <button class="btn btn-outline" style="width:30%;">Pausar / Regresar a Espera</button>
+                    <button class="btn btn-primary" onclick="finalizarEstudio()" style="width:70%; font-size:16px;">
+                        Guardar Estudio y Enviar a Interpretación
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-interpretacion" class="tab-content">
+            <div class="card">
+                <h3 style="margin:0 0 15px 0">Estudios Pendientes de Reporte Médico</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Paciente</th>
+                            <th>Estudio</th>
+                            <th>Técnico</th>
+                            <th>Archivos</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-interpretaciones">
+                        <tr>
+                            <td><strong>#RX-1038</strong></td>
+                            <td>García López, María</td>
+                            <td>Radiografía de Rodilla AP y Lateral</td>
+                            <td>T.R. Hernández</td>
+                            <td><span style="color:var(--primary); cursor:pointer;">2 Placas (Ver)</span></td>
+                            <td><span style="background:#fef3c7; color:#b45309; padding:3px 8px; border-radius:12px; font-size:11px;">Pendiente</span></td>
+                            <td><button class="btn btn-outline" style="padding: 5px 10px; font-size:12px;">Redactar Reporte</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mod-estudio-ok" class="modal-overlay">
+    <div class="modal-content">
+        <h2 style="margin:0">Estudio Capturado</h2>
+        <p style="color:var(--text-muted); font-size:14px;">Las imágenes se han anexado correctamente al expediente del paciente.</p>
+        <div style="background:#f1f5f9; padding:25px; border-radius:15px; margin:20px 0; border:2px dashed #cbd5e1; text-align:center;">
+            <div style="font-size:50px; margin-bottom:10px;">🩻✅</div>
+            <small style="font-weight:900; color:var(--primary);">ESTADO ACTUALIZADO</small>
+            <div style="font-size:18px; font-weight:600; color:var(--sidebar); margin-top:5px;">Enviado a Interpretación</div>
+        </div>
+        <button class="btn btn-primary" onclick="closeModal('mod-estudio-ok')" style="width:100%; padding:12px;">Volver a Sala de Espera</button>
+    </div>
+</div>
+
+<div id="mod-orden-medica" class="modal-overlay">
+    <div class="modal-content" style="width: min(600px, 95%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <h3 style="margin:0">Orden Médica Adjunta</h3>
+            <button class="btn btn-outline" style="padding: 5px 10px;" onclick="closeModal('mod-orden-medica')">Cerrar</button>
+        </div>
+        
+        <div style="background:#f8fafc; border:1px solid var(--border); padding:10px; text-align:center; border-radius:8px; max-height: 60vh; overflow-y: auto;">
+            <img id="img-orden-medica" src="https://via.placeholder.com/500x700.png?text=Fotograf%C3%ADa+o+Escaneo+de+la+Receta+de+Recepci%C3%B3n" alt="Orden Médica Escaneada" style="max-width:100%; height:auto; border-radius:4px;">
+        </div>
+        
+        <div style="margin-top: 15px; text-align: right;">
+            <button class="btn btn-primary" onclick="closeModal('mod-orden-medica')">Confirmar lectura</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Navegación entre pestañas
+    function openSubTab(evt, tabName) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+            tabcontent[i].style.display = "none"; 
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        
+        const selectedTab = document.getElementById(tabName);
+        selectedTab.classList.add("active");
+        selectedTab.style.display = "block"; // Asegurar visibilidad
+        evt.currentTarget.classList.add("active");
+    }
+
+    // Inicializar la primera pestaña al cargar
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("tab-espera").style.display = "block";
+        document.getElementById("tab-captura").style.display = "none";
+        document.getElementById("tab-interpretacion").style.display = "none";
+    });
+
+    // Función que simula el llamado del paciente desde sala de espera
+    function llamarPaciente(folio) {
+        // Actualizar datos de la cabecera
+        document.getElementById('paciente-actual-rx').innerText = "Luis Alberto Mendoza (#" + folio + ")";
+        
+        // Rellenar formulario de captura
+        document.getElementById('cap-folio').value = folio;
+        document.getElementById('cap-medico').value = "Dr. C. Ramírez (Urgencias)";
+        
+        // Insertar las indicaciones clínicas de Recepción/Consulta
+        document.getElementById('cap-indicaciones').value = 
+            "🔴 URGENCIA: Caída de propia altura.\n" +
+            "♿ Condición: Paciente llega en silla de ruedas, dolor severo (8/10).\n" +
+            "📋 Objetivo: Descartar fractura de fémur proximal derecho. Favor de ayudar con el traslado a la mesa.";
+            
+        // Cambiar automáticamente a la pestaña de Captura
+        document.getElementById('btn-tab-captura').click();
+    }
+
+    // Abrir modal de la orden médica
+    function verOrdenMedica() {
+        const modal = document.getElementById('mod-orden-medica');
+        modal.style.display = 'flex';
+        modal.classList.add('active');
+    }
+
+    // Finalizar el estudio y mostrar confirmación
+    function finalizarEstudio() {
+        const modal = document.getElementById('mod-estudio-ok');
+        modal.style.display = 'flex';
+        modal.classList.add('active');
+    }
+
+    // Cerrar cualquier modal genérico
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+        document.getElementById(modalId).classList.remove('active');
+        
+        // Si cerramos el modal de éxito, regresar a sala de espera
+        if(modalId === 'mod-estudio-ok') {
+            document.getElementById('btn-tab-espera').click();
+            document.getElementById('paciente-actual-rx').innerText = "Ninguno";
+            document.getElementById('cap-folio').value = "";
+            document.getElementById('cap-medico').value = "";
+            document.getElementById('cap-indicaciones').value = "";
+            document.getElementById('cap-tecnico').value = "";
+        }
+    }
+
+    // Simulación de buscador simple en tabla
+    function filterTable(input) {
+        // Lógica futura para filtrar la tabla
+        console.log("Buscando: " + input.value);
+    }
+</script>
+
+</body>
+</html>

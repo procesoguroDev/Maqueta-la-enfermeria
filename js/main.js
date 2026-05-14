@@ -431,3 +431,20 @@ const CONFIG_MEM = {
         document.getElementById('panel-membresia').style.display = 'none';
         toggleExtra('');
     }
+
+    function openUrgencia() {
+    // 1. Cambiamos visualmente al Módulo de Urgencias
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    // Supongamos que el item de Urgencias es el 6to (índice 5)
+    document.querySelectorAll('.nav-item')[5].classList.add('active');
+    
+    // 2. Limpiamos la admisión y pre-configuramos urgencias
+    limpiarForm();
+    document.getElementById('adm-serv').value = 'urgencias';
+    document.getElementById('adm-prio').value = 'Crítico';
+    
+    // 3. Abrimos la pestaña de Admisión para registrar los datos mínimos
+    openSubTab(null, 'tab-admision');
+    
+    alert("MODO URGENCIAS: Complete los datos básicos para generar el folio crítico.");
+}
