@@ -21,6 +21,7 @@ function showModule(id) {
         rrhh: 'Recursos Humanos',
         paciente: 'Vista del Paciente.',
         enfermeria: 'Vista de Enfermeria.',
+        xray:'vista de rayos x',
         sistema: 'Configuración del Sistema'
     };
     document.getElementById('module-title').innerText = titles[id];

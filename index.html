@@ -9,7 +9,8 @@
     <script src="./js/triage.js"></script>
     <script src="./js/laboratori.js"></script>
     <script src="./js/reception.js"></script>
-    <script src="./js/paramedic.js" ></script>
+    <script src="./js/xray.js"></script>
+    <script src="./js/paramedic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
@@ -57,6 +58,7 @@
             <div class="nav-item" onclick="showModule('paciente')"><span>🩺</span> Paciene</div>
             <div class="nav-item" onclick="showModule('consulta')"><span>👨‍⚕️</span> Consulta</div>
             <div class="nav-item" onclick="showModule('enfermeria')"><span>👨‍⚕️</span> Enfermeria </div>
+            <div class="nav-iteem" onclick="showModule('xray')">🩻 Rayos X</div>
             <div class="nav-item" onclick="showModule('')"><span>💳</span> Caja </div>
             <div class="nav-item" onclick="showModule('')"><span>📊</span> Reportes</div>
             <div class="nav-item" onclick="showModule('laboratorio')"><span>🧪</span> Laboratorio</div>
@@ -157,9 +159,7 @@
                                     </p>
                                 </div>
 
-                                <button
-                                    class="btn btn-danger"
-                                    onclick="openUrgencia()">
+                                <button class="btn btn-danger" onclick="openUrgencia()">
 
                                     🚨 Pase directo a urgencias
 
@@ -230,9 +230,7 @@
                             <ul class="nav nav-pills mb-4" id="admisionTabs">
 
                                 <li class="nav-item">
-                                    <button
-                                        class="nav-link active"
-                                        data-bs-toggle="pill"
+                                    <button class="nav-link active" data-bs-toggle="pill"
                                         data-bs-target="#tab-directorio">
 
                                         Directorio de Pacientes
@@ -241,10 +239,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <button
-                                        class="nav-link"
-                                        data-bs-toggle="pill"
-                                        data-bs-target="#tab-admision">
+                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-admision">
 
                                         Ficha de Ingreso
 
@@ -252,10 +247,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <button
-                                        class="nav-link"
-                                        data-bs-toggle="pill"
-                                        data-bs-target="#tab-atencion">
+                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-atencion">
 
                                         Monitor Clínico
 
@@ -268,27 +260,21 @@
 
                                 <!-- DIRECTORIO -->
 
-                                <div
-                                    class="tab-pane fade show active"
-                                    id="tab-directorio"
-                                >
+                                <div class="tab-pane fade show active" id="tab-directorio">
 
                                     <div class="card border-0 bg-light rounded-4">
 
                                         <div class="card-body">
 
-                                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                                            <div
+                                                class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
 
                                                 <h4 class="mb-0">
                                                     Expediente Digital
                                                 </h4>
 
-                                                <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    style="max-width:350px"
-                                                    placeholder="Buscar..."
-                                                    onkeyup="filterTable(this)">
+                                                <input type="text" class="form-control" style="max-width:350px"
+                                                    placeholder="Buscar..." onkeyup="filterTable(this)">
 
                                             </div>
 
@@ -328,7 +314,8 @@
                                         <div class="card-body p-4 p-lg-5">
 
                                             <!-- HEADER -->
-                                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                                            <div
+                                                class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
 
                                                 <div>
                                                     <h3 class="fw-bold mb-1">
@@ -340,8 +327,7 @@
                                                     </p>
                                                 </div>
 
-                                                <button
-                                                    class="btn btn-outline-secondary rounded-pill px-4"
+                                                <button class="btn btn-outline-secondary rounded-pill px-4"
                                                     onclick="limpiarForm()">
 
                                                     Limpiar formulario
@@ -364,10 +350,7 @@
                                                         Nombre(s)
                                                     </label>
 
-                                                    <input
-                                                        type="text"
-                                                        id="adm-nom"
-                                                        class="form-control form-control-lg"
+                                                    <input type="text" id="adm-nom" class="form-control form-control-lg"
                                                         placeholder="Ej. Luis Alberto">
                                                 </div>
 
@@ -376,10 +359,7 @@
                                                         Apellido Paterno
                                                     </label>
 
-                                                    <input
-                                                        type="text"
-                                                        id="adm-pat"
-                                                        class="form-control form-control-lg"
+                                                    <input type="text" id="adm-pat" class="form-control form-control-lg"
                                                         placeholder="Ej. Mendoza">
                                                 </div>
 
@@ -388,10 +368,7 @@
                                                         Apellido Materno
                                                     </label>
 
-                                                    <input
-                                                        type="text"
-                                                        id="adm-mat"
-                                                        class="form-control form-control-lg"
+                                                    <input type="text" id="adm-mat" class="form-control form-control-lg"
                                                         placeholder="Ej. Arriaga">
                                                 </div>
 
@@ -404,13 +381,9 @@
                                                         CURP
                                                     </label>
 
-                                                    <input
-                                                        type="text"
-                                                        id="adm-curp"
-                                                        class="form-control form-control-lg"
-                                                        maxlength="18"
-                                                        placeholder="18 caracteres"
-                                                        oninput="handleCURP(this.value)">
+                                                    <input type="text" id="adm-curp"
+                                                        class="form-control form-control-lg" maxlength="18"
+                                                        placeholder="18 caracteres" oninput="handleCURP(this.value)">
                                                 </div>
 
                                                 <div class="col-lg-3 col-md-6">
@@ -418,10 +391,7 @@
                                                         Fecha Nacimiento
                                                     </label>
 
-                                                    <input
-                                                        type="date"
-                                                        id="adm-fec"
-                                                        class="form-control form-control-lg"
+                                                    <input type="date" id="adm-fec" class="form-control form-control-lg"
                                                         onchange="calcEdad(this.value)">
                                                 </div>
 
@@ -430,10 +400,7 @@
                                                         Edad Calculada
                                                     </label>
 
-                                                    <input
-                                                        type="text"
-                                                        id="adm-edad"
-                                                        readonly
+                                                    <input type="text" id="adm-edad" readonly
                                                         class="form-control form-control-lg bg-light"
                                                         placeholder="Automático">
                                                 </div>
@@ -443,12 +410,8 @@
                                                         Teléfono
                                                     </label>
 
-                                                    <input
-                                                        type="tel"
-                                                        id="adm-tel"
-                                                        class="form-control form-control-lg"
-                                                        maxlength="10"
-                                                        placeholder="10 dígitos">
+                                                    <input type="tel" id="adm-tel" class="form-control form-control-lg"
+                                                        maxlength="10" placeholder="10 dígitos">
                                                 </div>
 
                                             </div>
@@ -468,8 +431,7 @@
                                                         Sexo
                                                     </label>
 
-                                                    <select id="adm-sexo"
-                                                        class="form-select form-select-lg">
+                                                    <select id="adm-sexo" class="form-select form-select-lg">
 
                                                         <option value="">Seleccione...</option>
                                                         <option>Femenino</option>
@@ -486,9 +448,7 @@
                                                         Correo
                                                     </label>
 
-                                                    <input
-                                                        type="email"
-                                                        id="adm-correo"
+                                                    <input type="email" id="adm-correo"
                                                         class="form-control form-control-lg"
                                                         placeholder="correo@dominio.com">
 
@@ -500,9 +460,7 @@
                                                         Tipo de Paciente
                                                     </label>
 
-                                                    <select
-                                                        id="adm-tipo-paciente"
-                                                        class="form-select form-select-lg"
+                                                    <select id="adm-tipo-paciente" class="form-select form-select-lg"
                                                         onchange="checkMembresiaManual(this.value)">
 
                                                         <option value="Particular">Particular</option>
@@ -518,9 +476,7 @@
                                                         Forma de Pago
                                                     </label>
 
-                                                    <select
-                                                        id="adm-pago"
-                                                        class="form-select form-select-lg">
+                                                    <select id="adm-pago" class="form-select form-select-lg">
 
                                                         <option>Efectivo</option>
                                                         <option>Tarjeta</option>
@@ -548,9 +504,7 @@
                                                         Servicio
                                                     </label>
 
-                                                    <select
-                                                        id="adm-serv"
-                                                        class="form-select form-select-lg"
+                                                    <select id="adm-serv" class="form-select form-select-lg"
                                                         onchange="toggleExtra(this.value)">
 
                                                         <option value="">Seleccione servicio...</option>
@@ -564,7 +518,7 @@
 
                                                 </div>
 
-                                               <!--  <div class="col-lg-3 col-md-6">
+                                                <!--  <div class="col-lg-3 col-md-6">
 
                                                     <label class="form-label fw-semibold required">
                                                         Prioridad
@@ -627,9 +581,7 @@
                                             </div>
 
                                             <!-- EXTRA CONSULTA -->
-                                            <div id="extra-consulta"
-                                                class="border-top mt-5 pt-4"
-                                                style="display:none;">
+                                            <div id="extra-consulta" class="border-top mt-5 pt-4" style="display:none;">
 
                                                 <h5 class="fw-bold mb-4 text-secondary">
                                                     Información de Consulta
@@ -643,12 +595,11 @@
                                                             Motivo principal de consulta
                                                         </label>
 
-                                                        <select
-                                                            id="adm-motivo-sel"
-                                                            class="form-select form-select-lg">
+                                                        <select id="adm-motivo-sel" class="form-select form-select-lg">
 
                                                             <option value="">Seleccione motivo...</option>
-                                                            <option value="Certificado Médico">Certificado Médico</option>
+                                                            <option value="Certificado Médico">Certificado Médico
+                                                            </option>
                                                             <option value="Contusión">Contusión</option>
                                                             <option value="Curación">Curación</option>
                                                             <option value="Diarrea">Diarrea</option>
@@ -665,10 +616,7 @@
                                                         Comentarios libres / Signos referidos por el paciente
                                                     </label>
 
-                                                    <textarea
-                                                        id="adm-comentarios"
-                                                        rows="3"
-                                                        class="form-control"
+                                                    <textarea id="adm-comentarios" rows="3" class="form-control"
                                                         placeholder="Ej. El paciente refiere dolor intenso desde hace 2 días..."></textarea>
 
                                                 </div>
@@ -676,13 +624,12 @@
                                             </div>
 
                                             <!-- PANEL MEMBRESIA -->
-                                            <div id="panel-membresia"
-                                                class="bg-light border rounded-4 p-4 mt-5">
+                                            <div id="panel-membresia" class="bg-light border rounded-4 p-4 mt-5">
 
-                                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                                                <div
+                                                    class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
 
-                                                    <h4 id="mem-titulo"
-                                                        class="fw-bold m-0">
+                                                    <h4 id="mem-titulo" class="fw-bold m-0">
                                                     </h4>
 
                                                     <span class="badge bg-success px-3 py-2">
@@ -691,8 +638,7 @@
 
                                                 </div>
 
-                                                <div id="mem-lista"
-                                                    class="row g-3">
+                                                <div id="mem-lista" class="row g-3">
                                                 </div>
 
                                             </div>
@@ -700,8 +646,7 @@
                                             <!-- BOTON -->
                                             <div class="mt-5">
 
-                                                <button
-                                                    id="btn-guardar-adm"
+                                                <button id="btn-guardar-adm"
                                                     class="btn btn-primary btn-lg w-100 py-3 fw-bold rounded-4"
                                                     onclick="finalizarNormal()">
 
@@ -718,9 +663,7 @@
                                 </div>
                                 <!-- MONITOR -->
 
-                                <div
-                                    class="tab-pane fade"
-                                    id="tab-atencion">
+                                <div class="tab-pane fade" id="tab-atencion">
 
                                     <div class="card border-0 bg-light rounded-4">
 
@@ -732,9 +675,7 @@
                                                     Monitor Clínico
                                                 </h4>
 
-                                                <button
-                                                    class="btn btn-outline-secondary"
-                                                    onclick="limpiarAtencion()">
+                                                <button class="btn btn-outline-secondary" onclick="limpiarAtencion()">
 
                                                     Limpiar monitor
 
@@ -742,11 +683,8 @@
 
                                             </div>
 
-                                            <div
-                                                id="lista-atencion"
-                                                class="grid grid-3"
-                                            >
-                                            <!-- 
+                                            <div id="lista-atencion" class="grid grid-3">
+                                                <!-- 
                                                 class="row g-3"
                                              -->
                                             </div>
@@ -822,7 +760,7 @@
                                         <label class="fw-bold">Tipo de Sangre</label>
                                         <p id="bloodType"></p>
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
@@ -834,16 +772,14 @@
                             <div class="accordion-item">
 
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button"
-                                        data-bs-toggle="collapse"
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseVisitas">
 
                                         Últimas Visitas
                                     </button>
                                 </h2>
 
-                                <div id="collapseVisitas"
-                                    class="accordion-collapse collapse show"
+                                <div id="collapseVisitas" class="accordion-collapse collapse show"
                                     data-bs-parent="#accordionHistorial">
 
                                     <div class="accordion-body">
@@ -853,21 +789,18 @@
                                     </div>
                                 </div>
                             </div>
-                             <!-- ANTECEDENTES -->
+                            <!-- ANTECEDENTES -->
                             <div class="accordion-item">
 
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseAntecedentes">
 
                                         Antecedentes Heredofamiliares
                                     </button>
                                 </h2>
 
-                                <div id="collapseAntecedentes"
-                                    class="accordion-collapse collapse"
+                                <div id="collapseAntecedentes" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionHistorial">
 
                                     <div class="accordion-body">
@@ -881,17 +814,14 @@
                             <div class="accordion-item">
 
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapsePadecimientos">
 
                                         <p>Padecimientos</p>
                                     </button>
                                 </h2>
 
-                                <div id="collapsePadecimientos"
-                                    class="accordion-collapse collapse"
+                                <div id="collapsePadecimientos" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionHistorial">
                                     <div class="accordion-body">
 
@@ -905,17 +835,14 @@
                             <div class="accordion-item">
 
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseMedicamentos">
 
                                         Medicamentos
                                     </button>
                                 </h2>
 
-                                <div id="collapseMedicamentos"
-                                    class="accordion-collapse collapse"
+                                <div id="collapseMedicamentos" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionHistorial">
 
                                     <div class="accordion-body">
@@ -930,17 +857,14 @@
                             <div class="accordion-item">
 
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseHistorial">
 
                                         Historial Clínico
                                     </button>
                                 </h2>
 
-                                <div id="collapseHistorial"
-                                    class="accordion-collapse collapse"
+                                <div id="collapseHistorial" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionHistorial">
 
                                     <div class="accordion-body">
@@ -1103,7 +1027,7 @@
                                 <span class="badge text-bg-danger">Nivel 1 - Emergencia (Inmediata)</span>
                             </label>
                             <label class="priority-level-two">
-                                <input id="selector-2" type="radio" name="prioridad" value="2" disabled> 
+                                <input id="selector-2" type="radio" name="prioridad" value="2" disabled>
                                 <span class="badge  text-bg-warning">Nivel 2 - Urgencia (< 15 min)</span>
                             </label>
                             <label class="priority-level-three">
@@ -1117,7 +1041,7 @@
                             <textarea aria-setsize="450" rows="4"
                                 placeholder="Describa brevemente el estado general, alergias detectadas o síntomas principales..."
                                 id="triage_note"></textarea>
-                        </div>  
+                        </div>
                         .
 
                     </div>
@@ -1161,7 +1085,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="grid grid-2" id="patientConsultForm" style="display: none;" >
+                            <div class="grid grid-2" id="patientConsultForm" style="display: none;">
                                 <div class="card">
                                     <div class="button-container">
                                         <button class="btn btn-outline-secundary" onclick="regresarConsulta()">
@@ -1225,7 +1149,7 @@
                                                     <option value="activo">Activo</option>
                                                 </select>
                                                 <br>
-                                                    
+
                                                 <label>Alergias:</label>
                                                 <textarea id="apnp_notas"></textarea>
                                                 <br>
@@ -1446,8 +1370,8 @@
                 <div class="container mt-5">
                     <ul class="nav nav-tabs" id="consultationTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#activeServices"
-                                type="button">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                data-bs-target="#activeServices" type="button">
                                 Servicios
                             </button>
                         </li>
@@ -1481,8 +1405,9 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="services">
-                             <div class="continer-button-ambulance-service">
-                                <button class="btn btn-primary"  onclick="createNewService()">Crear Servicio de Ambulancia</button>
+                            <div class="continer-button-ambulance-service">
+                                <button class="btn btn-primary" onclick="createNewService()">Crear Servicio de
+                                    Ambulancia</button>
                             </div>
                             <div class="container" id="container-table-service-paramedic">
                                 <table>
@@ -1509,93 +1434,696 @@
             </section>
 
             <section id="enfermeria" class="section">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Concentrado de Enfermería</h3>
-                    </div>
-
-                    <div class="enfermeria-grid">
-                        <div class="enfermeria-card">
-                            <div class="enfermeria-card-header">
-                                <h4>Triage</h4>
-                                <span class="badge bg-warning">Pendiente</span>
-                            </div>
-                            <p class="enfermeria-texto">1 paciente en espera de triage.</p>
-                            <div class="enfermeria-detalle">
-                                <span>Paciente: Juan Pérez</span>
-                                <span>Hora: 10:30</span>
-                            </div>
-                            <button class="btn btn-secondary" onclick="goTo()">Ver solicitud</button>
-                        </div>
-
-                        <div class="enfermeria-card">
-                            <div class="enfermeria-card-header">
-                                <h4>Curación</h4>
-                                <span class="badge bg-primary">En curso</span>
-                            </div>
-                            <p class="enfermeria-texto">1 paciente en curación.</p>
-                            <div class="enfermeria-detalle">
-                                <span>Paciente: Pedro Infante</span>
-                                <span>Procedimiento: Limpieza y aseo</span>
-                            </div>
-                            <button class="btn btn-secondary" onclick="abrirModal('modalHojaConsumoENF')">
-                                Generar Hoja de consumo
-                            </button>
-                        </div>
-
-                        <div class="enfermeria-card">
-                            <div class="enfermeria-card-header">
-                                <h4>Aplicación de medicamento</h4>
-                                <span class="badge bg-warning">Pendiente</span>
-                            </div>
-                            <p class="enfermeria-texto">2 medicamentos pendientes por aplicar.</p>
-                            <div class="enfermeria-detalle">
-                                <span>Paciente: Pedro Infante</span>
-                                <span>Medicamento: Ketorolaco</span>
-                                <span>Paciente: Ana Torres</span>
-                                <span>Medicamento: Paracetamol</span>
-                            </div>
-                            <button class="btn btn-secondary" onclick="abrirModal('modalMedicamentoENF')">Generar Hoja de consumo</button>
-                        </div>
-
-                        <div class="enfermeria-card">
-                            <div class="enfermeria-card-header">
-                                <h4>Urgencias</h4>
-                                <span class="badge bg-danger">Prioritario</span>
-                            </div>
-                            <p class="enfermeria-texto">1 paciente requiere atención de enfermería.</p>
-                            <div class="enfermeria-detalle">
-                                <span>Paciente: Ana Torres</span>
-                                <span>Motivo: Dolor abdominal</span>
-                            </div>
-                            <button class="btn btn-secondary" onclick="goTo()">Ver solicitud</button>
-                        </div>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Concentrado de Enfermería</h3>
                 </div>
 
-                <div class="card hojas-consumo-card">
-                    <div class="card-header">
-                        <h3>Hojas de Consumo</h3>
+                <div class="enfermeria-grid">
+                    <div class="enfermeria-card">
+                        <div class="enfermeria-card-header">
+                            <h4>Triage</h4>
+                            <span class="badge bg-warning">Pendiente</span>
+                        </div>
+                        <p class="enfermeria-texto">1 paciente en espera de triage.</p>
+                        <div class="enfermeria-detalle">
+                            <span>Paciente: Juan Pérez</span>
+                            <span>Hora: 10:30</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="goTo()">Ver solicitud</button>
                     </div>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Paciente</th>
-                                <th>Hoja de consumo</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaHojaConsumoENF">
-                            <tr>
-                                <td colspan="4">Sin hojas generadas</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="enfermeria-card">
+                        <div class="enfermeria-card-header">
+                            <h4>Curación</h4>
+                            <span class="badge bg-primary">En curso</span>
+                        </div>
+                        <p class="enfermeria-texto">1 paciente en curación.</p>
+                        <div class="enfermeria-detalle">
+                            <span>Paciente: Pedro Infante</span>
+                            <span>Procedimiento: Limpieza y aseo</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="abrirModal('modalHojaConsumoENF')">
+                            Generar Hoja de consumo
+                        </button>
+                    </div>
+
+                    <div class="enfermeria-card">
+                        <div class="enfermeria-card-header">
+                            <h4>Aplicación de medicamento</h4>
+                            <span class="badge bg-warning">Pendiente</span>
+                        </div>
+                        <p class="enfermeria-texto">2 medicamentos pendientes por aplicar.</p>
+                        <div class="enfermeria-detalle">
+                            <span>Paciente: Pedro Infante</span>
+                            <span>Medicamento: Ketorolaco</span>
+                            <span>Paciente: Ana Torres</span>
+                            <span>Medicamento: Paracetamol</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="abrirModal('modalMedicamentoENF')">Generar Hoja
+                            de consumo</button>
+                    </div>
+
+                    <div class="enfermeria-card">
+                        <div class="enfermeria-card-header">
+                            <h4>Urgencias</h4>
+                            <span class="badge bg-danger">Prioritario</span>
+                        </div>
+                        <p class="enfermeria-texto">1 paciente requiere atención de enfermería.</p>
+                        <div class="enfermeria-detalle">
+                            <span>Paciente: Ana Torres</span>
+                            <span>Motivo: Dolor abdominal</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="goTo()">Ver solicitud</button>
+                    </div>
                 </div>
+            </div>
+
+            <div class="card hojas-consumo-card">
+                <div class="card-header">
+                    <h3>Hojas de Consumo</h3>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Paciente</th>
+                            <th>Hoja de consumo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaHojaConsumoENF">
+                        <tr>
+                            <td colspan="4">Sin hojas generadas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             </section>
 
+            <section id="xray" class="section">
+
+                <!-- HEADER -->
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                        <div>
+                            <h3 class="mb-1">
+                                🩻 Rayos X
+                            </h3>
+
+                            <small class="text-muted">
+                                Control de sala, toma de estudios radiológicos e interpretación.
+                            </small>
+                        </div>
+
+                        <button class="btn btn-outline-warning">
+                            ⚠️ Reportar falla en equipo
+                        </button>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <!-- STATS -->
+                        <div class="row g-3 mb-4">
+
+                            <div class="col-md-3">
+                                <div class="card border-0 bg-light text-center h-100">
+                                    <div class="card-body">
+                                        <small class="text-muted d-block">
+                                            En espera de toma
+                                        </small>
+
+                                        <h2 id="stat-espera-rx" class="fw-bold mb-0">
+                                            1
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card border-0 bg-light text-center h-100">
+                                    <div class="card-body">
+                                        <small class="text-muted d-block">
+                                            En sala (Captura)
+                                        </small>
+
+                                        <h2 id="stat-en-sala" class="fw-bold mb-0">
+                                            0
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card border-0 bg-light text-center h-100">
+                                    <div class="card-body">
+                                        <small class="text-muted d-block">
+                                            Para interpretar
+                                        </small>
+
+                                        <h2 id="stat-interpretar" class="fw-bold mb-0">
+                                            1
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card border-0 bg-light text-center h-100">
+                                    <div class="card-body">
+                                        <small class="text-muted d-block">
+                                            Estudios hoy
+                                        </small>
+
+                                        <h2 id="stat-estudios-hoy" class="fw-bold mb-0">
+                                            8
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- TABS -->
+                        <ul class="nav nav-tabs mb-4" id="xrayTabs">
+
+                            <li class="nav-item">
+                                <button
+                                    class="nav-link active"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#tab-espera"
+                                    type="button"
+                                >
+                                    Sala de Espera RX
+                                </button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button
+                                    class="nav-link"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#tab-captura"
+                                    type="button"
+                                >
+                                    Captura de Estudio
+                                </button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button
+                                    class="nav-link"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#tab-interpretacion"
+                                    type="button"
+                                >
+                                    Interpretaciones
+                                </button>
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <!-- ========================================= -->
+                            <!-- TAB ESPERA -->
+                            <!-- ========================================= -->
+
+                            <div
+                                class="tab-pane fade show active"
+                                id="tab-espera"
+                            >
+
+                                <div class="card border-0 shadow-sm">
+
+                                    <div class="card-body">
+
+                                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+
+                                            <h5 class="mb-0">
+                                                Pacientes Pendientes de Estudio
+                                            </h5>
+
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Buscar folio o paciente..."
+                                                style="max-width:350px"
+                                                onkeyup="filterTable(this)"
+                                            >
+
+                                        </div>
+
+                                        <div class="table-responsive">
+
+                                            <table class="table table-hover align-middle">
+
+                                                <thead class="table-light">
+
+                                                    <tr>
+                                                        <th>Folio</th>
+                                                        <th>Paciente</th>
+                                                        <th>Estudio Solicitado</th>
+                                                        <th>Prioridad</th>
+                                                        <th>Tiempo Espera</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+
+                                                </thead>
+
+                                                <tbody id="lista-espera-rx">
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <strong>#RX-1042</strong>
+                                                        </td>
+
+                                                        <td>
+                                                            Mendoza Arriaga, Luis Alberto
+                                                        </td>
+
+                                                        <td>
+                                                            Tele de Tórax (PA y Lateral)
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="badge bg-warning text-dark">
+                                                                En espera
+                                                            </span>
+                                                        </td>
+
+                                                        <td>
+                                                            12 min
+                                                        </td>
+
+                                                        <td>
+
+                                                            <button
+                                                                class="btn btn-primary btn-sm"
+                                                                onclick="llamarPaciente('RX-1042')"
+                                                            >
+                                                                Llamar a Sala
+                                                            </button>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- ========================================= -->
+                            <!-- TAB CAPTURA -->
+                            <!-- ========================================= -->
+
+                            <div
+                                class="tab-pane fade"
+                                id="tab-captura"
+                            >
+
+                                <div class="card border-0 shadow-sm">
+
+                                    <div class="card-body">
+
+                                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+                                            <h5 class="mb-0">
+                                                Panel de Toma Radiológica
+                                            </h5>
+
+                                            <div class="badge bg-light text-dark border px-3 py-2">
+
+                                                Paciente en Sala:
+
+                                                <span
+                                                    id="paciente-actual-rx"
+                                                    class="text-primary"
+                                                >
+                                                    Ninguno
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- DATOS ESTUDIO -->
+
+                                        <h6 class="mb-3">
+                                            Datos del Estudio Solicitado
+                                        </h6>
+
+                                        <div class="row g-3 mb-4">
+
+                                            <div class="col-md-4">
+
+                                                <label class="form-label">
+                                                    Folio Activo
+                                                </label>
+
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="cap-folio"
+                                                    readonly
+                                                >
+
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-primary w-100 mt-2"
+                                                    onclick="verOrdenMedica()"
+                                                >
+                                                    📄 Ver Orden Escaneada
+                                                </button>
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                <label class="form-label">
+                                                    Médico Remitente
+                                                </label>
+
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="cap-medico"
+                                                    readonly
+                                                >
+
+                                            </div>
+
+                                            <div class="col-md-4">
+
+                                                <label class="form-label">
+                                                    Indicaciones Clínicas
+                                                </label>
+
+                                                <textarea
+                                                    class="form-control bg-light"
+                                                    id="cap-indicaciones"
+                                                    rows="4"
+                                                    readonly
+                                                ></textarea>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- PARAMETROS -->
+
+                                        <h6 class="mb-3">
+                                            Parámetros Técnicos
+                                        </h6>
+
+                                        <div class="row g-3 mb-4">
+
+                                            <div class="col-md-3">
+
+                                                <label class="form-label">
+                                                    Técnico Radiólogo
+                                                </label>
+
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="cap-tecnico"
+                                                >
+
+                                            </div>
+
+                                            <div class="col-md-3">
+
+                                                <label class="form-label">
+                                                    Proyecciones
+                                                </label>
+
+                                                <select
+                                                    class="form-select"
+                                                    id="cap-proyecciones"
+                                                >
+
+                                                    <option>
+                                                        Seleccione...
+                                                    </option>
+
+                                                    <option>
+                                                        AP
+                                                    </option>
+
+                                                    <option>
+                                                        PA
+                                                    </option>
+
+                                                    <option>
+                                                        Lateral
+                                                    </option>
+
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-md-3">
+
+                                                <label class="form-label">
+                                                    Equipo
+                                                </label>
+
+                                                <select
+                                                    class="form-select"
+                                                    id="cap-equipo"
+                                                >
+
+                                                    <option>
+                                                        Sala RX 1
+                                                    </option>
+
+                                                    <option>
+                                                        Sala RX 2
+                                                    </option>
+
+                                                    <option>
+                                                        Portátil
+                                                    </option>
+
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-md-3">
+
+                                                <label class="form-label">
+                                                    Calidad
+                                                </label>
+
+                                                <select
+                                                    class="form-select"
+                                                    id="cap-calidad"
+                                                >
+
+                                                    <option>
+                                                        Óptima
+                                                    </option>
+
+                                                    <option>
+                                                        Aceptable
+                                                    </option>
+
+                                                    <option>
+                                                        Repetición
+                                                    </option>
+
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- EVIDENCIA -->
+
+                                        <h6 class="mb-3">
+                                            Digitalización y Evidencia
+                                        </h6>
+
+                                        <div class="row g-3 mb-4">
+
+                                            <div class="col-md-6">
+
+                                                <label class="form-label">
+                                                    Subir Imágenes
+                                                </label>
+
+                                                <input
+                                                    type="file"
+                                                    class="form-control"
+                                                    id="file-dicom"
+                                                    multiple
+                                                    accept=".dcm,image/jpeg,image/png"
+                                                >
+
+                                            </div>
+
+                                            <div class="col-md-6">
+
+                                                <label class="form-label">
+                                                    Observaciones
+                                                </label>
+
+                                                <textarea
+                                                    class="form-control"
+                                                    id="cap-notas"
+                                                    rows="4"
+                                                ></textarea>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- BOTONES -->
+
+                                        <div class="d-flex gap-3">
+
+                                            <button class="btn btn-outline-secondary w-25">
+
+                                                Pausar / Regresar
+
+                                            </button>
+
+                                            <button
+                                                class="btn btn-primary w-75"
+                                                onclick="finalizarEstudio()"
+                                            >
+
+                                                Guardar Estudio y Enviar a Interpretación
+
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- ========================================= -->
+                            <!-- TAB INTERPRETACIÓN -->
+                            <!-- ========================================= -->
+
+                            <div
+                                class="tab-pane fade"
+                                id="tab-interpretacion"
+                            >
+
+                                <div class="card border-0 shadow-sm">
+
+                                    <div class="card-body">
+
+                                        <h5 class="mb-4">
+                                            Estudios Pendientes de Reporte Médico
+                                        </h5>
+
+                                        <div class="table-responsive">
+
+                                            <table class="table table-hover align-middle">
+
+                                                <thead class="table-light">
+
+                                                    <tr>
+                                                        <th>Folio</th>
+                                                        <th>Paciente</th>
+                                                        <th>Estudio</th>
+                                                        <th>Técnico</th>
+                                                        <th>Archivos</th>
+                                                        <th>Estado</th>
+                                                        <th>Acción</th>
+                                                    </tr>
+
+                                                </thead>
+
+                                                <tbody id="lista-interpretaciones">
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <strong>#RX-1038</strong>
+                                                        </td>
+
+                                                        <td>
+                                                            García López, María
+                                                        </td>
+
+                                                        <td>
+                                                            Radiografía de Rodilla
+                                                        </td>
+
+                                                        <td>
+                                                            T.R. Hernández
+                                                        </td>
+
+                                                        <td>
+
+                                                            <button class="btn btn-link btn-sm">
+
+                                                                Ver Archivos
+
+                                                            </button>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <span class="badge bg-warning text-dark">
+
+                                                                Pendiente
+
+                                                            </span>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <button class="btn btn-outline-primary btn-sm">
+
+                                                                Redactar Reporte
+
+                                                            </button>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
 
             <section id="compras" class="section">
                 <div class="grid grid-2">
@@ -1660,406 +2188,376 @@
         </div>
     </div>
     <!-- Modal section -->
-        <!-- MODAL FOLIO -->
-            <div class="modal fade" id="modFolio" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content rounded-4 border-0 shadow">
+    <!-- MODAL FOLIO -->
+    <div class="modal fade" id="modFolio" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
 
-                        <div class="modal-body p-4">
+                <div class="modal-body p-4">
 
-                            <h2 class="mb-2">
-                                Ingreso Registrado
-                            </h2>
+                    <h2 class="mb-2">
+                        Ingreso Registrado
+                    </h2>
 
-                            <p class="text-muted small">
-                                El paciente ha sido ingresado al flujo de atención.
-                            </p>
+                    <p class="text-muted small">
+                        El paciente ha sido ingresado al flujo de atención.
+                    </p>
 
-                            <div class="bg-light p-4 rounded-4 border mt-4 mb-4 text-center">
+                    <div class="bg-light p-4 rounded-4 border mt-4 mb-4 text-center">
 
-                                <small class="fw-bold text-success">
-                                    NÚMERO DE FOLIO
-                                </small>
+                        <small class="fw-bold text-success">
+                            NÚMERO DE FOLIO
+                        </small>
 
-                                <div
-                                    id="fol-num"
-                                    class="display-5 fw-bold text-dark">
-                                </div>
-
-                            </div>
-
-                            <button
-                                class="btn btn-primary w-100"
-                                data-bs-dismiss="modal">
-                                Entendido
-                            </button>
-
+                        <div id="fol-num" class="display-5 fw-bold text-dark">
                         </div>
 
                     </div>
+
+                    <button class="btn btn-primary w-100" data-bs-dismiss="modal">
+                        Entendido
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- MODAL HISTORIAL -->
+    <div class="modal fade" id="modHistorial" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4 border-0 shadow">
+
+                <div class="modal-header border-0">
+
+                    <h3 class="modal-title">
+                        Resumen Clínico
+                    </h3>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div id="hist-paciente-info" class="bg-light border rounded-4 p-3 mb-4 small">
+                    </div>
+
+                    <h5 class="mb-3">
+                        Últimas Visitas Registradas
+                    </h5>
+
+                    <div id="hist-visitas"></div>
+
+                </div>
+
+                <div class="modal-footer border-0">
+
+                    <button class="btn btn-primary w-100" id="btn-hist-admision">
+                        Ingresar a Admisión
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- MODAL FIRMA -->
+    <div class="modal fade" id="modFirma" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+
+                <div class="modal-header border-0">
+
+                    <h3 class="modal-title">
+                        Consentimiento Informado
+                    </h3>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p class="small text-muted">
+                        Autorizo al personal de enfermería de La Enfermería
+                        a administrar el medicamento inyectable solicitado.
+                    </p>
+
+                    <div class="border rounded-4 overflow-hidden">
+
+                        <canvas id="canvas-firma" width="440" height="200" style="width:100%; background:white;">
+                        </canvas>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-0 d-flex justify-content-between">
+
+                    <button class="btn btn-secondary" onclick="limpiarCanvas()">
+                        Borrar
+                    </button>
+
+                    <div class="d-flex gap-2">
+
+                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button class="btn btn-primary" onclick="guardarFirma()">
+                            Aceptar y Firmar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal Actualizar estado-->
+    <div id="modalActualizarEstado" class="modal">
+        <div class="modal-content">
+            <h3>Actualizar estado</h3>
+
+            <label for="Estado">Estado</label>
+            <select id="Estado">
+                <option value="">Selecciona el estado actual</option>
+                <option value="Validación de estudio">Validación de estudio</option>
+                <option value="Estudio en proceso">Estudio en proceso</option>
+                <option value="Estudio finalizado">Estudio finalizado</option>
+                <option value="Entrega de resultados">Entrega de resultados</option>
+            </select>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Estudio selector -->
+    <div id="modalEstudios" class="modal">
+        <div class="modal-content">
+            <h3>Editar estudios</h3>
+
+            <label for="nuevoEstudio">Agregar estudio</label>
+            <select id="nuevoEstudio">
+                <option value="">Selecciona un estudio</option>
+                <option value="Biometría Hemática">Biometría Hemática</option>
+                <option value="Química Sanguínea">Química Sanguínea</option>
+                <option value="Examen General de Orina">Examen General de Orina</option>
+                <option value="Perfil Lipídico">Perfil Lipídico</option>
+                <option value="Prueba de Glucosa">Prueba de Glucosa</option>
+            </select>
+
+            <label for="estudioEliminar">Quitar estudio</label>
+            <select id="estudioEliminar">
+                <option value="">Selecciona un estudio para quitar</option>
+            </select>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="cerrarModalEstudios()">Cerrar</button>
+                <button class="btn btn-secondary" onclick="quitarEstudio()">Quitar</button>
+                <button class="btn btn-primary" onclick="agregarEstudio()">Agregar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Enviar resulados  -->
+    <div id="modalEnviarResultados" class="modal">
+        <div class="modal-content">
+            <h3>Enviar resultados</h3>
+
+            <label for="emailDestino">E-mail</label>
+            <select id="emailDestino">
+                <option value="">Selecciona el E-mail de destino</option>
+                <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
+                <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
+                <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal hoja de consumo -->
+    <div id="modalHojaConsumo" class="modal">
+        <div class="modal-content">
+            <h3>Generar hoja de consumo</h3>
+
+            <label for="pacienteConsumo">Paciente</label>
+            <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
+                <option value="">Selecciona un paciente</option>
+                <option value="Pedro Infante" data-nacimiento="1917-11-18" data-procedimiento="Biometría Hemática">
+                    Pedro Infante
+                </option>
+            </select>
+            <div id="formHojaConsumo" class="container-fluid" style="display: none;">
+
+                <div class="row g-3">
+
+                    <!-- Nombre del paciente -->
+                    <div class="col-md-6">
+                        <label for="nombrePacienteConsumo" class="form-label">
+                            Nombre del paciente
+                        </label>
+
+                        <input type="text" id="nombrePacienteConsumo" class="form-control">
+                    </div>
+
+                    <!-- Fecha de nacimiento -->
+                    <div class="col-md-6">
+                        <label for="fechaNacimientoConsumo" class="form-label">
+                            Fecha de nacimiento
+                        </label>
+
+                        <input type="date" id="fechaNacimientoConsumo" class="form-control">
+                    </div>
+
+                    <!-- Procedimiento -->
+                    <div class="col-md-6">
+                        <label for="procedimientoConsumo" class="form-label">
+                            Procedimiento
+                        </label>
+
+                        <input type="text" id="procedimientoConsumo" class="form-control">
+                    </div>
+
+                    <!-- Fecha -->
+                    <div class="col-md-3">
+                        <label for="fechaConsumo" class="form-label">
+                            Fecha
+                        </label>
+
+                        <input type="date" id="fechaConsumo" class="form-control">
+                    </div>
+
+                    <!-- Hora -->
+                    <div class="col-md-3">
+                        <label for="horaConsumo" class="form-label">
+                            Hora
+                        </label>
+
+                        <input type="time" id="horaConsumo" class="form-control">
+                    </div>
+
+                    <!-- Turno -->
+                    <div class="col-md-6">
+                        <label for="turnoConsumo" class="form-label">
+                            Turno
+                        </label>
+
+                        <input type="text" id="turnoConsumo" class="form-control">
+                    </div>
+
+                    <!-- Químico -->
+                    <div class="col-md-6">
+                        <label for="quimicoConsumo" class="form-label">
+                            Nombre del químico
+                        </label>
+
+                        <input type="text" id="quimicoConsumo" class="form-control">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
+                <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalHojaConsumoENF" class="modal">
+        <div class="modal-dialog moodal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Solicitud</h3>
+
+                <label for="pacienteConsumoENF">Paciente</label>
+                <select id="pacienteConsumoENF">
+                    <option value="">Selecciona un paciente</option>
+                    <option value="Pedro Infante" data-nacimiento="1917-11-18">
+                        Pedro Infante
+                    </option>
+                </select>
+
+                <label for="procedimientoConsumoENF">Curación</label>
+                <select id="procedimientoConsumoENF">
+                    <option value="">Selecciona el tipo de curación</option>
+                    <option value="Detención de sangrado">Detención de sangrado</option>
+                    <option value="Limpieza y aseo">Limpieza y aseo</option>
+                    <option value="Reconstrucción">Reconstrucción</option>
+                    <option value="Fortalecimiento">Fortalecimiento</option>
+                </select>
+
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModal('modalHojaConsumoENF')">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-primary" onclick="generarHojaCuracionPDFENF()">
+                        Generar hoja de consumo
+                    </button>
                 </div>
             </div>
-            <!-- MODAL HISTORIAL -->
-            <div class="modal fade" id="modHistorial" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content rounded-4 border-0 shadow">
+        </div>
+    </div>
 
-                        <div class="modal-header border-0">
+    <div id="modalMedicamentoENF" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Solicitud de medicamento</h3>
+                <label for="pacienteMedicamentoENF">Paciente</label>
+                <select id="pacienteMedicamentoENF">
+                    <option value="">Selecciona un paciente</option>
+                    <option value="Pedro Infante" data-nacimiento="1917-11-18">
+                        Pedro Infante
+                    </option>
+                    <option value="Ana Torres" data-nacimiento="1917-11-18">
+                        Ana Torres
+                    </option>
+                </select>
+                <div class="card-body">
+                    <h3 class="mb-4">
+                        Medicamento
+                    </h3>
 
-                            <h3 class="modal-title">
-                                Resumen Clínico
-                            </h3>
-
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal">
-                            </button>
-
+                    <div class="multiselect-container">
+                        <!-- Caja -->
+                        <div class="multiselect-box" id="multiselectBox">
+                            <span>
+                                Selecciona tecnologías
+                            </span>
                         </div>
 
-                        <div class="modal-body">
-
-                            <div
-                                id="hist-paciente-info"
-                                class="bg-light border rounded-4 p-3 mb-4 small">
-                            </div>
-
-                            <h5 class="mb-3">
-                                Últimas Visitas Registradas
-                            </h5>
-
-                            <div id="hist-visitas"></div>
-
-                        </div>
-
-                        <div class="modal-footer border-0">
-
-                            <button
-                                class="btn btn-primary w-100"
-                                id="btn-hist-admision">
-                                Ingresar a Admisión
-                            </button>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- MODAL FIRMA -->
-            <div class="modal fade" id="modFirma" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content rounded-4 border-0 shadow">
-
-                        <div class="modal-header border-0">
-
-                            <h3 class="modal-title">
-                                Consentimiento Informado
-                            </h3>
-
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal">
-                            </button>
-
-                        </div>
-
-                        <div class="modal-body">
-
-                            <p class="small text-muted">
-                                Autorizo al personal de enfermería de La Enfermería
-                                a administrar el medicamento inyectable solicitado.
-                            </p>
-
-                            <div class="border rounded-4 overflow-hidden">
-
-                                <canvas
-                                    id="canvas-firma"
-                                    width="440"
-                                    height="200"
-                                    style="width:100%; background:white;">
-                                </canvas>
-
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer border-0 d-flex justify-content-between">
-
-                            <button
-                                class="btn btn-secondary"
-                                onclick="limpiarCanvas()">
-                                Borrar
-                            </button>
-
-                            <div class="d-flex gap-2">
-
-                                <button
-                                    class="btn btn-outline-secondary"
-                                    data-bs-dismiss="modal">
-                                    Cancelar
-                                </button>
-
-                                <button
-                                    class="btn btn-primary"
-                                    onclick="guardarFirma()">
-                                    Aceptar y Firmar
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Actualizar estado-->
-            <div id="modalActualizarEstado" class="modal">
-                <div class="modal-content">
-                    <h3>Actualizar estado</h3>
-
-                    <label for="Estado">Estado</label>
-                    <select id="Estado">
-                        <option value="">Selecciona el estado actual</option>
-                        <option value="Validación de estudio">Validación de estudio</option>
-                        <option value="Estudio en proceso">Estudio en proceso</option>
-                        <option value="Estudio finalizado">Estudio finalizado</option>
-                        <option value="Entrega de resultados">Entrega de resultados</option>
-                    </select>
-
-                    <div class="modal-actions">
-                        <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
-                        <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Estudio selector -->
-            <div id="modalEstudios" class="modal">
-                <div class="modal-content">
-                    <h3>Editar estudios</h3>
-
-                    <label for="nuevoEstudio">Agregar estudio</label>
-                    <select id="nuevoEstudio">
-                        <option value="">Selecciona un estudio</option>
-                        <option value="Biometría Hemática">Biometría Hemática</option>
-                        <option value="Química Sanguínea">Química Sanguínea</option>
-                        <option value="Examen General de Orina">Examen General de Orina</option>
-                        <option value="Perfil Lipídico">Perfil Lipídico</option>
-                        <option value="Prueba de Glucosa">Prueba de Glucosa</option>
-                    </select>
-
-                    <label for="estudioEliminar">Quitar estudio</label>
-                    <select id="estudioEliminar">
-                        <option value="">Selecciona un estudio para quitar</option>
-                    </select>
-
-                    <div class="modal-actions">
-                        <button class="btn btn-secondary" onclick="cerrarModalEstudios()">Cerrar</button>
-                        <button class="btn btn-secondary" onclick="quitarEstudio()">Quitar</button>
-                        <button class="btn btn-primary" onclick="agregarEstudio()">Agregar</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Enviar resulados  -->
-            <div id="modalEnviarResultados" class="modal">
-                <div class="modal-content">
-                    <h3>Enviar resultados</h3>
-
-                    <label for="emailDestino">E-mail</label>
-                    <select id="emailDestino">
-                        <option value="">Selecciona el E-mail de destino</option>
-                        <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
-                        <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
-                        <option value="otro">Otro</option>
-                    </select>
-
-                    <div class="modal-actions">
-                        <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
-                        <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal hoja de consumo -->
-            <div id="modalHojaConsumo" class="modal">
-                <div class="modal-content">
-                    <h3>Generar hoja de consumo</h3>
-
-                    <label for="pacienteConsumo">Paciente</label>
-                    <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
-                        <option value="">Selecciona un paciente</option>
-                        <option value="Pedro Infante" data-nacimiento="1917-11-18" data-procedimiento="Biometría Hemática">
-                            Pedro Infante
-                        </option>
-                    </select>
-                    <div id="formHojaConsumo" class="container-fluid" style="display: none;">
-
-                        <div class="row g-3">
-
-                            <!-- Nombre del paciente -->
-                            <div class="col-md-6">
-                                <label for="nombrePacienteConsumo" class="form-label">
-                                    Nombre del paciente
-                                </label>
-
-                                <input type="text" id="nombrePacienteConsumo" class="form-control">
-                            </div>
-
-                            <!-- Fecha de nacimiento -->
-                            <div class="col-md-6">
-                                <label for="fechaNacimientoConsumo" class="form-label">
-                                    Fecha de nacimiento
-                                </label>
-
-                                <input type="date" id="fechaNacimientoConsumo" class="form-control">
-                            </div>
-
-                            <!-- Procedimiento -->
-                            <div class="col-md-6">
-                                <label for="procedimientoConsumo" class="form-label">
-                                    Procedimiento
-                                </label>
-
-                                <input type="text" id="procedimientoConsumo" class="form-control">
-                            </div>
-
-                            <!-- Fecha -->
-                            <div class="col-md-3">
-                                <label for="fechaConsumo" class="form-label">
-                                    Fecha
-                                </label>
-
-                                <input type="date" id="fechaConsumo" class="form-control">
-                            </div>
-
-                            <!-- Hora -->
-                            <div class="col-md-3">
-                                <label for="horaConsumo" class="form-label">
-                                    Hora
-                                </label>
-
-                                <input type="time" id="horaConsumo" class="form-control">
-                            </div>
-
-                            <!-- Turno -->
-                            <div class="col-md-6">
-                                <label for="turnoConsumo" class="form-label">
-                                    Turno
-                                </label>
-
-                                <input type="text" id="turnoConsumo" class="form-control">
-                            </div>
-
-                            <!-- Químico -->
-                            <div class="col-md-6">
-                                <label for="quimicoConsumo" class="form-label">
-                                    Nombre del químico
-                                </label>
-
-                                <input type="text" id="quimicoConsumo" class="form-control">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="modal-actions">
-                        <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
-                        <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="modalHojaConsumoENF" class="modal">
-                <div class="modal-dialog moodal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <h3>Solicitud</h3>
-
-                        <label for="pacienteConsumoENF">Paciente</label>
-                        <select id="pacienteConsumoENF">
-                            <option value="">Selecciona un paciente</option>
-                            <option value="Pedro Infante" data-nacimiento="1917-11-18">
-                                Pedro Infante
-                            </option>
-                        </select>
-
-                        <label for="procedimientoConsumoENF">Curación</label>
-                        <select id="procedimientoConsumoENF">
-                            <option value="">Selecciona el tipo de curación</option>
-                            <option value="Detención de sangrado">Detención de sangrado</option>
-                            <option value="Limpieza y aseo">Limpieza y aseo</option>
-                            <option value="Reconstrucción">Reconstrucción</option>
-                            <option value="Fortalecimiento">Fortalecimiento</option>
-                        </select>
-
-                        <div class="modal-actions">
-                            <button class="btn btn-secondary" onclick="cerrarModal('modalHojaConsumoENF')">
-                                Cancelar
-                            </button>
-                            <button class="btn btn-primary" onclick="generarHojaCuracionPDFENF()">
-                                Generar hoja de consumo
-                            </button>
-                        </div>
-                    </div>
-                  </div>
-            </div>
-
-            <div id="modalMedicamentoENF" class="modal">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <h3>Solicitud de medicamento</h3>
-                        <label for="pacienteMedicamentoENF">Paciente</label>
-                        <select id="pacienteMedicamentoENF">
-                            <option value="">Selecciona un paciente</option>
-                            <option value="Pedro Infante" data-nacimiento="1917-11-18">
-                                Pedro Infante
-                            </option>
-                            <option value="Ana Torres" data-nacimiento="1917-11-18">
-                                Ana Torres 
-                            </option>
-                        </select>
-                        <div class="card-body">
-                            <h3 class="mb-4">
-                                Medicamento
-                            </h3>
-
-                            <div class="multiselect-container">
-                                <!-- Caja -->
-                                <div
-                                    class="multiselect-box"
-                                    id="multiselectBox"
-                                >
-                                    <span>
-                                        Selecciona tecnologías
-                                    </span>
-                                </div>
-
-                                <!-- Dropdown -->
-                                <div
-                                    class="multiselect-dropdown"
-                                    id="dropdown"
-                                >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-actions">
-                            <button class="btn btn-secondary" onclick="cerrarModal('modalMedicamentoENF')">
-                                Cancelar
-                            </button>
-
-                            <button class="btn btn-primary" onclick="generarHojaMedicamentoPDFENF()">
-                                Generar hoja de consumo
-                            </button>
+                        <!-- Dropdown -->
+                        <div class="multiselect-dropdown" id="dropdown">
                         </div>
                     </div>
                 </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModal('modalMedicamentoENF')">
+                        Cancelar
+                    </button>
+
+                    <button class="btn btn-primary" onclick="generarHojaMedicamentoPDFENF()">
+                        Generar hoja de consumo
+                    </button>
+                </div>
             </div>
-        <!-- fin -->
-            
-        
+        </div>
+    </div>
+    <!-- fin -->
+
+
     <!-- end modal section -->
 
-    <script src="./js/enfermeri.js" ></script>
+    <script src="./js/enfermeri.js"></script>
 
 </body>
 
