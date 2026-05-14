@@ -6,6 +6,7 @@
     <title>ERP Clínica La Enfermería - Sistema Integral</title>
     <link rel="stylesheet" href="./Styles/labratori.css">
    <script src="./Script/laboratori.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -108,6 +109,7 @@
         <div class="nav-item" onclick="showModule('consulta')"><span>👨‍⚕️</span> Consulta Médica</div>
         <div class="nav-item" onclick="showModule('laboratorio')"><span>🧪</span> Laboratorio</div>
         <div class="nav-item" onclick="showModule('paramedicos')"><span>🚑</span> Paramédicos (FRAP)</div>
+        <div class="nav-item" onclick="showModule('enfermeria')"><span>😷</span> Enfermería</div>
     </div>
 
     <div class="nav-group">
@@ -331,18 +333,6 @@
             </div>
         </section>
 
-        <!--section id="laboratorio" class="section">
-            <div class="card">
-                <h3>Órdenes de Laboratorio Pendientes</h3>
-                <table>
-                    <thead><tr><th>ID</th><th>Paciente</th><th>Estudio</th><th>Estado</th><th>Acciones</th></tr></thead>
-                    <tbody>
-                        <tr><td>L-901</td><td>Pedro Infante</td><td>Biometría Hemática</td><td><span class="badge bg-yellow">En proceso</span></td><td><button class="btn btn-secondary">Subir PDF</button></td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section> -->
-
 <!-- Laboratorio sección --> 
 <section id="laboratorio" class="section">
     <div class="card">
@@ -548,8 +538,6 @@
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 
 <!--Fin sección laboratorio -->
 
@@ -566,6 +554,164 @@
             </div>
         </section>
 
+<!-- Enfermería Sección -->
+<section id="enfermeria" class="section">
+    <div class="card">
+        <div class="card-header">
+            <h3>Concentrado de Enfermería</h3>
+        </div>
+
+        <div class="enfermeria-grid">
+            <div class="enfermeria-card">
+                <div class="enfermeria-card-header">
+                    <h4>Triage</h4>
+                    <span class="badge bg-yellow">Pendiente</span>
+                </div>
+                <p class="enfermeria-texto">1 paciente en espera de triage.</p>
+                <div class="enfermeria-detalle">
+                    <span>Paciente: Juan Pérez</span>
+                    <span>Hora: 10:30</span>
+                </div>
+                <button class="btn btn-secondary">Ver solicitud</button>
+            </div>
+
+            <div class="enfermeria-card">
+                <div class="enfermeria-card-header">
+                    <h4>Curación</h4>
+                    <span class="badge bg-blue">En curso</span>
+                </div>
+                <p class="enfermeria-texto">1 paciente en curación.</p>
+                <div class="enfermeria-detalle">
+                    <span>Paciente: Pedro Infante</span>
+                    <span>Procedimiento: Limpieza y aseo</span>
+                </div>
+                <button class="btn btn-secondary" onclick="abrirModalHojaConsumoENF()">
+                    Generar Hoja de consumo
+                </button>
+            </div>
+
+            <div class="enfermeria-card">
+                <div class="enfermeria-card-header">
+                    <h4>Aplicación de medicamento</h4>
+                    <span class="badge bg-yellow">Pendiente</span>
+                </div>
+                <p class="enfermeria-texto">2 medicamentos pendientes por aplicar.</p>
+                <div class="enfermeria-detalle">
+                    <span>Paciente: Pedro Infante</span>
+                    <span>Medicamento: Ketorolaco</span>
+                    <span>Paciente: Ana Torres</span>
+                    <span>Medicamento: Paracetamol</span>
+                </div>
+                <button class="btn btn-secondary" onclick="abrirModalMedicamentoENF()">Generar Hoja de consumo</button>
+            </div>
+
+            <div class="enfermeria-card">
+                <div class="enfermeria-card-header">
+                    <h4>Urgencias</h4>
+                    <span class="badge bg-red">Prioritario</span>
+                </div>
+                <p class="enfermeria-texto">1 paciente requiere atención de enfermería.</p>
+                <div class="enfermeria-detalle">
+                    <span>Paciente: Ana Torres</span>
+                    <span>Motivo: Dolor abdominal</span>
+                </div>
+                <button class="btn btn-secondary">Ver solicitud</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card hojas-consumo-card">
+        <div class="card-header">
+            <h3>Hojas de Consumo</h3>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Hoja de consumo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaHojaConsumoENF">
+                <tr>
+                    <td colspan="4">Sin hojas generadas</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Modal Medicamento ENF -->
+ <div id="modalMedicamentoENF" class="modal">
+    <div class="modal-content">
+        <h3>Solicitud de medicamento</h3>
+
+        <label for="pacienteMedicamentoENF">Paciente</label>
+        <select id="pacienteMedicamentoENF">
+            <option value="">Selecciona un paciente</option>
+            <option value="Pedro Infante" data-nacimiento="1917-11-18">
+                Pedro Infante
+            </option>
+            <option value="Ana Torres" data-nacimiento="1917-11-18">
+                Ana Torres 
+            </option>
+        </select>
+
+        <label for="medicamentoConsumoENF">Medicamento</label>
+        <select id="medicamentoConsumoENF" multiple>
+            <option value="Ketorolaco">Ketorolaco</option>
+            <option value="Paracetamol">Paracetamol</option>
+            <option value="Metamizol">Metamizol</option>
+            <option value="Omeprazol">Omeprazol</option>
+        </select>
+
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="cerrarModalMedicamentoENF()">
+                Cancelar
+            </button>
+
+            <button class="btn btn-primary" onclick="generarHojaMedicamentoPDFENF()">
+                Generar hoja de consumo
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal hoja de consumo ENF -->
+<div id="modalHojaConsumoENF" class="modal">
+    <div class="modal-content">
+        <h3>Solicitud</h3>
+
+        <label for="pacienteConsumoENF">Paciente</label>
+        <select id="pacienteConsumoENF">
+            <option value="">Selecciona un paciente</option>
+            <option value="Pedro Infante" data-nacimiento="1917-11-18">
+                Pedro Infante
+            </option>
+        </select>
+
+        <label for="procedimientoConsumoENF">Curación</label>
+        <select id="procedimientoConsumoENF">
+            <option value="">Selecciona el tipo de curación</option>
+            <option value="Detención de sangrado">Detención de sangrado</option>
+            <option value="Limpieza y aseo">Limpieza y aseo</option>
+            <option value="Reconstrucción">Reconstrucción</option>
+            <option value="Fortalecimiento">Fortalecimiento</option>
+        </select>
+
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="cerrarModalHojaConsumoENF()">
+                Cancelar
+            </button>
+            <button class="btn btn-primary" onclick="generarHojaConsumoPDFENF()">
+                Generar hoja de consumo
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Fin de la seccion Enfermería -->
 
         <section id="compras" class="section">
             <div class="grid grid-2">
@@ -630,6 +776,7 @@
             consulta: 'Consulta Médica',
             laboratorio: 'Gestión de Laboratorio',
             paramedicos: 'Servicios Paramédicos (FRAP)',
+            enfermeria: 'Enfermería',
             compras: 'Gestión de Compras',
             rrhh: 'Recursos Humanos',
             sistema: 'Configuración del Sistema'
