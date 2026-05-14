@@ -131,14 +131,14 @@ function obtenerTurno(hora) {
    PDF
 ========================================================= */
 
-function crearPDFConsumo() {
-    const data= {
-    paciente: 'Pedro Infante',
-    nacimiento: '',
-    procedimiento:'Limpieza y aseo',
-    detalle: 'Ninguno',
-    responsable :'Lic. Roberto Ramírez'
-}
+function crearPDFConsumo({
+    paciente,
+    nacimiento,
+    procedimiento,
+    detalle,
+    responsable = 'Lic. Roberto Ramírez'
+}) {
+
     const { jsPDF } = window.jspdf;
 
     const pdf = new jsPDF();
@@ -160,14 +160,14 @@ function crearPDFConsumo() {
     pdf.setFontSize(12);
 
     const contenido = [
-        `Nombre del paciente: ${data.paciente}`,
-        `Fecha de nacimiento: ${data.nacimiento}`,
-        `Procedimiento: ${data.procedimiento}`,
-        `detalle: ${data.detalle}`,
+        `Nombre del paciente: ${paciente}`,
+        `Fecha de nacimiento: ${nacimiento}`,
+        `Procedimiento: ${procedimiento}`,
+        detalle,
         `Fecha: ${fecha}`,
         `Hora: ${hora}`,
         `Turno: ${turno}`,
-        `Responsable: ${data.responsable}`
+        `Responsable: ${responsable}`
     ];
 
     let posicionY = 40;
@@ -564,3 +564,8 @@ document.addEventListener(
     }
 );
 
+
+
+function goTo(){
+    location.reload();
+}

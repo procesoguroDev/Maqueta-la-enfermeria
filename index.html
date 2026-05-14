@@ -1525,7 +1525,7 @@
                                 <span>Paciente: Juan Pérez</span>
                                 <span>Hora: 10:30</span>
                             </div>
-                            <button class="btn btn-secondary">Ver solicitud</button>
+                            <button class="btn btn-secondary" onclick="goTo()">Ver solicitud</button>
                         </div>
 
                         <div class="enfermeria-card">
@@ -1568,7 +1568,7 @@
                                 <span>Paciente: Ana Torres</span>
                                 <span>Motivo: Dolor abdominal</span>
                             </div>
-                            <button class="btn btn-secondary">Ver solicitud</button>
+                            <button class="btn btn-secondary" onclick="goTo()">Ver solicitud</button>
                         </div>
                     </div>
                 </div>
@@ -1996,12 +1996,12 @@
                             <button class="btn btn-secondary" onclick="cerrarModal('modalHojaConsumoENF')">
                                 Cancelar
                             </button>
-                            <button class="btn btn-primary" onclick="crearPDFConsumo()">
+                            <button class="btn btn-primary" onclick="generarHojaCuracionPDFENF()">
                                 Generar hoja de consumo
                             </button>
                         </div>
                     </div>
-                </div>
+                  </div>
             </div>
 
             <div id="modalMedicamentoENF" class="modal">
