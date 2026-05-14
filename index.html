@@ -100,6 +100,7 @@
     <div class="nav-group">
         <div class="nav-label">General</div>
         <div class="nav-item active" onclick="showModule('dashboard')"><span>📊</span> Dashboard</div>
+        <div class="nav-item active" onclick="showModule('inversionistas')"><span>💰</span> inversionistas</div>
     </div>
 
     <div class="nav-group">
@@ -162,6 +163,239 @@
                 </div>
             </div>
         </section>
+
+<!-- Seccion Inversionistas -->
+<section id="inversionistas" class="section active">
+    <div class="dashboard-header">
+        <div>
+            <h3>Dashboard para inversionistas</h3>
+            <p class="dashboard-subtitle">Resumen operativo y financiero del mes actual</p>
+        </div>
+
+        <div class="date-filter">
+            <label for="filtroFechaInversionistas">Filtrar por fecha</label>
+            <input type="date" id="filtroFechaInversionistas">
+        </div>
+    </div>
+
+    <div class="grid grid-4">
+        <div class="card kpi">
+            <small>Pacientes mes actual</small>
+            <strong>684</strong>
+            <span>+9% vs mes anterior</span>
+        </div>
+
+        <div class="card kpi">
+            <small>Uso de consultorios</small>
+            <strong>78%</strong>
+            <span>Consultorios activos</span>
+        </div>
+
+        <div class="card kpi">
+            <small>Uso cubículos urgencias</small>
+            <strong>64%</strong>
+            <span>Capacidad promedio</span>
+        </div>
+
+        <div class="card kpi">
+            <small>Estudios laboratorio</small>
+            <strong>312</strong>
+            <span>Mes actual</span>
+        </div>
+    </div>
+
+    <div class="grid grid-4">
+        <div class="card kpi">
+            <small>Compras mes actual</small>
+            <strong>$86,400</strong>
+            <span style="color:var(--danger)">Insumos y material médico</span>
+        </div>
+
+        <div class="card kpi">
+            <small>Pago a proveedores</small>
+            <strong>$124,900</strong>
+            <span style="color:var(--danger)">Mes actual</span>
+        </div>
+
+        <div class="card kpi">
+            <small>Recepción</small>
+            <strong>$214,300</strong>
+            <span>Corte mensual</span>
+        </div>
+
+        <div class="card kpi">
+            <small>Farmacia</small>
+            <strong>$97,850</strong>
+            <span>Corte mensual</span>
+        </div>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h3>Ranking de motivos de consulta</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Motivo</th>
+                        <th>Consultas</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Infección respiratoria</td>
+                        <td>146</td>
+                        <td>21%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Dolor abdominal</td>
+                        <td>98</td>
+                        <td>14%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Control de presión arterial</td>
+                        <td>82</td>
+                        <td>12%</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Curaciones</td>
+                        <td>61</td>
+                        <td>9%</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Aplicación de medicamento</td>
+                        <td>54</td>
+                        <td>8%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Capacidad instalada</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Área</th>
+                        <th>Capacidad</th>
+                        <th>Uso actual</th>
+                        <th>Disponibilidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Consultorio 1</td>
+                        <td>100%</td>
+                        <td>82%</td>
+                        <td><span class="badge bg-green">Disponible</span></td>
+                    </tr>
+                    <tr>
+                        <td>Consultorio 2</td>
+                        <td>100%</td>
+                        <td>74%</td>
+                        <td><span class="badge bg-green">Disponible</span></td>
+                    </tr>
+                    <tr>
+                        <td>Cubículos urgencias</td>
+                        <td>6 cubículos</td>
+                        <td>64%</td>
+                        <td><span class="badge bg-yellow">Moderado</span></td>
+                    </tr>
+                    <tr>
+                        <td>Laboratorio</td>
+                        <td>100%</td>
+                        <td>71%</td>
+                        <td><span class="badge bg-blue">Operativo</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <h3>Resumen financiero mensual</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Monto</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ingresos recepción POS</td>
+                        <td>$214,300</td>
+                        <td><span class="badge bg-green">Corte mensual</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ingresos farmacia POS</td>
+                        <td>$97,850</td>
+                        <td><span class="badge bg-green">Corte mensual</span></td>
+                    </tr>
+                    <tr>
+                        <td>Gastos compras</td>
+                        <td>$86,400</td>
+                        <td><span class="badge bg-yellow">En revisión</span></td>
+                    </tr>
+                    <tr>
+                        <td>Pagos proveedores</td>
+                        <td>$124,900</td>
+                        <td><span class="badge bg-blue">Programado</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Indicadores clave del mes</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Indicador</th>
+                        <th>Resultado</th>
+                        <th>Tendencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pacientes atendidos</td>
+                        <td>684</td>
+                        <td><span class="badge bg-green">+9%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ticket promedio recepción</td>
+                        <td>$313</td>
+                        <td><span class="badge bg-green">+4%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ticket promedio farmacia</td>
+                        <td>$186</td>
+                        <td><span class="badge bg-yellow">-2%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Estudios por paciente</td>
+                        <td>0.45</td>
+                        <td><span class="badge bg-blue">Estable</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Fin de la Seccion Inversionistas -->
 
         <section id="recepcion" class="section">
             <div class="grid grid-2">
@@ -771,6 +1005,7 @@
         // Actualizar Título
         const titles = {
             dashboard: 'Dashboard General',
+            inversionistas: 'Dashboard Inversionistas',
             recepcion: 'Admisión y Recepción de Pacientes',
             triage: 'Triage y Signos Vitales',
             consulta: 'Consulta Médica',
