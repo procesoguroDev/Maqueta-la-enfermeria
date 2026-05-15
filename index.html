@@ -105,6 +105,7 @@
 
     <div class="nav-group">
         <div class="nav-label">Operación Clínica</div>
+        <div class="nav-item" onclick="showModule('ventas')"><span>💲</span> Ventas</div>
         <div class="nav-item" onclick="showModule('recepcion')"><span>🧾</span> Admisión / Recepción</div>
         <div class="nav-item" onclick="showModule('triage')"><span>🩺</span> Triage / Urgencias</div>
         <div class="nav-item" onclick="showModule('consulta')"><span>👨‍⚕️</span> Consulta Médica</div>
@@ -394,8 +395,188 @@
         </div>
     </div>
 </section>
-
 <!-- Fin de la Seccion Inversionistas -->
+
+<!-- Seccion CRM ventas -->
+<section id="ventas" class="section">
+    <div class="crm-header">
+        <div>
+            <h3>CRM de Ventas</h3>
+            <p class="crm-subtitle">Embudo de prospectos para membresías</p>
+        </div>
+    </div>
+
+    <div class="crm-funnel">
+        <div class="crm-stage" data-stage="nuevo">
+            <div class="crm-stage-header">
+                <h4>Nuevo prospecto</h4>
+                <span class="badge bg-blue crm-stage-count">0</span>
+            </div>
+
+            <div class="crm-stage-body">
+                <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                    data-stage="nuevo"
+                    data-nombre="Laura Méndez"
+                    data-telefono="442-555-0101"
+                    data-email="laura.mendez@email.com"
+                    data-servicio="Vital Familiar">
+                    <strong>Laura Méndez</strong>
+                    <span>442-555-0101</span>
+                    <span>laura.mendez@email.com</span>
+                    <small>Vital Familiar</small>
+                </div>
+
+                <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                    data-stage="nuevo"
+                    data-nombre="Carlos Rivera"
+                    data-telefono="442-555-0102"
+                    data-email="carlos.rivera@email.com"
+                    data-servicio="Vital Básica">
+                    <strong>Carlos Rivera</strong>
+                    <span>442-555-0102</span>
+                    <span>carlos.rivera@email.com</span>
+                    <small>Vital Básica</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="crm-stage" data-stage="calificado">
+            <div class="crm-stage-header">
+                <h4>Calificado</h4>
+                <span class="badge bg-green crm-stage-count">0</span>
+            </div>
+
+            <div class="crm-stage-body">
+                <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                    data-stage="calificado"
+                    data-nombre="Empresa Norte SA"
+                    data-telefono="442-555-0188"
+                    data-email="contacto@empresanorte.com"
+                    data-servicio="Vital Empresa">
+                    <strong>Empresa Norte SA</strong>
+                    <span>442-555-0188</span>
+                    <span>contacto@empresanorte.com</span>
+                    <small>Vital Empresa</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="crm-stage" data-stage="propuesta">
+            <div class="crm-stage-header">
+                <h4>Propuesta</h4>
+                <span class="badge bg-yellow crm-stage-count">0</span>
+            </div>
+
+            <div class="crm-stage-body">
+                <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                    data-stage="propuesta"
+                    data-nombre="Martha Gómez"
+                    data-telefono="442-555-0177"
+                    data-email="martha.gomez@email.com"
+                    data-servicio="Vital Adultos mayores">
+                    <strong>Martha Gómez</strong>
+                    <span>442-555-0177</span>
+                    <span>martha.gomez@email.com</span>
+                    <small>Vital Adultos mayores</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="crm-stage" data-stage="negociacion">
+            <div class="crm-stage-header">
+                <h4>Negociación</h4>
+                <span class="badge bg-red crm-stage-count">0</span>
+            </div>
+
+            <div class="crm-stage-body">
+                <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                    data-stage="negociacion"
+                    data-nombre="Grupo San Pablo"
+                    data-telefono="442-555-0199"
+                    data-email="compras@sanpablo.com"
+                    data-servicio="Vital Empresa">
+                    <strong>Grupo San Pablo</strong>
+                    <span>442-555-0199</span>
+                    <span>compras@sanpablo.com</span>
+                    <small>Vital Empresa</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal prospecto CRM -->
+<div id="modalProspectoCRM" class="modal">
+    <div class="modal-content crm-modal-content">
+        <button class="modal-close" onclick="cerrarModalProspecto()">×</button>
+
+        <h3>Detalle del prospecto</h3>
+
+        <div class="crm-stage-progress">
+            <button type="button" data-stage="nuevo" onclick="moverProspectoAEtapa('nuevo')">
+                Nuevo prospecto
+            </button>
+            <button type="button" data-stage="calificado" onclick="moverProspectoAEtapa('calificado')">
+                Calificado
+            </button>
+            <button type="button" data-stage="propuesta" onclick="moverProspectoAEtapa('propuesta')">
+                Propuesta
+            </button>
+            <button type="button" data-stage="negociacion" onclick="moverProspectoAEtapa('negociacion')">
+                Negociación
+            </button>
+        </div>
+
+        <div class="crm-detail-grid">
+            <div>
+                <label>Nombre del prospecto</label>
+                <input type="text" id="crmNombre">
+            </div>
+
+            <div>
+                <label>Teléfono</label>
+                <input type="text" id="crmTelefono">
+            </div>
+
+            <div>
+                <label>Email</label>
+                <input type="email" id="crmEmail">
+            </div>
+
+            <div>
+                <label>Servicio de membresía</label>
+                <select id="crmServicio">
+                    <option value="Vital Familiar">Vital Familiar</option>
+                    <option value="Vital Empresa">Vital Empresa</option>
+                    <option value="Vital Adultos mayores">Vital Adultos mayores</option>
+                    <option value="Vital Básica">Vital Básica</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Valor del trato</label>
+                <input type="number" id="crmValorTrato" placeholder="0.00">
+            </div>
+
+            <div class="crm-quote-box">
+                <label>Cotización</label>
+                <button class="btn btn-primary" onclick="generarCotizacionCRM()">
+                    Crear cotización
+                </button>
+
+                <div id="crmArchivoCotizacion" class="crm-quote-file">
+                    Sin cotización generada
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-actions crm-modal-actions">
+            <button class="btn btn-secondary" onclick="marcarProspectoPerdido()">Perdido</button>
+            <button class="btn btn-primary" onclick="marcarProspectoGanado()">Ganado</button>
+        </div>
+    </div>
+</div>
+<!-- Fin de la seccion de CRM ventas -->
 
         <section id="recepcion" class="section">
             <div class="grid grid-2">
@@ -1006,6 +1187,7 @@
         const titles = {
             dashboard: 'Dashboard General',
             inversionistas: 'Dashboard Inversionistas',
+            ventas: 'CRM ventas',
             recepcion: 'Admisión y Recepción de Pacientes',
             triage: 'Triage y Signos Vitales',
             consulta: 'Consulta Médica',
