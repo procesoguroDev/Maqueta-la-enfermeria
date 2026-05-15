@@ -1,0 +1,161 @@
+
+.crm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.crm-header h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.crm-subtitle {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.crm-funnel {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(230px, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.crm-stage {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #f8fafc;
+    padding: 14px;
+    min-height: 420px;
+}
+
+.crm-stage-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.crm-stage-header h4 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.crm-stage-body {
+    min-height: 320px;
+}
+
+.crm-stage.drag-over {
+    border-color: var(--primary);
+    background: #eef2ff;
+}
+
+.crm-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    transition: 0.2s;
+}
+
+.crm-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.crm-card.dragging {
+    opacity: 0.5;
+}
+
+.crm-card strong,
+.crm-card span,
+.crm-card small {
+    display: block;
+}
+
+.crm-card strong {
+    margin-bottom: 8px;
+}
+
+.crm-card span {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.crm-card small {
+    margin-top: 8px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.crm-modal-content {
+    position: relative;
+    width: min(720px, calc(100% - 32px));
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: none;
+    background: transparent;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.crm-stage-progress {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.crm-stage-progress button {
+    border: 1px solid var(--border);
+    background: #f8fafc;
+    color: var(--text-muted);
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.crm-stage-progress button.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.crm-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.crm-quote-box {
+    grid-column: span 2;
+}
+
+.crm-quote-file {
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.crm-modal-actions {
+    justify-content: space-between;
+}

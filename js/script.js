@@ -22,7 +22,8 @@ function showModule(id) {
         paciente: 'Vista del Paciente.',
         enfermeria: 'Vista de Enfermeria.',
         xray:'vista de rayos x',
-        urgency:'vista de urgencias.',
+        urgencias:'vista de urgencias.',
+        ventas:'vista dee ventas',
         investor:'inversionista.',
         sistema: 'Configuración del Sistema'
     };
