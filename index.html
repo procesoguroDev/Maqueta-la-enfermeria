@@ -12,16 +12,17 @@
     <script src="./js/xray.js"></script>
     <script src="./js/paramedic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./styles/triage.css">
     <link rel="stylesheet" href="./styles/laboratori.css">
     <link rel="stylesheet" href="./styles/enfermery.css">
     <link rel="stylesheet" href="./styles/consultation.css">
     <link rel="stylesheet" href="./styles/patient.css">
+    <link rel="stylesheet" href="./styles/urgency.css">
+    <link rel="stylesheet" href="./styles/invetors.css">
     <link rel="stylesheet" href="./styles/toast.css">
     <link rel="stylesheet" href="./styles/paramedics.css">
+    <link rel="stylesheet" href="./styles/sales.css">
     <link rel="stylesheet" href="./styles/reception.css">
     <link rel="stylesheet" href="./styles/general.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -33,6 +34,8 @@
 <body>
     <script src="./js/consultation.js"></script>
     <script src="./js/patient.js"></script>
+    <script src="./js//urgency.js"></script>
+    <script src="./js/sales.js"></script>
 
     <div id="toast-container"></div>
     <aside class="sidebar">
@@ -49,6 +52,7 @@
 
             <div class="nav-label">General</div>
             <div class="nav-item active" onclick="showModule('dashboard')"><span>📊</span> Dashboard</div>
+            <div class="nav-item" onclick="showModule('investor')"><span>💰</span> inversionistas</div>
         </div>
 
         <div class="nav-group">
@@ -58,7 +62,9 @@
             <div class="nav-item" onclick="showModule('paciente')"><span>🩺</span> Paciene</div>
             <div class="nav-item" onclick="showModule('consulta')"><span>👨‍⚕️</span> Consulta</div>
             <div class="nav-item" onclick="showModule('enfermeria')"><span>👨‍⚕️</span> Enfermeria </div>
-            <div class="nav-iteem" onclick="showModule('xray')">🩻 Rayos X</div>
+            <div class="nav-item" onclick="showModule('urgencias')"><span>🚨</span> Urgencias</div>
+            <div class="nav-item" onclick="showModule('ventas')"><span>💲</span> Ventas</div>
+            <div class="nav-iteem" onclick="showModule('xray')"><span>&nbsp;&nbsp;&nbsp;🩻 &nbsp;</span> Rayos X</div>
             <div class="nav-item" onclick="showModule('')"><span>💳</span> Caja </div>
             <div class="nav-item" onclick="showModule('')"><span>📊</span> Reportes</div>
             <div class="nav-item" onclick="showModule('laboratorio')"><span>🧪</span> Laboratorio</div>
@@ -141,6 +147,236 @@
                 </div>
             </section>
 
+            <section id="investor" class="section">
+                <div class="dashboard-header">
+                    <div>
+                        <h3>Dashboard para inversionistas</h3>
+                        <p class="dashboard-subtitle">Resumen operativo y financiero del mes actual</p>
+                    </div>
+
+                    <div class="date-filter">
+                        <label for="filtroFechaInversionistas">Filtrar por fecha</label>
+                        <input type="date" id="filtroFechaInversionistas">
+                    </div>
+                </div>
+
+                <div class="grid grid-4">
+                    <div class="card kpi">
+                        <small>Pacientes mes actual</small>
+                        <strong>684</strong>
+                        <span>+9% vs mes anterior</span>
+                    </div>
+
+                    <div class="card kpi">
+                        <small>Uso de consultorios</small>
+                        <strong>78%</strong>
+                        <span>Consultorios activos</span>
+                    </div>
+
+                    <div class="card kpi">
+                        <small>Uso cubículos urgencias</small>
+                        <strong>64%</strong>
+                        <span>Capacidad promedio</span>
+                    </div>
+
+                    <div class="card kpi">
+                        <small>Estudios laboratorio</small>
+                        <strong>312</strong>
+                        <span>Mes actual</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-4">
+                    <div class="card kpi">
+                        <small>Compras mes actual</small>
+                        <strong>$86,400</strong>
+                        <span style="color:var(--danger)">Insumos y material médico</span>
+                    </div>
+
+                    <div class="card kpi">
+                        <small>Pago a proveedores</small>
+                        <strong>$124,900</strong>
+                        <span style="color:var(--danger)">Mes actual</span>
+                    </div>
+
+                    <div class="card kpi">
+                        <small>Recepción</small>
+                        <strong>$214,300</strong>
+                        <span>Corte mensual</span>
+                    </div>
+
+                    <div class="card kpi">
+                        <small>Farmacia</small>
+                        <strong>$97,850</strong>
+                        <span>Corte mensual</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Ranking de motivos de consulta</h3>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Motivo</th>
+                                    <th>Consultas</th>
+                                    <th>%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Infección respiratoria</td>
+                                    <td>146</td>
+                                    <td>21%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Dolor abdominal</td>
+                                    <td>98</td>
+                                    <td>14%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Control de presión arterial</td>
+                                    <td>82</td>
+                                    <td>12%</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Curaciones</td>
+                                    <td>61</td>
+                                    <td>9%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Aplicación de medicamento</td>
+                                    <td>54</td>
+                                    <td>8%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card">
+                        <h3>Capacidad instalada</h3>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Área</th>
+                                    <th>Capacidad</th>
+                                    <th>Uso actual</th>
+                                    <th>Disponibilidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Consultorio 1</td>
+                                    <td>100%</td>
+                                    <td>82%</td>
+                                    <td><span class="badge text-bg-success">Disponible</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Consultorio 2</td>
+                                    <td>100%</td>
+                                    <td>74%</td>
+                                    <td><span class="badge text-bg-success">Disponible</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cubículos urgencias</td>
+                                    <td>6 cubículos</td>
+                                    <td>64%</td>
+                                    <td><span class="badge badge text-bg-warning">Moderado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Laboratorio</td>
+                                    <td>100%</td>
+                                    <td>71%</td>
+                                    <td><span class="badge badge text-bg-primary">Operativo</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Resumen financiero mensual</h3>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ingresos recepción POS</td>
+                                    <td>$214,300</td>
+                                    <td><span class="badge text-bg-success">Corte mensual</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ingresos farmacia POS</td>
+                                    <td>$97,850</td>
+                                    <td><span class="badge text-bg-success">Corte mensual</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Gastos compras</td>
+                                    <td>$86,400</td>
+                                    <td><span class="badge text-bg-warning">En revisión</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Pagos proveedores</td>
+                                    <td>$124,900</td>
+                                    <td><span class="badge text-bg-primary">Programado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card">
+                        <h3>Indicadores clave del mes</h3>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Indicador</th>
+                                    <th>Resultado</th>
+                                    <th>Tendencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pacientes atendidos</td>
+                                    <td>684</td>
+                                    <td><span class="badge text-bg-success">+9%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ticket promedio recepción</td>
+                                    <td>$313</td>
+                                    <td><span class="badge text-bg-success">+4%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ticket promedio farmacia</td>
+                                    <td>$186</td>
+                                    <td><span class="badge badge text-bg-warning">-2%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Estudios por paciente</td>
+                                    <td>0.45</td>
+                                    <td><span class="badge badge text-bg-primary">Estable</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
             <section id="recepcion" class="section">
                 <div class="container-fluid py-3">
                     <div class="card shadow-sm border-0 rounded-4">
@@ -215,7 +451,7 @@
                                     <div class="card border-0 bg-light rounded-4">
                                         <div class="card-body">
                                             <small class="text-muted">
-                                                Finalizados
+                                                Pendiente de cobro
                                             </small>
 
                                             <h2 id="stat-finalizados" class="mb-0">
@@ -226,11 +462,13 @@
                                 </div>
 
                             </div>
-
                             <ul class="nav nav-pills mb-4" id="admisionTabs">
 
                                 <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="pill"
+                                    <button
+                                        id="btn-tab-directorio"
+                                        class="nav-link active"
+                                        data-bs-toggle="pill"
                                         data-bs-target="#tab-directorio">
 
                                         Directorio de Pacientes
@@ -239,7 +477,11 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-admision">
+                                    <button
+                                        id="btn-tab-admision"
+                                        class="nav-link"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#tab-admision">
 
                                         Ficha de Ingreso
 
@@ -247,7 +489,11 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-atencion">
+                                    <button
+                                        id="btn-tab-atencion"
+                                        class="nav-link"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#tab-atencion">
 
                                         Monitor Clínico
 
@@ -517,67 +763,6 @@
                                                     </select>
 
                                                 </div>
-
-                                                <!--  <div class="col-lg-3 col-md-6">
-
-                                                    <label class="form-label fw-semibold required">
-                                                        Prioridad
-                                                    </label>
-
-                                                    <select
-                                                        id="adm-prio"
-                                                        class="form-select form-select-lg">
-
-                                                        <option value="Normal">Normal / Verde</option>
-                                                        <option value="Urgente">Urgente / Amarillo</option>
-                                                        <option value="Crítico">Crítico / Rojo</option>
-
-                                                    </select>
-
-                                                </div>
-
-                                                <div class="col-lg-3 col-md-6">
-
-                                                    <label class="form-label fw-semibold">
-                                                        Sucursal / Área
-                                                    </label>
-
-                                                    <select
-                                                        id="adm-sucursal"
-                                                        class="form-select form-select-lg">
-
-                                                        <option>Clínica Principal</option>
-                                                        <option>Urgencias</option>
-                                                        <option>Imagenología</option>
-                                                        <option>Laboratorio</option>
-                                                        <option>Enfermería</option>
-
-                                                    </select>
-
-                                                </div>
-
-                                                <div class="col-lg-3 col-md-6">
-
-                                                    <label class="form-label fw-semibold">
-                                                        Cubículo / Cama
-                                                    </label>
-
-                                                    <select
-                                                        id="adm-cubiculo"
-                                                        class="form-select form-select-lg">
-
-                                                        <option value="No asignado">No asignado</option>
-                                                        <option value="Sala de Choque">Sala de Choque</option>
-                                                        <option value="Observación 1">Observación 1</option>
-                                                        <option value="Observación 2">Observación 2</option>
-                                                        <option value="Terapia Intensiva">Terapia Intensiva</option>
-                                                        <option value="Pediatría">Pediatría</option>
-
-                                                    </select>
-
-                                                </div> 
-                                                -->
-
                                             </div>
 
                                             <!-- EXTRA CONSULTA -->
@@ -622,6 +807,43 @@
                                                 </div>
 
                                             </div>
+                                            <!-- EXTRA X-ray -->
+                                              <div id="extra-rx" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                                                    <div class="grid grid-3">
+                                                        <div><label>Estudio Solicitado</label><input type="text" id="rx-tipo" placeholder="Ej. Tele de Tórax"></div>
+                                                        <div><label>Médico Solicitante</label><input type="text" id="rx-med" placeholder="Nombre del médico"></div>
+                                                        <div>
+                                                            <label>Adjuntar Orden Médica</label>
+                                                            <input type="file" id="rx-orden" accept=".pdf, image/jpeg, image/png" style="background:#f8fafc; cursor:pointer; padding:8px;">
+                                                        </div>
+                                                    </div>
+                                                    <div style="margin-top:15px;">
+                                                        <label>Comentarios / Indicaciones Especiales</label>
+                                                        <textarea id="rx-comentarios" rows="2" placeholder="Ej. Paciente en silla de ruedas, sospecha de fractura en extremidad superior..."></textarea>
+                                                    </div>
+                                                </div>
+                                            <!-- EXTRA LAB -->
+                                             <div id="extra-lab" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                                                    <div class="grid grid-2">
+                                                        <div><label>Exámenes Solicitados</label><input type="text" id="lab-tipo" placeholder="Ej. Biometría Hemática, Química de 6 elementos"></div>
+                                                        <div><label>Médico Solicitante</label><input type="text" id="lab-med" placeholder="Nombre del médico que remite"></div>
+                                                    </div>
+                                                    <div style="margin-top:15px;">
+                                                        <label>Comentarios / Condiciones del paciente</label>
+                                                        <textarea id="lab-comentarios" rows="2" placeholder="Ej. Viene en ayuno de 8 horas, paciente geriátrico de difícil acceso venoso..."></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- EXTRA ENFERMERIA -->
+                                                <div id="extra-enfermeria" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                                                    <div class="grid grid-3">
+                                                        <div><label>Procedimiento / Inyección</label><input type="text" id="enf-proc" placeholder="Ej. Aplicación de Ketorolaco IM"></div>
+                                                        <div><label>Trae Receta Médica?</label><select id="enf-receta"><option>Sí (Física)</option><option>Sí (Digital)</option><option>No (Requiere Valoración)</option></select></div>
+                                                        <div style="display:flex; align-items:flex-end;">
+                                                            <button type="button" id="btn-firma" class="btn btn-outline" onclick="abrirFirma()">✍️ Recabar Consentimiento</button>
+                                                        </div>
+                                                    </div>
+                                                    <p style="font-size:11px; color:var(--text-muted); margin-top:10px;">* De acuerdo a la NOM, toda administración de medicamento inyectable requiere el consentimiento del paciente o responsable.</p>
+                                                </div>
 
                                             <!-- PANEL MEMBRESIA -->
                                             <div id="panel-membresia" class="bg-light border rounded-4 p-4 mt-5">
@@ -1052,7 +1274,7 @@
                 <div class="container mt-5">
                     <ul class="nav nav-tabs" id="consultationTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            <button class="nav-link active" id="home-consult-tab" data-bs-toggle="tab" data-bs-target="#home"
                                 type="button">
                                 Paciente en consulta
                             </button>
@@ -1243,7 +1465,7 @@
                                     <div class="button-container">
                                         <button class="btn btn-primary"
                                             onclick="showModalFinishConsultation()">Finalizar Atención</button>
-                                        <button class="btn btn-primary"> <a href="./assets//receta.pdf" download
+                                        <button class="btn btn-primary"> <a href="./assets//receta.pdf" download style="color: white !important;"
                                                 target="_blank"> Imprimir receta </a></button>
                                     </div>
                                 </div>
@@ -1368,7 +1590,7 @@
 
             <section id="paramedicos" class="section">
                 <div class="container mt-5">
-                    <ul class="nav nav-tabs" id="consultationTabs" role="tablist">
+                    <ul class="nav nav-tabs" id="consultationParamedicTabs" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                 data-bs-target="#activeServices" type="button">
@@ -1377,7 +1599,7 @@
                         </li>
 
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="perfil-tab" data-bs-toggle="tab" data-bs-target="#services"
+                            <button class="nav-link" id="perfil-paramedic-tab" data-bs-toggle="tab" data-bs-target="#services"
                                 type="button">
                                 Servicios activos
                             </button>
@@ -1456,14 +1678,14 @@
                     <div class="enfermeria-card">
                         <div class="enfermeria-card-header">
                             <h4>Curación</h4>
-                            <span class="badge bg-primary">En curso</span>
+                            <span class="badge text-bg-primary">En curso</span>
                         </div>
                         <p class="enfermeria-texto">1 paciente en curación.</p>
                         <div class="enfermeria-detalle">
                             <span>Paciente: Pedro Infante</span>
                             <span>Procedimiento: Limpieza y aseo</span>
                         </div>
-                        <button class="btn btn-secondary" onclick="abrirModal('modalHojaConsumoENF')">
+                        <button class="btn text-btn-secondary" onclick="abrirModal('modalHojaConsumoENF')">
                             Generar Hoja de consumo
                         </button>
                     </div>
@@ -1471,7 +1693,7 @@
                     <div class="enfermeria-card">
                         <div class="enfermeria-card-header">
                             <h4>Aplicación de medicamento</h4>
-                            <span class="badge bg-warning">Pendiente</span>
+                            <span class="badge text-bg-warning">Pendiente</span>
                         </div>
                         <p class="enfermeria-texto">2 medicamentos pendientes por aplicar.</p>
                         <div class="enfermeria-detalle">
@@ -1487,7 +1709,7 @@
                     <div class="enfermeria-card">
                         <div class="enfermeria-card-header">
                             <h4>Urgencias</h4>
-                            <span class="badge bg-danger">Prioritario</span>
+                            <span class="badge text-bg-danger">Prioritario</span>
                         </div>
                         <p class="enfermeria-texto">1 paciente requiere atención de enfermería.</p>
                         <div class="enfermeria-detalle">
@@ -1609,39 +1831,46 @@
                         </div>
 
                         <!-- TABS -->
-                        <ul class="nav nav-tabs mb-4" id="xrayTabs">
-
+                        <ul class="nav nav-tabs mb-4" id="xray-tabs">
                             <li class="nav-item">
+
                                 <button
                                     class="nav-link active"
+                                    id="xray-espera-tab"
                                     data-bs-toggle="tab"
-                                    data-bs-target="#tab-espera"
+                                    data-bs-target="#xray-espera"
                                     type="button"
                                 >
                                     Sala de Espera RX
                                 </button>
+
                             </li>
 
                             <li class="nav-item">
                                 <button
                                     class="nav-link"
+                                    id="xray-captura-tab"
                                     data-bs-toggle="tab"
-                                    data-bs-target="#tab-captura"
+                                    data-bs-target="#xray-captura"
                                     type="button"
                                 >
                                     Captura de Estudio
                                 </button>
+
                             </li>
 
                             <li class="nav-item">
+
                                 <button
                                     class="nav-link"
+                                    id="xray-interpretacion-tab"
                                     data-bs-toggle="tab"
-                                    data-bs-target="#tab-interpretacion"
+                                    data-bs-target="#xray-interpretacion"
                                     type="button"
                                 >
                                     Interpretaciones
                                 </button>
+
                             </li>
 
                         </ul>
@@ -1654,7 +1883,7 @@
 
                             <div
                                 class="tab-pane fade show active"
-                                id="tab-espera"
+                                id="xray-espera"
                             >
 
                                 <div class="card border-0 shadow-sm">
@@ -1751,7 +1980,7 @@
 
                             <div
                                 class="tab-pane fade"
-                                id="tab-captura"
+                                id="xray-captura"
                             >
 
                                 <div class="card border-0 shadow-sm">
@@ -1796,6 +2025,7 @@
                                                 <input
                                                     type="text"
                                                     class="form-control"
+                                                    placeholder="#RX-1042"
                                                     id="cap-folio"
                                                     readonly
                                                 >
@@ -1860,6 +2090,7 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="cap-tecnico"
+                                                    placeholder="Dr. Roberto Ramirez"
                                                 >
 
                                             </div>
@@ -2024,7 +2255,7 @@
 
                             <div
                                 class="tab-pane fade"
-                                id="tab-interpretacion"
+                                id="xray-interpretacion"
                             >
 
                                 <div class="card border-0 shadow-sm">
@@ -2125,6 +2356,126 @@
 
             </section>
 
+            <section id="urgencias" class="section">
+                <div class="card patient-card">
+
+                    <div class="card-header">
+
+                        <span class="status-pill bg-red">
+                            🔴 PRIORIDAD CRÍTICA
+                        </span>
+
+                        <div class="d-flex justify-content-between align-items-center header-flex">
+
+                            <div>
+                                <h3 class="patient-name">
+                                    Pedro Infante Cruz
+                                </h3>
+
+                                <div class="patient-info">
+                                    URG-045 • 39 años • <b>Cama 02</b>
+                                </div>
+                            </div>
+
+                            <div class="timer" id="timer-pedro">
+                                02:10:45
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="vitals-row">
+
+                            <div class="vital-tag">
+                                <small>T/A</small>
+                                <strong>120/80</strong>
+                            </div>
+
+                            <div class="vital-tag">
+                                <small>FC</small>
+                                <strong>78</strong>
+                            </div>
+
+                            <div class="vital-tag">
+                                <small>T°</small>
+                                <strong>36.6</strong>
+                            </div>
+
+                            <div class="vital-tag">
+                                <small>SpO2</small>
+                                <strong>98%</strong>
+                            </div>
+
+                            <div class="vital-tag">
+                                <small>GLU</small>
+                                <strong>105</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="section-title" id="estudios-pedro">
+                            <small> ESTUDIOS REALIZADOS </small>
+                            <div class="study-view">
+                                <b>🩻 RAYOS X CRÁNEO</b>
+                                Interpretación: Sin trazos de fractura evidentes.
+                            </div>
+                        </div>
+
+                        
+
+
+                        <div class="timeline" id="timeline-patient">
+
+                            <div class="timeline-item">
+                                <b>12:15 PM - Evolución:</b>
+                                Paciente estable tras analgésico.
+                            </div>
+
+                            <div class="timeline-item">
+                                <b>10:45 AM - Ingreso:</b>
+                                Traumatismo craneoencefálico leve.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+
+                        <button class="btn btn-outline-secondary btn-custom" onclick="openModal('mod-signos')">
+                            🩺 Signos
+                        </button>
+
+                        <button class="btn btn-outline-secondary btn-custom" onclick="openModal('mod-nota')">
+                            📋 Nota Med.
+                        </button>
+
+                        <button class="btn btn-outline-secondary btn-custom" onclick="openModal('mod-estudios')">
+                            🩻 Estudios
+                        </button>
+
+                        <button class="btn btn-outline-secondary btn-custom" onclick="openModal('mod-insumos')">
+                            💊 Insumos
+                        </button>
+
+                        <button class="btn btn-success btn-custom btn-success-custom" onclick="openModal('mod-alta')">
+                            ✅ Alta
+                        </button>
+
+                        <button class="btn btn-danger btn-custom" onclick="openModal('mod-referencia')">
+                            🚑 Ref.
+                        </button>
+
+                    </div>
+
+                </div>
+            </section>
+
             <section id="compras" class="section">
                 <div class="grid grid-2">
                     <div class="card">
@@ -2153,6 +2504,114 @@
                     <div class="card">
                         <h3>Historial OC</h3>
                         <div style="font-size:12px;">OC-550 - Autorizada - $4,500</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ventas" class="section">
+                <div class="crm-header">
+                    <div>
+                        <h3>CRM de Ventas</h3>
+                        <p class="crm-subtitle">Embudo de prospectos para membresías</p>
+                    </div>
+                </div>
+
+                <div class="crm-funnel">
+                    <div class="crm-stage" data-stage="nuevo">
+                        <div class="crm-stage-header">
+                            <h4>Nuevo prospecto</h4>
+                            <span class="badge text-bg-primary crm-stage-count">0</span>
+                        </div>
+
+                        <div class="crm-stage-body">
+                            <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                                data-stage="nuevo"
+                                data-nombre="Laura Méndez"
+                                data-telefono="442-555-0101"
+                                data-email="laura.mendez@email.com"
+                                data-servicio="Vital Familiar">
+                                <strong>Laura Méndez</strong>
+                                <span>442-555-0101</span>
+                                <span>laura.mendez@email.com</span>
+                                <small>Vital Familiar</small>
+                            </div>
+
+                            <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                                data-stage="nuevo"
+                                data-nombre="Carlos Rivera"
+                                data-telefono="442-555-0102"
+                                data-email="carlos.rivera@email.com"
+                                data-servicio="Vital Básica">
+                                <strong>Carlos Rivera</strong>
+                                <span>442-555-0102</span>
+                                <span>carlos.rivera@email.com</span>
+                                <small>Vital Básica</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="crm-stage" data-stage="calificado">
+                        <div class="crm-stage-header">
+                            <h4>Calificado</h4>
+                            <span class="badge text-bg-success crm-stage-count">0</span>
+                        </div>
+
+                        <div class="crm-stage-body">
+                            <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                                data-stage="calificado"
+                                data-nombre="Empresa Norte SA"
+                                data-telefono="442-555-0188"
+                                data-email="contacto@empresanorte.com"
+                                data-servicio="Vital Empresa">
+                                <strong>Empresa Norte SA</strong>
+                                <span>442-555-0188</span>
+                                <span>contacto@empresanorte.com</span>
+                                <small>Vital Empresa</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="crm-stage" data-stage="propuesta">
+                        <div class="crm-stage-header">
+                            <h4>Propuesta</h4>
+                            <span class="badge text-bg-warning">0</span>
+                        </div>
+
+                        <div class="crm-stage-body">
+                            <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                                data-stage="propuesta"
+                                data-nombre="Martha Gómez"
+                                data-telefono="442-555-0177"
+                                data-email="martha.gomez@email.com"
+                                data-servicio="Vital Adultos mayores">
+                                <strong>Martha Gómez</strong>
+                                <span>442-555-0177</span>
+                                <span>martha.gomez@email.com</span>
+                                <small>Vital Adultos mayores</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="crm-stage" data-stage="negociacion">
+                        <div class="crm-stage-header">
+                            <h4>Negociación</h4>
+                            <span class="badge text-bg-danger crm-stage-count">0</span>
+                        </div>
+
+                        <div class="crm-stage-body">
+                            <div class="crm-card" draggable="true" onclick="abrirModalProspecto(this)"
+                                data-stage="negociacion"
+                                data-nombre="Grupo San Pablo"
+                                data-telefono="442-555-0199"
+                                data-email="compras@sanpablo.com"
+                                data-servicio="Vital Empresa">
+                                <strong>Grupo San Pablo</strong>
+                                <span>442-555-0199</span>
+                                <span>compras@sanpablo.com</span>
+                                <small>Vital Empresa</small>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -2552,6 +3011,235 @@
             </div>
         </div>
     </div>
+
+    <div id="mod-estudio-ok" class="modal">
+        <!-- modal-dialog moodal-dialog-centered modal-lg -->
+         <div class=" modal-dialog moodal-dialog-centered modal-lg ">
+            <div class="modal-content">
+                <h2 style="margin:0">Estudio Capturado</h2>
+                <p style="color:var(--text-muted); font-size:14px;">Las imágenes se han anexado correctamente al expediente del paciente.</p>
+                <div style="background:#f1f5f9; padding:25px; border-radius:15px; margin:20px 0; border:2px dashed #cbd5e1; text-align:center;">
+                    <div style="font-size:50px; margin-bottom:10px;">🩻✅</div>
+                    <small style="font-weight:900; color:var(--primary);">ESTADO ACTUALIZADO</small>
+                    <div style="font-size:18px; font-weight:600; color:var(--sidebar); margin-top:5px;">Enviado a Interpretación</div>
+                </div>
+                <button class="btn btn-primary" onclick="cerrarModal('mod-estudio-ok')" style="width:100%; padding:12px;">Volver a Sala de Espera</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-orden-medica" class="modal">
+        <div class=" modal-dialog moodal-dialog-centered modal-lg">
+            <div class="modal-content" style="width: min(600px, 95%);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h3 style="margin:0">Orden Médica Adjunta</h3>
+                    <button class="btn btn-outline" style="padding: 5px 10px;" onclick="cerrarModal('mod-orden-medica')">Cerrar</button>
+                </div>
+                
+                <div style="background:#f8fafc; border:1px solid var(--border); padding:10px; text-align:center; border-radius:8px; max-height: 60vh; overflow-y: auto;">
+                    <img id="img-orden-medica" src="https://via.placeholder.com/500x700.png?text=Fotograf%C3%ADa+o+Escaneo+de+la+Receta+de+Recepci%C3%B3n" alt="Orden Médica Escaneada" style="max-width:100%; height:auto; border-radius:4px;">
+                </div>
+                
+                <div style="margin-top: 15px; text-align: right;">
+                    <button class="btn btn-primary" onclick="cerrarModal('mod-orden-medica')">Confirmar lectura</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-signos" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Actualizar Signos Vitales</h3>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <input type="text" id="vital-sign-note-ta" placeholder="T/A (Ej. 120/80)">
+                    <input type="text" id="type-sign" placeholder="F. Cardiaca">
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="btn btn-sm btn-outline-danger" onclick="cerrarModal('mod-signos')">Cancelar</button>
+                    <button 
+                        class="btn btn-sm btn-primary" 
+                        onclick="addNote('SIGNOS', 'Toma de signos vitales actualizada.'); 
+                        cerrarModal('mod-signos')"
+                    >Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="mod-nota" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Nota de Evolución / Seguimiento</h3>
+                <textarea id="txt-nota" rows="5" placeholder="Escriba los hallazgos médicos actuales..."></textarea>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="btn btn-sm btn-outline-danger" onclick="cerrarModal('mod-nota')">Cancelar</button>
+                    <button 
+                        class="btn btn-sm btn-primary"
+                        onclick="guardarEvolucion()"
+                    >Guardar Nota</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-estudios" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Solicitud y Resultados de Estudios</h3>
+                <select id="sel-estudio">
+                    <option>Electrocardiograma</option>
+                    <option>Laboratorio (BH/QS)</option>
+                    <option>Rayos X</option>
+                    <option>Ultrasonido</option>
+                </select>
+                <textarea id="res-estudio" rows="3" placeholder="Capture el resultado o interpretación aquí..."></textarea>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="btn btn-sm btn-outline-danger" onclick="cerrarModal('mod-estudios')">Cancelar</button>
+                    <button 
+                        class="btn btn-sm btn-primary" 
+                        onclick="guardarEstudio()" 
+                        
+                    >Registrar Estudio</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="mod-insumos" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Carga de Insumos (Enfermería)</h3>
+                <p style="font-size:12px; color:var(--text-muted)">Estos artículos se sumarán a la cuenta en Recepción.</p>
+                <select id="sel-insumo">
+                    <option>Solución Salina 500ml</option>
+                    <option>Ketorolaco Ampolleta</option>
+                    <option>Jeringa 5ml</option>
+                    <option>Catéter Venoso #20</option>
+                </select>
+                <input type="number" id="qty-insumo" value="1">
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="btn btn-sm btn-outline-danger" onclick="cerrarModal('mod-insumos')">Cancelar</button>
+                    <button class="btn btn-sm btn-primary" onclick="guardarInsumo()">Cargar a Cuenta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-alta" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Cierre de Estancia / Alta Médica</h3>
+                <textarea id="plan-alta" rows="4" placeholder="Instrucciones de egreso y signos de alarma..."></textarea>
+                <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; margin-top: 15px;">
+                    <small style="font-weight: 800; color: var(--primary);">RESUMEN PARA CAJA:</small>
+                    <div style="font-size: 11px;">• Estancia Urgencias<br>• Cargos de Insumos y Estudios Registrados</div>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="btn btn-sm btn-outline-danger" onclick="cerrarModal('mod-referencia')">Cancelar</button>
+                    <button class="btn btn-sm btn-success" onclick="finalizarTodo()">Confirmar Alta y Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-referencia" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="width: 750px;">
+                <div id="hoja-ref" style="border: 2px solid #000; padding: 25px; font-family: 'Courier New', monospace; background: white;">
+                    <h2 style="text-align:center; border-bottom: 2px solid #000; margin: 0 0 15px 0;">HOJA DE REFERENCIA (TRASLADO)</h2>
+                    <div style="font-size: 13px;">
+                        <strong>PACIENTE:</strong> PEDRO INFANTE CRUZ | 39 AÑOS<br>
+                        <strong>UNIDAD RECEPTORA:</strong> [HOSPITAL 2DO NIVEL]<br>
+                        <hr>
+                        <strong>ESTUDIOS ADJUNTOS:</strong><br>
+                        <div id="ref-estudios-lista">- Rx Cráneo (Reporte Incluido)</div>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+                    <button class="btn btn-sm btn-outline-danger" onclick="cerrarModal('mod-referencia')">Cerrar</button>
+                    <button class="btn btn-sm btn-outline-secundary" onclick="window.print()">Imprimir Traslado</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal prospecto CRM -->
+    <div id="modalProspectoCRM" class="modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content crm-modal-content">
+                <button class="modal-close" onclick="cerrarModalProspecto()">×</button>
+
+                <h3>Detalle del prospecto</h3>
+
+                <div class="crm-stage-progress">
+                    <button type="button" data-stage="nuevo" onclick="moverProspectoAEtapa('nuevo')">
+                        Nuevo prospecto
+                    </button>
+                    <button type="button" data-stage="calificado" onclick="moverProspectoAEtapa('calificado')">
+                        Calificado
+                    </button>
+                    <button type="button" data-stage="propuesta" onclick="moverProspectoAEtapa('propuesta')">
+                        Propuesta
+                    </button>
+                    <button type="button" data-stage="negociacion" onclick="moverProspectoAEtapa('negociacion')">
+                        Negociación
+                    </button>
+                </div>
+
+                <div class="crm-detail-grid">
+                    <div>
+                        <label>Nombre del prospecto</label>
+                        <input type="text" id="crmNombre">
+                    </div>
+
+                    <div>
+                        <label>Teléfono</label>
+                        <input type="text" id="crmTelefono">
+                    </div>
+
+                    <div>
+                        <label>Email</label>
+                        <input type="email" id="crmEmail">
+                    </div>
+
+                    <div>
+                        <label>Servicio de membresía</label>
+                        <select id="crmServicio">
+                            <option value="Vital Familiar">Vital Familiar</option>
+                            <option value="Vital Empresa">Vital Empresa</option>
+                            <option value="Vital Adultos mayores">Vital Adultos mayores</option>
+                            <option value="Vital Básica">Vital Básica</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Valor del trato</label>
+                        <input type="number" id="crmValorTrato" placeholder="0.00">
+                    </div>
+
+                    <div class="crm-quote-box">
+                        <label>Cotización</label>
+                        <button class="btn btn-primary" onclick="generarCotizacionCRM()">
+                            Crear cotización
+                        </button>
+
+                        <div id="crmArchivoCotizacion" class="crm-quote-file">
+                            Sin cotización generada
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions crm-modal-actions">
+                    <button class="btn btn-secondary" onclick="marcarProspectoPerdido()">Perdido</button>
+                    <button class="btn btn-primary" onclick="marcarProspectoGanado()">Ganado</button>
+                </div>
+            </div>
+        </div>  
+    </div>
+
     <!-- fin -->
 
 
@@ -2559,6 +3247,10 @@
 
     <script src="./js/enfermeri.js"></script>
 
+   
+
+
 </body>
 
 </html>
+

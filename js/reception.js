@@ -72,9 +72,9 @@ const CONFIG_MEM = {
 
     function toggleExtra(v) {
         document.getElementById('extra-consulta').style.display = (v === 'consulta' || v === 'urgencias') ? 'block' : 'none';
+        document.getElementById('extra-enfermeria').style.display = (v === 'enfermeria') ? 'block' : 'none';
         document.getElementById('extra-rx').style.display = (v === 'rx') ? 'block' : 'none';
         document.getElementById('extra-lab').style.display = (v === 'laboratorio') ? 'block' : 'none';
-        document.getElementById('extra-enfermeria').style.display = (v === 'enfermeria') ? 'block' : 'none';
     }
 
     // --- CANVAS DE FIRMA ---
@@ -141,9 +141,9 @@ const CONFIG_MEM = {
     function limpiarCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         consentimientoFirmado = false;
-        const btn = document.getElementById('btn-firma');
+        /* const btn = document.getElementById('btn-firma');
         btn.className = 'btn btn-outline';
-        btn.innerHTML = '✍️ Recabar Consentimiento';
+        btn.innerHTML = '✍️ Recabar Consentimiento'; */
     }
 
     function guardarFirma() {
@@ -196,23 +196,28 @@ const CONFIG_MEM = {
 
     // --- ADMISIÓN RÁPIDA ---
     function quickAdm(curp) {
-        limpiarForm(); 
-        const p = pacientesDirectorio.find(pac => pac.curp === curp);
-        if(!p) return;
-        
-        document.getElementById('adm-nom').value = p.nom;
-        document.getElementById('adm-pat').value = p.pat;
-        document.getElementById('adm-mat').value = p.mat || '';
-        document.getElementById('adm-curp').value = p.curp;
-        document.getElementById('adm-tel').value = p.tel;
-        document.getElementById('adm-correo').value = p.correo || '';
-        
-        handleCURP(p.curp);
-        document.getElementById('adm-tipo-paciente').value = p.mem ? 'Membresía' : 'Particular';
-        mostrarMembresia(p.mem);
-        
-        document.getElementById('btn-tab-admision').click();
-        document.getElementById('main-scroll').scrollTop = 0;
+        try {
+            limpiarForm(); 
+            const p = pacientesDirectorio.find(pac => pac.curp === curp);
+            if(!p) return;
+            
+            document.getElementById('adm-nom').value = p.nom;
+            document.getElementById('adm-pat').value = p.pat;
+            document.getElementById('adm-mat').value = p.mat || '';
+            document.getElementById('adm-curp').value = p.curp;
+            document.getElementById('adm-tel').value = p.tel;
+            document.getElementById('adm-correo').value = p.correo || '';
+            
+            handleCURP(p.curp);
+            document.getElementById('adm-tipo-paciente').value = p.mem ? 'Membresía' : 'Particular';
+            mostrarMembresia(p.mem);
+            const triggerEl = document.getElementById('btn-tab-admision');
+            const tab = new bootstrap.Tab(triggerEl);
+            tab.show();
+        } 
+        catch (error) {
+            console.error('error', error)    
+        }
     }
 
     function mostrarMembresia(mem) {
@@ -255,26 +260,31 @@ const CONFIG_MEM = {
     }
 
     function completarDatos(i) {
-        editIndex = i;
-        const p = pacientesActivos[i];
-        
-        limpiarForm();
-        
-        document.getElementById('adm-serv').value = p.servicio;
-        document.getElementById('adm-prio').value = p.prioridad;
-        document.getElementById('adm-sucursal').value = 'Urgencias';
-        
-        if(p.cubiculo !== 'No asignado') {
-            document.getElementById('adm-cubiculo').value = p.cubiculo;
-        }
+        try {
+            editIndex = i;
+            const p = pacientesActivos[i];
+            
+            limpiarForm();
+            
+           /*  document.getElementById('adm-serv').value = p.servicio;
+            document.getElementById('adm-prio').value = p.prioridad;
+            document.getElementById('adm-sucursal').value = 'Urgencias'; 
+            
+            if(p.cubiculo !== 'No asignado') {
+                document.getElementById('adm-cubiculo').value = p.cubiculo;
+            }*/
 
-        toggleExtra(p.servicio);
-        openSubTab(null, 'tab-admision');
-        
-        document.getElementById('btn-guardar-adm').innerText = "Actualizar Datos y Cubículo";
-        document.getElementById('main-scroll').scrollTop = 0;
-        
-        alert("📝 Complete el nombre, CURP y asigne el cubículo de observación para este paciente.");
+            toggleExtra(p.servicio);
+            openSubTab(null, 'tab-admision');
+            
+            document.getElementById('btn-guardar-adm').innerText = "Actualizar Datos y Cubículo";
+            document.getElementById('main-scroll').scrollTop = 0;
+            
+            alert("📝 Complete el nombre, CURP y asigne el cubículo de observación para este paciente.");
+        } 
+        catch (error) {
+            console.error('seerver error', error)    
+        }
     }
 
     function finalizarNormal() {
@@ -282,8 +292,8 @@ const CONFIG_MEM = {
         const pat = document.getElementById('adm-pat').value.trim();
         const curp = document.getElementById('adm-curp').value.trim();
         const serv = document.getElementById('adm-serv').value;
-        const cub = document.getElementById('adm-cubiculo').value;
-        const prio = document.getElementById('adm-prio').value;
+        // const cub = document.getElementById('adm-cubiculo').value;
+        // const prio = document.getElementById('adm-prio').value;
         
         if(!nom || !pat || !curp || !serv) {
             return alert("Por favor complete los campos obligatorios marcados con (*)");
@@ -300,8 +310,6 @@ const CONFIG_MEM = {
         if (editIndex !== null) {
             pacientesActivos[editIndex].nombre = `${nom} ${pat}`;
             pacientesActivos[editIndex].servicio = serv;
-            pacientesActivos[editIndex].prioridad = prio;
-            pacientesActivos[editIndex].cubiculo = cub;
             
             guardarYSincronizar();
             alert("✅ Datos del paciente actualizados correctamente.");
@@ -309,16 +317,12 @@ const CONFIG_MEM = {
             document.getElementById('btn-tab-atencion').click();
             return; 
         }
-
-        const prefijo = prio === 'Crítico' || serv === 'urgencias' ? 'URG' : 'ADM';
-        const folio = `${prefijo}-${nFolio++}`;
+        const folio = `ADM-${nFolio++}`;
         
         const pac = {
             folio,
             nombre: `${nom} ${pat}`,
             servicio: serv,
-            prioridad: prio,
-            cubiculo: cub,
             hora: new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})
         };
 
@@ -437,11 +441,13 @@ const CONFIG_MEM = {
         
         document.getElementById('adm-sexo').value = '';
         document.getElementById('adm-serv').value = '';
+        /* 
         document.getElementById('adm-prio').value = 'Normal';
         document.getElementById('adm-tipo-paciente').value = 'Particular';
         document.getElementById('adm-pago').value = 'Efectivo';
         document.getElementById('adm-sucursal').value = 'Clínica Principal';
-        document.getElementById('adm-cubiculo').value = 'No asignado';
+        document.getElementById('adm-cubiculo').value = 'No asignado'; 
+        */
         document.getElementById('adm-motivo-sel').value = '';
         
         limpiarCanvas(); // IMPORTANTE: Reseteamos la firma
