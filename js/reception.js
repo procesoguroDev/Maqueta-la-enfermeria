@@ -72,9 +72,9 @@ const CONFIG_MEM = {
 
     function toggleExtra(v) {
         document.getElementById('extra-consulta').style.display = (v === 'consulta' || v === 'urgencias') ? 'block' : 'none';
-        /* document.getElementById('extra-rx').style.display = (v === 'rx') ? 'block' : 'none';
+        document.getElementById('extra-enfermeria').style.display = (v === 'enfermeria') ? 'block' : 'none';
+        document.getElementById('extra-rx').style.display = (v === 'rx') ? 'block' : 'none';
         document.getElementById('extra-lab').style.display = (v === 'laboratorio') ? 'block' : 'none';
-        document.getElementById('extra-enfermeria').style.display = (v === 'enfermeria') ? 'block' : 'none'; */
     }
 
     // --- CANVAS DE FIRMA ---

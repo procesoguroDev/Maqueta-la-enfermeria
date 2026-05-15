@@ -572,6 +572,43 @@
                                                 </div>
 
                                             </div>
+                                            <!-- EXTRA X-ray -->
+                                              <div id="extra-rx" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                                                    <div class="grid grid-3">
+                                                        <div><label>Estudio Solicitado</label><input type="text" id="rx-tipo" placeholder="Ej. Tele de Tórax"></div>
+                                                        <div><label>Médico Solicitante</label><input type="text" id="rx-med" placeholder="Nombre del médico"></div>
+                                                        <div>
+                                                            <label>Adjuntar Orden Médica</label>
+                                                            <input type="file" id="rx-orden" accept=".pdf, image/jpeg, image/png" style="background:#f8fafc; cursor:pointer; padding:8px;">
+                                                        </div>
+                                                    </div>
+                                                    <div style="margin-top:15px;">
+                                                        <label>Comentarios / Indicaciones Especiales</label>
+                                                        <textarea id="rx-comentarios" rows="2" placeholder="Ej. Paciente en silla de ruedas, sospecha de fractura en extremidad superior..."></textarea>
+                                                    </div>
+                                                </div>
+                                            <!-- EXTRA LAB -->
+                                             <div id="extra-lab" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                                                    <div class="grid grid-2">
+                                                        <div><label>Exámenes Solicitados</label><input type="text" id="lab-tipo" placeholder="Ej. Biometría Hemática, Química de 6 elementos"></div>
+                                                        <div><label>Médico Solicitante</label><input type="text" id="lab-med" placeholder="Nombre del médico que remite"></div>
+                                                    </div>
+                                                    <div style="margin-top:15px;">
+                                                        <label>Comentarios / Condiciones del paciente</label>
+                                                        <textarea id="lab-comentarios" rows="2" placeholder="Ej. Viene en ayuno de 8 horas, paciente geriátrico de difícil acceso venoso..."></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- EXTRA ENFERMERIA -->
+                                                <div id="extra-enfermeria" style="display:none; margin-top:20px; padding-top:15px; border-top:1px dashed var(--border);">
+                                                    <div class="grid grid-3">
+                                                        <div><label>Procedimiento / Inyección</label><input type="text" id="enf-proc" placeholder="Ej. Aplicación de Ketorolaco IM"></div>
+                                                        <div><label>Trae Receta Médica?</label><select id="enf-receta"><option>Sí (Física)</option><option>Sí (Digital)</option><option>No (Requiere Valoración)</option></select></div>
+                                                        <div style="display:flex; align-items:flex-end;">
+                                                            <button type="button" id="btn-firma" class="btn btn-outline" onclick="abrirFirma()">✍️ Recabar Consentimiento</button>
+                                                        </div>
+                                                    </div>
+                                                    <p style="font-size:11px; color:var(--text-muted); margin-top:10px;">* De acuerdo a la NOM, toda administración de medicamento inyectable requiere el consentimiento del paciente o responsable.</p>
+                                                </div>
 
                                             <!-- PANEL MEMBRESIA -->
                                             <div id="panel-membresia" class="bg-light border rounded-4 p-4 mt-5">
