@@ -22,6 +22,7 @@ function showModule(id) {
         paciente: 'Vista del Paciente.',
         enfermeria: 'Vista de Enfermeria.',
         xray:'vista de rayos x',
+        urgency:'vista de urgencias.',
         sistema: 'Configuración del Sistema'
     };
     document.getElementById('module-title').innerText = titles[id];

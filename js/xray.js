@@ -26,33 +26,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función que simula el llamado del paciente desde sala de espera
 function llamarPaciente(folio) {
+
     try {
 
-        // Actualizar datos de la cabecera
-        document.getElementById('paciente-actual-rx').innerText = "Luis Alberto Mendoza (#" + folio + ")";
+        // Actualizar datos
+        document.getElementById('paciente-actual-rx').innerText =
+            "Luis Alberto Mendoza (#" + folio + ")";
 
-        // Rellenar formulario de captura
+        // Formulario
         document.getElementById('cap-folio').value = folio;
-        document.getElementById('cap-medico').value = "Dr. C. Ramírez (Urgencias)";
 
-        // Insertar las indicaciones clínicas de Recepción/Consulta
+        document.getElementById('cap-medico').value =
+            "Dr. C. Ramírez (Urgencias)";
+
         document.getElementById('cap-indicaciones').value =
             "🔴 URGENCIA: Caída de propia altura.\n" +
-            "♿ Condición: Paciente llega en silla de ruedas, dolor severo (8/10).\n" +
-            "📋 Objetivo: Descartar fractura de fémur proximal derecho. Favor de ayudar con el traslado a la mesa.";
+            "♿ Condición: Paciente llega en silla de ruedas.\n" +
+            "📋 Objetivo: Descartar fractura.";
 
-        // Cambiar automáticamente a la pestaña de Captura
-        // document.getElementById('btn-tab-captura').click();
-        const triggerEl = document.querySelector('#xray-captura');
-        console.log(triggerEl)
-        const tab = new bootstrap.Tab(triggerEl);
+        // CAMBIAR TAB
+        const triggerEl =
+            document.getElementById('xray-captura-tab');
+
+        const tab =
+            new bootstrap.Tab(triggerEl);
 
         tab.show();
+
     }
     catch (error) {
-        console.error('error',error)    
+
+        console.error(error);
+
     }
-    
+
 }
 
 // Abrir modal de la orden médica

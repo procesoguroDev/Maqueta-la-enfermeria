@@ -57,6 +57,7 @@
             <div class="nav-item" onclick="showModule('paciente')"><span>🩺</span> Paciene</div>
             <div class="nav-item" onclick="showModule('consulta')"><span>👨‍⚕️</span> Consulta</div>
             <div class="nav-item" onclick="showModule('enfermeria')"><span>👨‍⚕️</span> Enfermeria </div>
+            <div class="nav-item" onclick="showModule('urgency')">🚨 Urgencias</div>
             <div class="nav-iteem" onclick="showModule('xray')">🩻 Rayos X</div>
             <div class="nav-item" onclick="showModule('')"><span>💳</span> Caja </div>
             <div class="nav-item" onclick="showModule('')"><span>📊</span> Reportes</div>
@@ -1803,6 +1804,7 @@
                                                 <input
                                                     type="text"
                                                     class="form-control"
+                                                    placeholder="#RX-1042"
                                                     id="cap-folio"
                                                     readonly
                                                 >
@@ -2130,6 +2132,51 @@
 
                 </div>
 
+            </section>
+
+            <section id="urgency" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="status-pill bg-red">🔴 PRIORIDAD CRÍTICA</span>
+                        <div style="display:flex; justify-content:space-between; align-items: center;">
+                            <h3 style="margin:0;">Pedro Infante Cruz</h3>
+                            <strong style="color:var(--danger)" id="timer-pedro">02:10:45</strong>
+                        </div>
+                        <small style="color:var(--text-muted)">URG-045 • 39 años • <b>Cama 02</b></small>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="vitals-row">
+                            <div class="vital-tag"><small>T/A</small><strong>120/80</strong></div>
+                            <div class="vital-tag"><small>FC</small><strong>78</strong></div>
+                            <div class="vital-tag"><small>T°</small><strong>36.6</strong></div>
+                            <div class="vital-tag"><small>SpO2</small><strong>98%</strong></div>
+                            <div class="vital-tag"><small>GLU</small><strong>105</strong></div>
+                        </div>
+
+                        <div id="estudios-pedro">
+                            <small style="font-weight: 800; color: var(--primary);">ESTUDIOS REALIZADOS</small>
+                            <div class="study-view">
+                                <b>🩻 RAYOS X CRÁNEO</b>
+                                Interpretación: Sin trazos de fractura evidentes.
+                            </div>
+                        </div>
+
+                        <div class="timeline" id="timeline-pedro">
+                            <div class="timeline-item"><b>12:15 PM - Evolución:</b> Paciente estable tras analgésico.</div>
+                            <div class="timeline-item"><b>10:45 AM - Ingreso:</b> Traumatismo craneoencefálico leve.</div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn-sm btn-outline" onclick="openModal('mod-signos')">🩺 Signos</button>
+                        <button class="btn-sm btn-outline" onclick="openModal('mod-nota')">📋 Nota Med.</button>
+                        <button class="btn-sm btn-outline" onclick="openModal('mod-estudios')">🩻 Estudios</button>
+                        <button class="btn-sm btn-outline" onclick="openModal('mod-insumos')">💊 Insumos</button>
+                        <button class="btn-sm btn-success" style="margin-left: auto;" onclick="openModal('mod-alta')">✅ Alta</button>
+                        <button class="btn-sm btn-danger" onclick="openModal('mod-referencia')">🚑 Ref.</button>
+                    </div>
+                </div>
             </section>
 
             <section id="compras" class="section">
@@ -2559,12 +2606,48 @@
             </div>
         </div>
     </div>
+
+    <div id="mod-estudio-ok" class="modal">
+        <!-- modal-dialog moodal-dialog-centered modal-lg -->
+         <div class=" modal-dialog moodal-dialog-centered modal-lg ">
+            <div class="modal-content">
+                <h2 style="margin:0">Estudio Capturado</h2>
+                <p style="color:var(--text-muted); font-size:14px;">Las imágenes se han anexado correctamente al expediente del paciente.</p>
+                <div style="background:#f1f5f9; padding:25px; border-radius:15px; margin:20px 0; border:2px dashed #cbd5e1; text-align:center;">
+                    <div style="font-size:50px; margin-bottom:10px;">🩻✅</div>
+                    <small style="font-weight:900; color:var(--primary);">ESTADO ACTUALIZADO</small>
+                    <div style="font-size:18px; font-weight:600; color:var(--sidebar); margin-top:5px;">Enviado a Interpretación</div>
+                </div>
+                <button class="btn btn-primary" onclick="cerrarModal('mod-estudio-ok')" style="width:100%; padding:12px;">Volver a Sala de Espera</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-orden-medica" class="modal">
+        <div class=" modal-dialog moodal-dialog-centered modal-lg ">
+            <div class="modal-content" style="width: min(600px, 95%);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h3 style="margin:0">Orden Médica Adjunta</h3>
+                    <button class="btn btn-outline" style="padding: 5px 10px;" onclick="cerrarModal('mod-orden-medica')">Cerrar</button>
+                </div>
+                
+                <div style="background:#f8fafc; border:1px solid var(--border); padding:10px; text-align:center; border-radius:8px; max-height: 60vh; overflow-y: auto;">
+                    <img id="img-orden-medica" src="https://via.placeholder.com/500x700.png?text=Fotograf%C3%ADa+o+Escaneo+de+la+Receta+de+Recepci%C3%B3n" alt="Orden Médica Escaneada" style="max-width:100%; height:auto; border-radius:4px;">
+                </div>
+                
+                <div style="margin-top: 15px; text-align: right;">
+                    <button class="btn btn-primary" onclick="closeModal('mod-orden-medica')">Confirmar lectura</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- fin -->
 
 
     <!-- end modal section -->
 
-    <!-- <script src="./js/enfermeri.js"></script> -->
+    <script src="./js/enfermeri.js"></script>
    
 
 
