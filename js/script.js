@@ -23,6 +23,7 @@ function showModule(id) {
         enfermeria: 'Vista de Enfermeria.',
         xray:'vista de rayos x',
         urgency:'vista de urgencias.',
+        investor:'inversionista.',
         sistema: 'Configuración del Sistema'
     };
     document.getElementById('module-title').innerText = titles[id];
