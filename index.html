@@ -216,7 +216,7 @@
                                     <div class="card border-0 bg-light rounded-4">
                                         <div class="card-body">
                                             <small class="text-muted">
-                                                Finalizados
+                                                Pendiente de cobro
                                             </small>
 
                                             <h2 id="stat-finalizados" class="mb-0">
@@ -227,11 +227,13 @@
                                 </div>
 
                             </div>
-
                             <ul class="nav nav-pills mb-4" id="admisionTabs">
 
                                 <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="pill"
+                                    <button
+                                        id="btn-tab-directorio"
+                                        class="nav-link active"
+                                        data-bs-toggle="pill"
                                         data-bs-target="#tab-directorio">
 
                                         Directorio de Pacientes
@@ -240,7 +242,11 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-admision">
+                                    <button
+                                        id="btn-tab-admision"
+                                        class="nav-link"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#tab-admision">
 
                                         Ficha de Ingreso
 
@@ -248,7 +254,11 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-atencion">
+                                    <button
+                                        id="btn-tab-atencion"
+                                        class="nav-link"
+                                        data-bs-toggle="pill"
+                                        data-bs-target="#tab-atencion">
 
                                         Monitor Clínico
 
@@ -518,67 +528,6 @@
                                                     </select>
 
                                                 </div>
-
-                                                <!--  <div class="col-lg-3 col-md-6">
-
-                                                    <label class="form-label fw-semibold required">
-                                                        Prioridad
-                                                    </label>
-
-                                                    <select
-                                                        id="adm-prio"
-                                                        class="form-select form-select-lg">
-
-                                                        <option value="Normal">Normal / Verde</option>
-                                                        <option value="Urgente">Urgente / Amarillo</option>
-                                                        <option value="Crítico">Crítico / Rojo</option>
-
-                                                    </select>
-
-                                                </div>
-
-                                                <div class="col-lg-3 col-md-6">
-
-                                                    <label class="form-label fw-semibold">
-                                                        Sucursal / Área
-                                                    </label>
-
-                                                    <select
-                                                        id="adm-sucursal"
-                                                        class="form-select form-select-lg">
-
-                                                        <option>Clínica Principal</option>
-                                                        <option>Urgencias</option>
-                                                        <option>Imagenología</option>
-                                                        <option>Laboratorio</option>
-                                                        <option>Enfermería</option>
-
-                                                    </select>
-
-                                                </div>
-
-                                                <div class="col-lg-3 col-md-6">
-
-                                                    <label class="form-label fw-semibold">
-                                                        Cubículo / Cama
-                                                    </label>
-
-                                                    <select
-                                                        id="adm-cubiculo"
-                                                        class="form-select form-select-lg">
-
-                                                        <option value="No asignado">No asignado</option>
-                                                        <option value="Sala de Choque">Sala de Choque</option>
-                                                        <option value="Observación 1">Observación 1</option>
-                                                        <option value="Observación 2">Observación 2</option>
-                                                        <option value="Terapia Intensiva">Terapia Intensiva</option>
-                                                        <option value="Pediatría">Pediatría</option>
-
-                                                    </select>
-
-                                                </div> 
-                                                -->
-
                                             </div>
 
                                             <!-- EXTRA CONSULTA -->
@@ -1610,50 +1559,49 @@
                         </div>
 
                         <!-- TABS -->
-                       <ul class="nav nav-tabs mb-4" id="xray-tabs">
-                        <li class="nav-item">
+                        <ul class="nav nav-tabs mb-4" id="xray-tabs">
+                            <li class="nav-item">
 
-                            <button
-                                class="nav-link active"
-                                id="xray-espera-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#xray-espera"
-                                type="button"
-                            >
-                                Sala de Espera RX
-                            </button>
+                                <button
+                                    class="nav-link active"
+                                    id="xray-espera-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#xray-espera"
+                                    type="button"
+                                >
+                                    Sala de Espera RX
+                                </button>
 
-                        </li>
+                            </li>
 
-                        <li class="nav-item">
+                            <li class="nav-item">
+                                <button
+                                    class="nav-link"
+                                    id="xray-captura-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#xray-captura"
+                                    type="button"
+                                >
+                                    Captura de Estudio
+                                </button>
 
-                            <button
-                                class="nav-link"
-                                id="xray-captura-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#xray-captura"
-                                type="button"
-                            >
-                                Captura de Estudio
-                            </button>
+                            </li>
 
-                        </li>
+                            <li class="nav-item">
 
-                        <li class="nav-item">
+                                <button
+                                    class="nav-link"
+                                    id="xray-interpretacion-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#xray-interpretacion"
+                                    type="button"
+                                >
+                                    Interpretaciones
+                                </button>
 
-                            <button
-                                class="nav-link"
-                                id="xray-interpretacion-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#xray-interpretacion"
-                                type="button"
-                            >
-                                Interpretaciones
-                            </button>
+                            </li>
 
-                        </li>
-
-                    </ul>
+                        </ul>
 
                         <div class="tab-content">
 
@@ -1870,6 +1818,7 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="cap-tecnico"
+                                                    placeholder="Dr. Roberto Ramirez"
                                                 >
 
                                             </div>
