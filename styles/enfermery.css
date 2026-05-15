@@ -1,0 +1,137 @@
+.archivo-nombre {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.btn-icon {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 8px;
+}
+
+.btn-icon:hover {
+    opacity: 0.7;
+}
+
+.consumo-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.hojas-consumo {
+    flex: 1;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d9e0ea;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Enfermería Css */
+.enfermeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.enfermeria-card {
+    border: 1px solid #e1e7ef;
+    border-radius: 8px;
+    padding: 18px;
+    background: #fff;
+}
+
+.enfermeria-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.enfermeria-card-header h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.enfermeria-texto {
+    margin: 0 0 12px;
+    font-weight: 600;
+}
+
+.enfermeria-detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+
+
+
+
+.multiselect-container {
+    position: relative;
+    width: 350px;
+}
+
+.multiselect-box {
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+    background: white;
+    min-height: 45px;
+    padding: .5rem;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    align-items: center;
+}
+
+.multiselect-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+    margin-top: 5px;
+    padding: .5rem;
+    display: none;
+    z-index: 1000;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+}
+
+.multiselect-dropdown.show {
+    display: block;
+}
+
+.selected-tag {
+    background: #0d6efd;
+    color: white;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: .85rem;
+}
+
+.placeholder {
+    color: gray;
+}
