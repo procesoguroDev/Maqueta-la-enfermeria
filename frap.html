@@ -2,569 +2,558 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>FRAP Bootstrap</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="frap.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>Wizard Vanilla JS</title>
 </head>
 
 <body>
-    <div class="wizard">
 
-        <div class="progress">
-            Paso <span id="currentStep">1</span> de 2
+    <div class="container wizard-container">
+
+        <!-- HEADER -->
+        <div class="wizard-header d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Formato FRAP</h3>
+
+            <span class="badge bg-primary badge-step">
+                Paso <span id="currentStep">1</span> de 2
+            </span>
         </div>
 
+        <!-- ========================= -->
         <!-- PASO 1 -->
-        <div class="step">
-            <div class="accordion" id="accordionFirstPartFRAP">
+        <!-- ========================= -->
+
+        <div class="wizard-step active">
+
+            <div class="accordion" id="accordionPaso1">
+
+                <!-- CARACTERISTICAS -->
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseGeneralData" aria-expanded="true"
-                            aria-controls="collapseGeneralData">
-                            Caracteristicas personales
+                            data-bs-target="#collapseCaracteristicas">
+                            Características personales
                         </button>
                     </h2>
-                    <div id="collapseGeneralData" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionGeneralData">
+
+                    <div id="collapseCaracteristicas" class="accordion-collapse collapse show">
                         <div class="accordion-body">
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    Dia de la Semana:
-                                    <input disabled type="text" value="Miercoles">
+                                    <label>Día de la semana</label>
+                                    <input class="form-control" disabled value="Miércoles">
                                 </div>
+
                                 <div class="col-md-3 mb-3">
-                                    fecha:
-                                    <input disabled type="date" value="2026-05-01">
+                                    <label>Fecha</label>
+                                    <input type="date" class="form-control" disabled value="2026-05-01">
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-2">
-                                    Llamada:
-                                    <input disabled type="time" id="llamada" value="08:00">
-                                </div>
 
-                                <div class="col-md-2">
-                                    Salida:
-                                    <input disabled type="time" id="salida" value="08:10">
-                                </div>
-
-                                <div class="col-md-2">
-                                    Traslado:
-                                    <input disabled type="time" id="traslado" value="08:25">
-                                </div>
-
-                                <div class="col-md-2">
-                                    Hospital:
-                                    <input disabled type="time" id="hospital" value="08:40">
-                                </div>
-
-                                <div class="col-md-2">
-                                    Base:
-                                    <input disabled type="time" value="09:10">
-                                </div>
-                            </div>
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    Motivo atencion:
-                                    <input disabled type="text" value="Translado">
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Llamada</label>
+                                    <input type="time" class="form-control" disabled value="08:00">
                                 </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Salida</label>
+                                    <input type="time" class="form-control" disabled value="08:10">
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Traslado</label>
+                                    <input type="time" class="form-control" disabled value="08:25">
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Hospital</label>
+                                    <input type="time" class="form-control" disabled value="08:40">
+                                </div>
+
+                                <div class="col-md-2 mb-3">
+                                    <label>Base</label>
+                                    <input type="time" class="form-control" disabled value="09:10">
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
                                 <div class="col-md-6 mb-3">
-                                    Direccion del servicio:
-                                    <input disabled type="text"
+                                    <label>Motivo de atención</label>
+                                    <input class="form-control" disabled value="Traslado">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Dirección del servicio</label>
+                                    <input class="form-control" disabled
                                         value="Boeing 35-43, La Purísima, 76146 La Purísima, Qro.">
                                 </div>
+
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 mb-6">
-                                    Lugar de la incidiencia:
-                                    <div class="check-container mb-3">
-                                        Hogar <input type="checkbox"> Via publica <input type="checkbox"> Via publica
-                                        <input type="checkbox">
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="section-title">Lugar de la incidencia</label>
+
+                                    <div class="check-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Hogar</label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Vía pública</label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Trabajo</label>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 mb-6">
-                                    Unidad:
-                                    <input disabled type="text" value="AMB-01">
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Unidad</label>
+                                    <input class="form-control" disabled value="AMB-01">
                                 </div>
-                                <div class="col-md-6 mb-6">
-                                    Numero economico de la unidad :
-                                    <input disabled type="text" value="AMB-01">
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Número económico</label>
+                                    <input class="form-control" disabled value="AMB-01">
                                 </div>
-                                <div class="col-md-6 mb-6">
-                                    Operador:
-                                    <input disabled type="text" value="Thomas">
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Operador</label>
+                                    <input class="form-control" disabled value="Thomas">
                                 </div>
-                                <div class="col-md-6 mb-6">
-                                    Medico regulador:
-                                    <input disabled type="text" value="Genaro">
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Médico regulador</label>
+                                    <input class="form-control" disabled value="Genaro">
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
+
+                <!-- PACIENTE -->
                 <div class="accordion-item">
+
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapsePatient" aria-expanded="false" aria-controls="collapsePatient">
+                            data-bs-target="#collapsePaciente">
                             Datos del paciente
                         </button>
                     </h2>
-                    <div id="collapsePatient" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFirstPartFRAP">
+
+                    <div id="collapsePaciente" class="accordion-collapse collapse">
+
                         <div class="accordion-body">
-                            <div class="row">
-                                <div class="col-ml-5">
-                                    Esta afiliado <input type="checkbox" id="followerCheck">
-                                </div>
-                                <div class="col-md-6">
-                                    sexo:
-                                    Mujer<input type="checkbox">
-                                    Hombre<input type="checkbox" checked>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    Años: <input disabled type="text" value="0">
 
-                                </div>
-                                <div class="col-md-3">
-                                    Meses<input disabled type="text" value="0">
+                            <div class="row">
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check mt-4">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">
+                                            Está afiliado
+                                        </label>
+                                    </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    Calle y Numero
-                                    <!-- Boeing 35-43, La Purísima, 76146 La Purísima, Qro. -->
-                                    <input type="text" disabled value=" Boeing 35-43">
-                                </div>
-                                <div class="col-md-4">
-                                    colonia
-                                    <input type="text" disabled value="La Purisima">
-                                </div>
-                                <div class="col-md-7">
-                                    Municipio
-                                    <input type="text" disabled value="La Purisima">
-                                </div>
-                                <div class="col-md-6">
-                                    Telefono
-                                    <input type="text" disabled value="4432552078">
-                                </div>
-                                <div class="col-md-4">
-                                    ocupacion
-                                    <input type="text" disabled value="Estudiante">
-                                </div>
-                                <div class="col-md-8">
-                                    Derechohabiente a
-                                    <input type="text" disabled value="">
-                                </div>
-                                <div class="col-md-8">
-                                    compañia de seguros:
-                                    <input type="text" disabled value="NA">
+                                <div class="col-md-4 mb-3">
+                                    <label>Sexo</label>
+
+                                    <div class="check-group mt-2">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Mujer</label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Hombre</label>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                             </div>
-                            <div class="row"></div>
-                            <div class="row"></div>
+
+                            <div class="row">
+
+                                <div class="col-md-3 mb-3">
+                                    <label>Años</label>
+                                    <input class="form-control" disabled value="0">
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label>Meses</label>
+                                    <input class="form-control" disabled value="0">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Calle y número</label>
+                                    <input class="form-control" disabled value="Boeing 35-43">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Colonia</label>
+                                    <input class="form-control" disabled value="La Purísima">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Municipio</label>
+                                    <input class="form-control" disabled value="Querétaro">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Teléfono</label>
+                                    <input class="form-control" disabled value="4432552078">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Ocupación</label>
+                                    <input class="form-control" disabled value="Estudiante">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Derechohabiente</label>
+                                    <input class="form-control" disabled>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Compañía de seguros</label>
+                                    <input class="form-control" disabled value="NA">
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
+
+            </div>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- PASO 2 -->
+        <!-- ========================= -->
+
+        <div class="wizard-step">
+
+            <div class="accordion" id="accordionPaso2">
+
+                <!-- SIGNOS -->
                 <div class="accordion-item">
+
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseReflection" aria-expanded="false"
-                            aria-controls="collapseReflection">
-                            Toma de reflejos
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSignos">
+                            Signos vitales
                         </button>
                     </h2>
-                    <div id="collapseReflection" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFirstPartFRAP">
+
+                    <div id="collapseSignos" class="accordion-collapse collapse show">
+
                         <div class="accordion-body">
-                            <div class="row">
-                                <p>
-                                    <strong>
-                                        Nivel de conciencia
-                                    </strong>
-                                </p>
-                                <div class="col-md-10 mb-3">
-                                    Alerta: <input type="checkbox">
-                                    Verbal: <input type="checkbox">
-                                    Doloroso: <input type="checkbox">
-                                    Inconsiente: <input type="checkbox">
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="grid grid-3">
-                                        <div class="form-group">
-                                            <label><strong>Apertura Ocular</strong>: </label>
-                                            <select id="glasgow_ocular" onchange="watcherGlassgow()">
-                                                <option value="4">4 - Espontánea</option>
-                                                <option value="3">3 - Al orden</option>
-                                                <option value="2">2 - Al dolor</option>
-                                                <option value="1">1 - Ninguna</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>Respuesta Verbal</strong>: </label>
-                                            <select id="glasgow_verbal" onchange="watcherGlassgow()">
-                                                <option value="5">5 - Orientado</option>
-                                                <option value="4">4 - Confuso</option>
-                                                <option value="3">3 - Inapropiado</option>
-                                                <option value="2">2 - Sonidos</option>
-                                                <option value="1">1 - Ninguna</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>Respuesta Motora</strong>: </label>
-                                            <select id="glasgow_motor" onchange="watcherGlassgow()">
-                                                <option value="6">6 - Obedece</option>
-                                                <option value="5">5 - Localiza</option>
-                                                <option value="4">4 - Retira</option>
-                                                <option value="3">3 - Flexión</option>
-                                                <option value="2">2 - Extensión</option>
-                                                <option value="1">1 - Ninguna</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-3"> 
-                                    <p><strong> Via aérea: </strong></p>
-                                    Permeable: <input type="checkbox">
-                                    comprometida:<input type="checkbox">
-                                </div>
-                                <div class="col-md-2">
-                                    <p><strong>Reflejo de deglución</strong>:</p>
-                                    <div class="check-container">
-                                        Pacial:<input type="checkbox">
-                                        Comprometida Total:<input type="checkbox">
-                                        Presente:<input type="checkbox">
-                                        Ausente:<input type="checkbox">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-1">
-                                    <p><strong>Ciculación</strong>:</p>
-                                    <div class="check-container">
-                                        Pulso:<input type="checkbox">
-                                        Radial:<input type="checkbox">
-                                        Carotideo:<input type="checkbox">
-                                        Ausennte:<input type="checkbox">
-                                    </div>
 
-                                </div>
-                                <div class="col-md-2">
-                                    <p><strong>Calidad del pulso</strong>:</p>
-                                    <div class="check-container">
-                                        Rápida:<input type="checkbox">
-                                        Lento:<input type="checkbox">
-                                        Rítmico:<input type="checkbox">
-                                        Arritmico:<input type="checkbox">
-                                    </div>
+                            <div class="table-responsive">
 
-                                </div>
-                                <div class="col-md-2">
-                                    <p><strong>Piel</strong>:</p>
-                                    <select>
-                                        <option value="Normal">Normal</option>
-                                        <option value="Pálida">Pálida</option>
-                                        <option value="Ciaótica">Ciaótica</option>
-                                        <option value="Ictérica">Ictérica</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <p><strong>Características de la piel</strong>:</p>
-                                    <select>
-                                        <option value="Caliente">Caliente</option>
-                                        <option value="Fría">Fría</option>
-                                        <option value="Diforensis">Diforensis</option>
-                                        <option value="Seca">Seca</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <p><strong>Ventilacion</strong>:</p>
-                                    <select>
-                                        <option value="Automatimo regular">Automatimo regular</option>
-                                        <option value="Automatismo irregular">Automatismo irregular</option>
-                                        <option value="Ventilacion Superficial">Ventilacion Superficial</option>
-                                        <option value="Ventilacion rápida">Ventilacion rápida</option>
-                                        <option value="Apnea">Apnea</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <p><strong>Austcultación</strong>:</p>
-                                    <select>
-                                        <option value="Automatimo regular">Automatimo regular</option>
-                                        <option value="Automatismo irregular">Automatismo irregular</option>
-                                        <option value="Ventilacion Superficial">Ventilacion Superficial</option>
-                                        <option value="Ventilacion rápida">Ventilacion rápida</option>
-                                        <option value="Apnea">Apnea</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <p><strong>Hemitorax</strong>:</p>
-                                    <select>
-                                        <option value="Derecho">Derecho</option>
-                                        <option value="Izquierdo">Izquierdo</option>
-                                        <option value="otro">otro</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    (sitio)
-                                    <select>
-                                        <option value="Apical">Apical</option>
-                                        <option value="Base">Base</option>
-                                    </select>
-                                </div>
+                                <table class="table table-bordered table-hover align-middle">
+
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Hora</th>
+                                            <th>FR</th>
+                                            <th>FC</th>
+                                            <th>TAD</th>
+                                            <th>TAS</th>
+                                            <th>SaO2%</th>
+                                            <th>Temp</th>
+                                            <th>Glucosa</th>
+                                            <th>Llenado capilar</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>08:00</td>
+                                            <td>20</td>
+                                            <td>80</td>
+                                            <td>80</td>
+                                            <td>120</td>
+                                            <td>98%</td>
+                                            <td>36.5</td>
+                                            <td>90</td>
+                                            <td>2 seg</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
                             </div>
+
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- PASO 2 -->
-    <div class="step active">
-        <div class="accordion" id="accordionSecondPartFRAP">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseGeneralData" aria-expanded="true"
-                        aria-controls="collapseGeneralData">
-                        Signos vitales
-                    </button>
-                </h2>
-                <div id="collapseGeneralData" class="accordion-collapse collapse show"
-                    data-bs-parent="#accordionGeneralData">
-                    <div class="accordion-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>HORA</th>
-                                    <th>FR</th>
-                                    <th>FC</th>
-                                    <th>TAD</th>
-                                    <th>TAS</th>
-                                    <th>Sa02%</th>
-                                    <th>TEM</th>
-                                    <th>GLUCOSA</th>
-                                    <th>LLENADO CAPILAR</th>
-                                </tr>
-                            </thead>
-                            <tbody id="vital-signs-table"></tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseExploration" aria-expanded="false" aria-controls="collapseExploration">
-                        Exploracion, antecedentes y condicion
-                    </button>
-                </h2>
-                <div id="collapseExploration" class="accordion-collapse collapse"
-                    data-bs-parent="#accordionFirstPartFRAP">
-                    <div class="accordion-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <p><strong>Exploracion Fisica</strong></p>
-                                <select>
-                                    <option value="">Ninguna</option>
-                                    <option value="">Deformidades</option>
-                                    <option value="">Contusiones</option>
-                                    <option value="">Abrasiiones</option>
-                                    <option value="">Penetraciones</option>
-                                    <option value="">Movimiento paradójico</option>
-                                    <option value="">crepitación</option>
-                                    <option value="">Heridas</option>
-                                    <option value="">Facturas</option>
-                                    <option value="">Enfisema subcutáneo</option>
-                                    <option value="">Quemaduras</option>
-                                    <option value="">Laceraciones</option>
-                                    <option value="">Edema</option>
-                                    <option value="">Alteracion de sensibillidad</option>
-                                    <option value="">Alteracion de Movilidad</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5 mt-3">
-                                <p>
-                                    <strong>Condicion del paciente</strong>:
-                                </p>
-                                <div class="form-group">
-                                    <button class="btn btn-success" disabled>Verde</button>
-                                    <button class="btn btn-warning" >Amarillo</button>
-                                    <button class="btn btn-danger" disabled>Rojo</button>
-                                    <button class="btn btn-dark" disabled>Negro</button>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <p>
-                                        <strong>Estado</strong>:
-                                    </p>
-                                    <input type="checkbox" checked> estable
-                                    <input type="checkbox"> inestable
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Enfermedades:</label>
-                                <select id="app_enfermedades" disabled>
-                                    <option value="Nada">ninguna enfermedad</option>
-                                </select>
-                                <br>
-                                <label>Tipo sanguinio</label>
-                                <select disabled>
-                                    <option value="O+">O+</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Descripción:</label>
-                                <input type="text" disabled></input>
-                                <label>Medicamentos:</label>
-                                <input disabled value="ninguna"></input>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <p>
-                                    <strong>Hora de ultima comida</strong>
-                                </p>
-                                <input type="datetime-local" min="2026-05-05">
-                            </div>
-                            <div class="col-md-8">
-                                <p>
-                                    <strong>
-                                        Eventos preevios relacionados
-                                    </strong>
-                                    <input type="text" disabled value="Sin eventos previos"></input>
-                                </p>
-                                <p>
-                                    <strong>
-                                        Riesgos
-                                    </strong>
-                                </p>
-                                <input   type="text" disabled value="Sin riesgos"></input>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="from-group">
-                                    <input type="checkbox">
-                                    <label>ONSET</label>
-                                </div>
-                                <div class="from-group">
-                                    <input type="checkbox">
-                                    <label>PROVOCACION</label>
-                                </div>
-                                <div class="from-group">
-                                    <input type="checkbox">
-                                    <label>QUALITY(CALIDAD)</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox">
-                                    <label>RADIACIÓN O REGIÓN</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox">
-                                    <label>SEVERIDAD</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox">
-                                    <label>TIEMPO</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
+
+                <!-- EXPLORACION -->
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapsePosible" aria-expanded="false" aria-controls="collapsePosible">
+                            data-bs-target="#collapseExploracion">
+                            Exploración, antecedentes y condición
+                        </button>
+                    </h2>
+
+                    <div id="collapseExploracion" class="accordion-collapse collapse">
+
+                        <div class="accordion-body">
+
+                            <div class="row">
+
+                                <div class="col-md-4 mb-3">
+                                    <label>Exploración física</label>
+
+                                    <select class="form-select">
+                                        <option>Ninguna</option>
+                                        <option>Deformidades</option>
+                                        <option>Contusiones</option>
+                                        <option>Abrasiones</option>
+                                        <option>Heridas</option>
+                                        <option>Fracturas</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-8 mb-3">
+
+                                    <label class="section-title">
+                                        Condición del paciente
+                                    </label>
+
+                                    <div class="d-flex gap-2 flex-wrap">
+
+                                        <button class="btn btn-success">
+                                            Verde
+                                        </button>
+
+                                        <button class="btn btn-warning">
+                                            Amarillo
+                                        </button>
+
+                                        <button class="btn btn-danger">
+                                            Rojo
+                                        </button>
+
+                                        <button class="btn btn-dark">
+                                            Negro
+                                        </button>
+
+                                    </div>
+
+                                    <div class="mt-3">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" checked type="checkbox">
+                                            <label class="form-check-label">Estable</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Inestable</label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ORIGEN PROBABLE -->
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOrigen">
                             Origen probable
                         </button>
                     </h2>
-                <div id="collapsePosible" class="accordion-collapse collapse">
-                    <div class="row">
-                        <div class="col-md-6" style="gap: 80px;">
-                            <div class="form-group">
-                                <label>Necrológico</label>
-                                <input type="checkbox">
+
+                    <div id="collapseOrigen" class="accordion-collapse collapse">
+
+                        <div class="accordion-body">
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <div class="row g-3">
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="neurologico">
+                                                <label class="form-check-label" for="neurologico">
+                                                    Neurológico
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="cardiovascular">
+                                                <label class="form-check-label" for="cardiovascular">
+                                                    Cardiovascular
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="respiratorio">
+                                                <label class="form-check-label" for="respiratorio">
+                                                    Respiratorio
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="metabolico">
+                                                <label class="form-check-label" for="metabolico">
+                                                    Metabólico
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="digestivo">
+                                                <label class="form-check-label" for="digestivo">
+                                                    Digestivo
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="urogenital">
+                                                <label class="form-check-label" for="urogenital">
+                                                    Urogenital
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gineco">
+                                                <label class="form-check-label" for="gineco">
+                                                    Ginecoobstétrico
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="emocional">
+                                                <label class="form-check-label" for="emocional">
+                                                    Cognitivo emocional
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="musculo">
+                                                <label class="form-check-label" for="musculo">
+                                                    Musculoesquelético
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="infeccioso">
+                                                <label class="form-check-label" for="infeccioso">
+                                                    Infeccioso
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="oncologico">
+                                                <label class="form-check-label" for="oncologico">
+                                                    Oncológico
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
                             </div>
-                            <div class="form-group">
-                                <label>Cardiovascular</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Respiratorio</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Metabólico</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Digestivo</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Urogenital</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Ginecoobstetrico</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Cognitivo emocional</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Musculoesqueletico</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>Infecciooso</label>
-                                <input type="checkbox">
-                            </div>
-                            <div class="form-group">
-                                <label>oncológico</label>
-                                <input type="checkbox">
-                            </div>
+
                         </div>
+
                     </div>
+
                 </div>
             </div>
+
         </div>
+
+        <!-- BOTONES -->
+        <div class="wizard-buttons">
+
+            <button class="btn btn-outline-secondary" id="prevBtn">
+                Anterior
+            </button>
+
+            <button class="btn btn-primary" id="nextBtn">
+                Siguiente
+            </button>
+
+        </div>
+
     </div>
 
-    <!-- PASO 3 -->
-<!--     <div class="step">
-        <h2>Finalizar</h2>
-        <p>Confirma la información</p>
-    </div> -->
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <div class="buttons">
-        <button id="prevBtn">Anterior</button>
-        <button id="nextBtn">Siguiente</button>
-    </div>
+    <script src="./frap.js">
 
-    </div>
-
-    
-
-    <script src="frap.js"></script>
+    </script>
 
 </body>
 
