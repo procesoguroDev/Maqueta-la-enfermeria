@@ -30,7 +30,7 @@ const  service =  [
 
 function selectedServiceFrap() {
     try {
-        console.log('hola click')
+        window.open('file:///home/dev-ps/Documentos/Proyectos/Maqueta-la-enfermeria/frap.html', '_blank')
     }
     catch (error) {
         console.error(error)    
