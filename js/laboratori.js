@@ -240,67 +240,79 @@ function buscarFilaPaciente(nombrePaciente) {
     return null;
 }
 
-function generarHojaConsumoPDF() {
-    const paciente = document.getElementById('nombrePacienteConsumo').value;
-    const nacimiento = document.getElementById('fechaNacimientoConsumo').value;
-    const procedimiento = document.getElementById('procedimientoConsumo').value;
-    const fecha = document.getElementById('fechaConsumo').value;
-    const hora = document.getElementById('horaConsumo').value;
-    const turno = document.getElementById('turnoConsumo').value;
-    const quimico = document.getElementById('quimicoConsumo').value;
+function agregarHojaConsumoTablaLaboratory(paciente, nombreArchivo, pdfUrl) {
+    try {
+        
+        const tabla = document.getElementById('tablaHojasConsumo');
+        console.log('hola mundo esto es data');
 
-    if (!paciente) {
-        mostrarToast('Selecciona un paciente.', 'warning');
-        return;
+        if (tabla.children.length === 1 && tabla.children[0].children[0].colSpan === 3) {
+            tabla.innerHTML = '';
+        }
+
+        const fila = document.createElement('tr');
+
+        fila.innerHTML = `
+            <td>${paciente}</td>
+            <td>
+                <a href="${pdfUrl}"  style="color: black !important;" target="_blank">${nombreArchivo}</a>
+            </td>
+            <td>
+                <button class="btn btn-secondary" onclick="enviarHojaRecepcion()">
+                    Enviar a Recepción
+                </button>
+            </td>
+        `;
+
+        tabla.appendChild(fila);
+    } 
+    catch (error) {
+        console.error('error',error)    
     }
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF();
-
-    pdf.setFontSize(18);
-    pdf.text('Hoja de consumo', 20, 20);
-
-    pdf.setFontSize(12);
-    pdf.text(`Nombre del paciente: ${paciente}`, 20, 40);
-    pdf.text(`Fecha de nacimiento: ${nacimiento}`, 20, 50);
-    pdf.text(`Procedimiento: ${procedimiento}`, 20, 60);
-    pdf.text(`Fecha: ${fecha}`, 20, 70);
-    pdf.text(`Hora: ${hora}`, 20, 80);
-    pdf.text(`Turno: ${turno}`, 20, 90);
-    pdf.text(`Nombre del químico: ${quimico}`, 20, 100);
-
-    const nombreArchivo = `hoja-consumo-${paciente.replaceAll(' ', '-')}.pdf`;
-    const pdfBlob = pdf.output('blob');
-    const pdfUrl = URL.createObjectURL(pdfBlob);
-
-    agregarHojaConsumoTabla(paciente, nombreArchivo, pdfUrl);
-    cerrarModalHojaConsumo();
-
-    mostrarToast('Hoja de consumo generada.', 'success');
 }
 
-function agregarHojaConsumoTabla(paciente, nombreArchivo, pdfUrl) {
-    const tabla = document.getElementById('tablaHojasConsumo');
+function generarHojaConsumoPDF() {
+    try {
+        const { jsPDF } = window.jspdf;
 
-    if (tabla.children.length === 1 && tabla.children[0].children[0].colSpan === 3) {
-        tabla.innerHTML = '';
+        const pdf = new jsPDF();
+        const paciente = document.getElementById('nombrePacienteConsumo').value;
+        const nacimiento = document.getElementById('fechaNacimientoConsumo').value;
+        const procedimiento = document.getElementById('procedimientoConsumo').value;
+        const fecha = document.getElementById('fechaConsumo').value;
+        const hora = document.getElementById('horaConsumo').value;
+        const turno = document.getElementById('turnoConsumo').value;
+        const quimico = document.getElementById('quimicoConsumo').value;
+
+        if (!paciente) {
+            mostrarToast('Selecciona un paciente.', 'warning');
+            return;
+        }
+
+        pdf.setFontSize(18);
+        pdf.text('Hoja de consumo', 20, 20);
+
+        pdf.setFontSize(12);
+        pdf.text(`Nombre del paciente: ${paciente}`, 20, 40);
+        pdf.text(`Fecha de nacimiento: ${nacimiento}`, 20, 50);
+        pdf.text(`Procedimiento: ${procedimiento}`, 20, 60);
+        pdf.text(`Fecha: ${fecha}`, 20, 70);
+        pdf.text(`Hora: ${hora}`, 20, 80);
+        pdf.text(`Turno: ${turno}`, 20, 90);
+        pdf.text(`Nombre del químico: ${quimico}`, 20, 100);
+
+        const nombreArchivo = `hoja-consumo-${paciente.replaceAll(' ', '-')}.pdf`;
+        const pdfBlob = pdf.output('blob');
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+
+        agregarHojaConsumoTablaLaboratory(paciente, nombreArchivo, pdfUrl);
+        cerrarModalHojaConsumo();
+        mostrarToast('Hoja de consumo generada.', 'success');
+    
+        }
+    catch (error) {
+        console.error(error)    
     }
-
-    const fila = document.createElement('tr');
-
-    fila.innerHTML = `
-        <td>${paciente}</td>
-        <td>
-            <a href="${pdfUrl}"  style="color: black !important;" target="_blank">${nombreArchivo}</a>
-        </td>
-        <td>
-            <button class="btn btn-secondary" onclick="enviarHojaRecepcion()">
-                Enviar a Recepción
-            </button>
-        </td>
-    `;
-
-    tabla.appendChild(fila);
 }
 
 function enviarHojaRecepcion() {
