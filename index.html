@@ -11,8 +11,8 @@
     <script src="./js/reception.js"></script>
     <script src="./js/xray.js"></script>
     <script src="./js/paramedic.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="./styles/triage.css">
     <link rel="stylesheet" href="./styles/laboratori.css">
     <link rel="stylesheet" href="./styles/enfermery.css">
@@ -51,31 +51,32 @@
 
 
             <div class="nav-label">General</div>
-            <div class="nav-item active" onclick="showModule('dashboard')"><span>📊</span> Dashboard</div>
-            <div class="nav-item" onclick="showModule('investor')"><span>💰</span> inversionistas</div>
+            <div class="nav-item active" onclick="showModule('dashboard')"> Dashboard</div>
+            <div class="nav-item" onclick="showModule('investor')"> inversionistas</div>
         </div>
 
         <div class="nav-group">
             <div class="nav-label">Operación Clínica</div>
-            <div class="nav-item" onclick="showModule('recepcion')"><span>🧾</span>Recepción</div>
-            <div class="nav-item" onclick="showModule('triage')"><span>🩺</span> Triage</div>
-            <div class="nav-item" onclick="showModule('enfermeria')"><span>👨‍⚕️</span> Enfermeria</div>
-            <div class="nav-item" onclick="showModule('consulta')"><span>👨‍⚕️</span> Consulta</div>
-            <div class="nav-item" onclick="showModule('paciente')"><span>🩺</span> Paciene</div>
-            <div class="nav-item" onclick="showModule('urgencias')"><span>🚨</span> Urgencias</div>
-            <div class="nav-item" onclick="showModule('ventas')"><span>💲</span> Ventas</div>
-            <div class="nav-item" onclick="showModule('xray')"><span>🩻 </span> Rayos X</div>
-            <div class="nav-item" onclick="showModule('paramedicos')"><span>🚑</span> Paramédicos (FRAP)</div>
-            <div class="nav-item" onclick="showModule('')"><span>💳</span> Caja </div>
-            <div class="nav-item" onclick="showModule('laboratorio')"><span>🧪</span> Laboratorio</div>
+            <div class="nav-item" onclick="showModule('recepcion')">Recepción</div>
+            <div class="nav-item" onclick="showModule('triage')"> Triage</div>
+            <div class="nav-item" onclick="showModule('enfermeria')">Enfermeria</div>
+            <div class="nav-item" onclick="showModule('consulta')">Consulta</div>
+            <div class="nav-item" onclick="showModule('paciente')">Paciente</div>
+            <div class="nav-item" onclick="showModule('urgencias')"> Urgencias</div>
+            <div class="nav-item" onclick="showModule('xray')">Rayos X</div>
+            <div class="nav-item" onclick="showModule('laboratorio')"> Laboratorio</div>
+            <div class="nav-item" onclick="showModule('')"> Quirofano </div>
+            <div class="nav-item" onclick="showModule('paramedicos')"> Paramédicos (FRAP)</div>
+            <div class="nav-item" onclick="showModule('ventas')">Ventas</div>
+            <div class="nav-item" onclick="showModule('')"> Caja </div>
         </div>
 
         <div class="nav-group">
             <div class="nav-label">Administración</div>
-            <div class="nav-item" onclick="showModule('')"><span>📊</span> Reportes</div>
-            <div class="nav-item" onclick="showModule('compras')"><span>🛒</span> Compras e Insumos</div>
-            <div class="nav-item" onclick="showModule('rrhh')"><span>👥</span> Recursos Humanos</div>
-            <div class="nav-item" onclick="showModule('sistema')"><span>⚙️</span> Configuración</div>
+            <div class="nav-item" onclick="showModule('')"> Reportes</div>
+            <div class="nav-item" onclick="showModule('compras')"> Compras e Insumos</div>
+            <div class="nav-item" onclick="showModule('rrhh')"> Recursos Humanos</div>
+            <div class="nav-item" onclick="showModule('sistema')"> Configuración</div>
         </div>
     </aside>
     <div class="main-container">
@@ -1117,13 +1118,13 @@
                         <tbody>
                             <tr onclick="seleccionarPaciente()">
                                 <td>ADM-001</td>
-                                <td>Juan Pérez</td>
+                                <td>Pedro Infante</td>
                                 <td>Dolor en antebrazo</td>
                                 <td class="badge text-bg-warning">En espera</td>
                             </tr>
                             <tr onclick="seleccionarPaciente()">
                                 <td>ADM-002</td>
-                                <td>Elena Gil</td>
+                                <td>Jorge Negrete</td>
                                 <td>Aplicacion de inyeccion</td>
                                 <td class="badge text-bg-primary">En Atencion</td>
                             </tr>
@@ -1300,7 +1301,7 @@
                                     <tbody>
                                         <tr onclick="seleccionarConsulta()">
                                             <td>ADM-001</td>
-                                            <td>Juan Pérez</td>
+                                            <td>Pedro Infante</td>
                                             <td>Dolor de antebrazo</td>
                                             <td class="badge text-bg-primary">En espera</td>
                                         </tr>
@@ -1430,15 +1431,34 @@
 
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card">
-                                        <h3>Expediente Clínico</h3>
-                                        <div class="form-group"><label>Motivo de Consulta</label><textarea
-                                                rows="3"></textarea></div>
-                                        <div class="form-group"><label>Exploración Física</label><textarea
-                                                rows="3"></textarea></div>
-                                        <div class="form-group"><label>Diagnóstico (CIE-10)</label><input type="text"
-                                                placeholder="Ej. J00 - Rinofaringitis"></div>
+                                        <div class="accordion">
+                                            <div class="accordion-header">Expediente Clínico</div>
+                                            <div class="accordion-content">
+                                                <div class="card">
+                                                    <div class="form-group">
+                                                        <label>Motivo de Consulta</label>
+                                                        <textarea rows="3"></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Exploración Física</label>
+                                                        <textarea rows="3"></textarea>
+                                                    </div>
+                                                    <div class="form-group"><label>Recomendaciones</label>
+                                                        <textarea rows="3"></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Diagnóstico (CIE-10)</label>
+                                                        <input type="text" placeholder="Ej. J00 - Rinofaringitis">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion">
+                                            <div class="accordion-header">Estudios</div>
+                                            <div class="accordion-content">
+                                                <button class="btn btn-primary" onclick="abrirModal('mod-estudios')">Solicitar Estidio</button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card">
                                         <h3>Receta Médica</h3>
@@ -1483,7 +1503,7 @@
                                     <tbody>
                                         <tr>
                                             <td>ADM-001</td>
-                                            <td>Juan Pérez</td>
+                                            <td>Pedro Infante</td>
                                             <td>Dolor de antebrazo</td>
                                             <td>2026/01/01 23:00 hrs</td>
                                         </tr>
@@ -1669,7 +1689,7 @@
                         </div>
                         <p class="enfermeria-texto">1 paciente en espera de triage.</p>
                         <div class="enfermeria-detalle">
-                            <span>Paciente: Juan Pérez</span>
+                            <span>Paciente: Pedro Infante</span>
                             <span>Hora: 10:30</span>
                         </div>
                         <button class="btn btn-secondary" onclick="goTo()">Ver solicitud</button>
@@ -1685,7 +1705,7 @@
                             <span>Paciente: Pedro Infante</span>
                             <span>Procedimiento: Limpieza y aseo</span>
                         </div>
-                        <button class="btn text-btn-secondary" onclick="abrirModal('modalHojaConsumoENF')">
+                        <button class="btn btn-secondary" onclick="abrirModal('modalHojaConsumoENF')">
                             Generar Hoja de consumo
                         </button>
                     </div>
@@ -1760,11 +1780,6 @@
                                 Control de sala, toma de estudios radiológicos e interpretación.
                             </small>
                         </div>
-
-                        <button class="btn btn-outline-warning">
-                            ⚠️ Reportar falla en equipo
-                        </button>
-
                     </div>
 
                     <div class="card-body">
@@ -1932,7 +1947,7 @@
                                                         </td>
 
                                                         <td>
-                                                            Mendoza Arriaga, Luis Alberto
+                                                            Pedro Infante Cruz
                                                         </td>
 
                                                         <td>
@@ -2778,21 +2793,23 @@
     </div>
     <!-- Modal Actualizar estado-->
     <div id="modalActualizarEstado" class="modal">
-        <div class="modal-content">
-            <h3>Actualizar estado</h3>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Actualizar estado</h3>
 
-            <label for="Estado">Estado</label>
-            <select id="Estado">
-                <option value="">Selecciona el estado actual</option>
-                <option value="Validación de estudio">Validación de estudio</option>
-                <option value="Estudio en proceso">Estudio en proceso</option>
-                <option value="Estudio finalizado">Estudio finalizado</option>
-                <option value="Entrega de resultados">Entrega de resultados</option>
-            </select>
+                <label for="Estado">Estado</label>
+                <select id="Estado">
+                    <option value="">Selecciona el estado actual</option>
+                    <option value="Validación de estudio">Validación de estudio</option>
+                    <option value="Estudio en proceso">Estudio en proceso</option>
+                    <option value="Estudio finalizado">Estudio finalizado</option>
+                    <option value="Entrega de resultados">Entrega de resultados</option>
+                </select>
 
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
-                <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModalEstado()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="guardarNuevoEstado()">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -2825,111 +2842,117 @@
     </div>
     <!-- Modal Enviar resulados  -->
     <div id="modalEnviarResultados" class="modal">
-        <div class="modal-content">
-            <h3>Enviar resultados</h3>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Enviar resultados</h3>
 
-            <label for="emailDestino">E-mail</label>
-            <select id="emailDestino">
-                <option value="">Selecciona el E-mail de destino</option>
-                <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
-                <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
-                <option value="otro">Otro</option>
-            </select>
+                <label for="emailDestino">E-mail</label>
+                <select id="emailDestino">
+                    <option value="">Selecciona el E-mail de destino</option>
+                    <option value="tuemail@tudominio.com">tuemail@tudominio.com</option>
+                    <option value="segundoemail@tudominio.com">segundoemail@tudominio.com</option>
+                    <option value="otro">Otro</option>
+                </select>
 
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
-                <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModalEnvio()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="enviarResultados()">Enviar</button>
+                </div>
             </div>
         </div>
+        
     </div>
     <!-- Modal hoja de consumo -->
     <div id="modalHojaConsumo" class="modal">
-        <div class="modal-content">
-            <h3>Generar hoja de consumo</h3>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <h3>Generar hoja de consumos</h3>
 
-            <label for="pacienteConsumo">Paciente</label>
-            <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
-                <option value="">Selecciona un paciente</option>
-                <option value="Pedro Infante" data-nacimiento="1917-11-18" data-procedimiento="Biometría Hemática">
-                    Pedro Infante
-                </option>
-            </select>
-            <div id="formHojaConsumo" class="container-fluid" style="display: none;">
+                <label for="pacienteConsumo">Paciente</label>
+                <select id="pacienteConsumo" onchange="cargarDatosHojaConsumo()">
+                    <option value="">Selecciona un paciente</option>
+                    <option value="Pedro Infante" data-nacimiento="1917-11-18" data-procedimiento="Biometría Hemática">
+                        Pedro Infante
+                    </option>
+                </select>
+                <div id="formHojaConsumo" class="container-fluid" style="display: none;">
 
-                <div class="row g-3">
+                    <div class="row g-3">
 
-                    <!-- Nombre del paciente -->
-                    <div class="col-md-6">
-                        <label for="nombrePacienteConsumo" class="form-label">
-                            Nombre del paciente
-                        </label>
+                        <!-- Nombre del paciente -->
+                        <div class="col-md-6">
+                            <label for="nombrePacienteConsumo" class="form-label">
+                                Nombre del paciente
+                            </label>
 
-                        <input type="text" id="nombrePacienteConsumo" class="form-control">
-                    </div>
+                            <input type="text" id="nombrePacienteConsumo" class="form-control">
+                        </div>
 
-                    <!-- Fecha de nacimiento -->
-                    <div class="col-md-6">
-                        <label for="fechaNacimientoConsumo" class="form-label">
-                            Fecha de nacimiento
-                        </label>
+                        <!-- Fecha de nacimiento -->
+                        <div class="col-md-6">
+                            <label for="fechaNacimientoConsumo" class="form-label">
+                                Fecha de nacimiento
+                            </label>
 
-                        <input type="date" id="fechaNacimientoConsumo" class="form-control">
-                    </div>
+                            <input type="date" id="fechaNacimientoConsumo" class="form-control">
+                        </div>
 
-                    <!-- Procedimiento -->
-                    <div class="col-md-6">
-                        <label for="procedimientoConsumo" class="form-label">
-                            Procedimiento
-                        </label>
+                        <!-- Procedimiento -->
+                        <div class="col-md-6">
+                            <label for="procedimientoConsumo" class="form-label">
+                                Procedimiento
+                            </label>
 
-                        <input type="text" id="procedimientoConsumo" class="form-control">
-                    </div>
+                            <input type="text" id="procedimientoConsumo" class="form-control">
+                        </div>
 
-                    <!-- Fecha -->
-                    <div class="col-md-3">
-                        <label for="fechaConsumo" class="form-label">
-                            Fecha
-                        </label>
+                        <!-- Fecha -->
+                        <div class="col-md-3">
+                            <label for="fechaConsumo" class="form-label">
+                                Fecha
+                            </label>
 
-                        <input type="date" id="fechaConsumo" class="form-control">
-                    </div>
+                            <input type="date" id="fechaConsumo" class="form-control">
+                        </div>
 
-                    <!-- Hora -->
-                    <div class="col-md-3">
-                        <label for="horaConsumo" class="form-label">
-                            Hora
-                        </label>
+                        <!-- Hora -->
+                        <div class="col-md-3">
+                            <label for="horaConsumo" class="form-label">
+                                Hora
+                            </label>
 
-                        <input type="time" id="horaConsumo" class="form-control">
-                    </div>
+                            <input type="time" id="horaConsumo" class="form-control">
+                        </div>
 
-                    <!-- Turno -->
-                    <div class="col-md-6">
-                        <label for="turnoConsumo" class="form-label">
-                            Turno
-                        </label>
+                        <!-- Turno -->
+                        <div class="col-md-6">
+                            <label for="turnoConsumo" class="form-label">
+                                Turno
+                            </label>
 
-                        <input type="text" id="turnoConsumo" class="form-control">
-                    </div>
+                            <input type="text" id="turnoConsumo" class="form-control">
+                        </div>
 
-                    <!-- Químico -->
-                    <div class="col-md-6">
-                        <label for="quimicoConsumo" class="form-label">
-                            Nombre del químico
-                        </label>
+                        <!-- Químico -->
+                        <div class="col-md-6">
+                            <label for="quimicoConsumo" class="form-label">
+                                Nombre del químico
+                            </label>
 
-                        <input type="text" id="quimicoConsumo" class="form-control">
+                            <input type="text" id="quimicoConsumo" class="form-control">
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
-
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
-                <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="cerrarModalHojaConsumo()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="generarHojaConsumoPDF()">Generar hoja de consumo</button>
+                </div>
             </div>
         </div>
+        
     </div>
 
     <div id="modalHojaConsumoENF" class="modal">
@@ -3158,7 +3181,7 @@
                 </div>
                 <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
                     <button class="btn btn-sm btn-outline-danger" onclick="cerrarModal('mod-referencia')">Cerrar</button>
-                    <button class="btn btn-sm btn-outline-secundary" onclick="window.print()">Imprimir Traslado</button>
+                    <button class="btn btn-sm btn-outline-primary" onclick="window.print()">Imprimir Traslado</button>
                 </div>
             </div>
         </div>

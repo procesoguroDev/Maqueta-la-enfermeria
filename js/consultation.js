@@ -191,6 +191,11 @@ function agregarAntecedente() {
   render();
 }
 
+
+function finishAttention(){
+  location.reload()
+}
+
 function  showModalMedicaments(){
   try {
       const modalContainer = document.createElement('div')
@@ -374,7 +379,7 @@ function showModalFinishConsultation(){
                       <p>Estas apunto de  finaliza la consulta estas seguro</p>
                       <div class="button-container">
                         <button class="btn btn-danger" data-bs-dismiss="modal">cancelar </button>
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                        <button class="btn btn-primary" data-bs-dismiss="modal" onclick="finishAttention()">Aceptar</button>
                       </div>
                     </div>
                 </div>
